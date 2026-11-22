@@ -1,8 +1,0 @@
-Issue_ID,Workstream,Severity,Component,Description,Current_Mitigation,Production_Blocker_Resolution
-GAP-01,M1 Market Intelligence,CRITICAL,market_prices,Panel contains only 43 observations on 2 calendar days,Fail-closed training gate raises DataInsufficiencyError,Requires authentic 90-day AGMARKNET daily time series ingestion
-GAP-02,M1 Market Intelligence,CRITICAL,market_arrivals,market_arrivals table has 0 rows,Reports explicit UNAVAILABLE_AWAITING_SOURCE state,Requires live mandi arrival telemetry feed connection
-GAP-03,M1 Market Intelligence,CRITICAL,price_forecasts,price_forecasts table has 0 rows,Reports explicit UNAVAILABLE_UNTRAINED_MODEL,Requires trained statistical model after GAP-01/02 resolution
-GAP-04,M2 Geospatial Intelligence,HIGH,locations,79 operational locations use administrative district proxies,Labeled with site_coordinate_verified=False,Requires field-collected verified GPS coordinates with consent
-GAP-05,M2 Geospatial Intelligence,HIGH,road_edges,620 road edges have synthetic Euclidean topology,Labeled with simulation_flag=True and rejected for dispatch,Requires GIS road network or OpenStreetMap routability integration
-GAP-06,M3 Financial Settlement,HIGH,settlements,Zero two-way bank gateway settlement confirmations,Labeled as SIMULATED_SETTLED with operator confirmation,Requires authentic banking webhook or UTR validation integration
-GAP-07,M0 System Readiness,CRITICAL,readiness,Readiness endpoint correctly blocks production deployment,Returns NOT_READY_CRITICAL_OPERATIONAL_GAPS,Maintained fail-closed until authentic field pilot evidence is provided

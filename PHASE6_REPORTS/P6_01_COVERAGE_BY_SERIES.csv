@@ -1,4 +1,0 @@
-market_id,commodity_id,first_date,last_date,calendar_span_days,observed_dates,coverage_pct,meets_730_day_gate,meets_80pct_gate,training_eligibility
-MKT_000001,COM_POTATO,2026-11-16,2026-11-17,2,2,100.0,False,True,BLOCKED_INSUFFICIENT_SPAN
-MKT_000002,COM_TOMATO,2026-11-17,2026-11-17,1,1,100.0,False,True,BLOCKED_INSUFFICIENT_SPAN
-MKT_000003,COM_ONION,2026-11-17,2026-11-17,1,1,100.0,False,True,BLOCKED_INSUFFICIENT_SPAN

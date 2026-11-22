@@ -1,1 +1,0 @@
-price_forecast_id,market_id,commodity_id,forecast_for_date,predicted_modal_price_inr_quintal,lower_bound_inr_quintal,upper_bound_inr_quintal,model_version,generated_at,simulation_flag

@@ -1,5 +1,0 @@
-internal_id,entity_type,internal_name,official_code,official_name,review_status,reviewer,notes
-MKT_000001,MARKET,Birbhum APMC,AGM_MKT_WB_014,Birbhum (Suri),QUARANTINED_PENDING_APPROVAL,STATE_MARKETING_BOARD,Requires DMI confirmation
-MKT_000002,MARKET,Durgapur APMC,AGM_MKT_WB_022,Durgapur (City Centre),QUARANTINED_PENDING_APPROVAL,STATE_MARKETING_BOARD,Requires DMI confirmation
-COM_POTATO,COMMODITY,Potato,AGM_COM_024,Potato / Alu,QUARANTINED_PENDING_APPROVAL,STATE_MARKETING_BOARD,Standard botanical variety mapping required
-COM_TOMATO,COMMODITY,Tomato,AGM_COM_028,Tomato / Tamatar,QUARANTINED_PENDING_APPROVAL,STATE_MARKETING_BOARD,Standard botanical variety mapping required

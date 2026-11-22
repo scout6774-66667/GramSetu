@@ -1,3 +1,0 @@
-case_id,commodity,cluster,farmer_count,lot_grams,buyer,status,blocker_reason
-CASE_SHADOW_001,Potato,Birbhum-Suri,12,5000000,Reliance Fresh (Shadow),BLOCKED_PARTNER_CREDENTIALS,No live corporate banking API integration
-CASE_SHADOW_002,Tomato,Durgapur-Bardhaman,8,2500000,BigBasket (Shadow),BLOCKED_PARTNER_CREDENTIALS,No physical weighbridge serial stream connected

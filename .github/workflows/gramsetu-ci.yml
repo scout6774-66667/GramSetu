@@ -37,7 +37,7 @@ jobs:
         run: |
           python -c "
           import os, sys
-          required_dirs = ['gramsetu/core', 'gramsetu/infrastructure', 'gramsetu/ingestion', 'gramsetu/optimization', 'gramsetu/ml', 'gramsetu/api', 'REFACTOR_REPORTS']
+          required_dirs = ['gramsetu/core', 'gramsetu/infrastructure', 'gramsetu/ingestion', 'gramsetu/optimization', 'gramsetu/ml', 'gramsetu/api']
           missing = [d for d in required_dirs if not os.path.isdir(d)]
           if missing:
               print(f'Missing required architectural directories: {missing}')

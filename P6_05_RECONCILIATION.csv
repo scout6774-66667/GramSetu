@@ -1,3 +1,0 @@
-reconciliation_id,case_id,delivered_grams,accepted_grams,rejected_grams,pending_grams,gross_paise,deductions_paise,net_paise,bank_cleared_paise,reconciliation_verdict
-REC_SHADOW_001,CASE_SHADOW_001,5000000,4800000,200000,0,11760000,250000,11510000,0,BLOCKED_NO_LIVE_BANK_TRANSFER
-REC_SHADOW_002,CASE_SHADOW_002,2500000,2400000,100000,0,6240000,150000,6090000,0,BLOCKED_NO_LIVE_BANK_TRANSFER
