@@ -33,6 +33,9 @@ DEV_ACTORS: Dict[str, DevActor] = {
     "driver-1": DevActor(actor_id="driver-1", role=Role.DRIVER, organization_id="fpo-alpha", name="Jagdish Transport"),
     "driver-2": DevActor(actor_id="driver-2", role=Role.DRIVER, organization_id="fpo-alpha", name="Mohan Carrier"),
     "driver-other": DevActor(actor_id="driver-other", role=Role.DRIVER, organization_id="fpo-beta", name="Vikram Freight"),
+    "transporter-1": DevActor(actor_id="transporter-1", role=Role.TRANSPORTER, organization_id="fpo-alpha", name="Bengal Rural Transporters"),
+    "storage-operator-1": DevActor(actor_id="storage-operator-1", role=Role.STORAGE_OPERATOR, organization_id="fpo-alpha", name="Burdwan Cold Storage Ltd"),
+    "admin-master": DevActor(actor_id="admin-master", role=Role.ADMIN, organization_id=None, name="GramSetu System Administrator"),
     "system-worker": DevActor(actor_id="system-worker", role=Role.SYSTEM, organization_id=None, name="GramSetu System Engine"),
 }
 
@@ -65,7 +68,7 @@ def get_current_actor(request: Request) -> DevActor:
 def require_roles(*allowed_roles: Role) -> Callable[[DevActor], DevActor]:
     """Dependency factory enforcing server-side role authorization."""
     def role_checker(actor: DevActor = Depends(get_current_actor)) -> DevActor:
-        if actor.role == Role.SYSTEM:
+        if actor.role in (Role.SYSTEM, Role.ADMIN):
             return actor
         if actor.role not in allowed_roles:
             raise AuthorizationError(

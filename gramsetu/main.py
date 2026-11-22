@@ -115,8 +115,38 @@ def create_app(
             stats=coordinator.store.get_stats(),
         )
 
+    # Mount static assets and UI routes
+    import os
+    from fastapi.staticfiles import StaticFiles
+    from fastapi.responses import FileResponse
+
+    static_dir = os.path.join(os.path.dirname(__file__), "static")
+    if os.path.exists(static_dir):
+        app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
+        assets_dir = os.path.join(static_dir, "assets")
+        if os.path.exists(assets_dir):
+            app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+        @app.get("/", include_in_schema=False)
+        @app.get("/app", include_in_schema=False)
+        @app.get("/ui", include_in_schema=False)
+        async def serve_ui():
+            return FileResponse(os.path.join(static_dir, "index.html"))
+
     # Mount API v1 router
     app.include_router(api_v1_router)
+
+    # SPA Client-side Route Catch-all (for HTML5 pushState routing)
+    if os.path.exists(static_dir):
+        @app.get("/{full_path:path}", include_in_schema=False)
+        async def spa_fallback(full_path: str):
+            if full_path.startswith("api/") or full_path in ("docs", "redoc", "openapi.json"):
+                return JSONResponse(status_code=404, content={"error": "NOT_FOUND", "message": "Endpoint not found"})
+            index_path = os.path.join(static_dir, "index.html")
+            if os.path.exists(index_path):
+                return FileResponse(index_path)
+            return JSONResponse(status_code=404, content={"error": "NOT_FOUND", "message": "UI not found"})
 
     return app
 

@@ -37,6 +37,14 @@ KNOWN_COLLECTIONS = {
     "events",
     "evidence",
     "items",
+    "farmers",
+    "buyers",
+    "transporters",
+    "facilities",
+    "listings",
+    "transport_requests",
+    "procurement_offers",
+    "users",
 }
 
 
