@@ -1,0 +1,1 @@
+forecast_id,farmer_id,fpo_id,crop,variety,grade,estimated_grams,harvest_start_date,harvest_end_date,confidence_score,created_at,status

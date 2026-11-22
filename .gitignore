@@ -30,7 +30,8 @@ wheels/
 htmlcov/
 
 # Local Storage Snapshots & Temp files
-data/
+data/snapshots/
+data/*.tmp
 *.tmp
 *.log
 

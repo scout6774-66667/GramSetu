@@ -1,0 +1,1 @@
+edge_id,source_node,target_node,distance_meters,speed_kmh,road_class,weight_limit_grams,is_open,closure_reason
