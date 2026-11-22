@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gramsetu"
+version = "0.1.0"
+description = "GramSetu AI - Rural Food Supply-Chain Resilience Platform"
+authors = [{ name = "GramSetu Engineering Team" }]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.28.0",
+    "pydantic>=2.6.0",
+    "python-dateutil>=2.8.2"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-p no:zarr"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

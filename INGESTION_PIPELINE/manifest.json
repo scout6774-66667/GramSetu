@@ -1,0 +1,105 @@
+{
+  "pipeline_name": "GramSetu Canonical Ingestion Pipeline",
+  "pipeline_version": "1.0.0",
+  "timestamp_utc": "2026-11-21T19:48:07.697554+00:00",
+  "status": "PASSED",
+  "datasets": {
+    "verified/commodity_master.csv": {
+      "sha256": "3a0b643bc55aa78a09e636dca8d0d35879e69ef4793e421606f86aa662a7a031",
+      "records": 12,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/commodity_grades.csv": {
+      "sha256": "bf073bf37a9eca10b6b2e3ce7598a92c9c0f2787af3689601a2c46efd9800df1",
+      "records": 13,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/administrative_locations.csv": {
+      "sha256": "663d35918b6519e98b983571cd69f5d4582f9e963698961d20a768b3379df0ff",
+      "records": 10,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/mandi_master.csv": {
+      "sha256": "64c8d1960e6cf7ac804f1a4dc94306404d556b9ace1884dd64ef991e8d9afbcf",
+      "records": 7,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/daily_mandi_prices.csv": {
+      "sha256": "63a6e68cdc9012358415aafcc1d0da84ec065bc54283448df1149b255f33072f",
+      "records": 10,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/daily_mandi_arrivals.csv": {
+      "sha256": "040315e9a3c77cc5394dd71702c84e65258b5ca8327b576f16377692e34b9e2b",
+      "records": 6,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/road_nodes.csv": {
+      "sha256": "94cb8ee72457390d47468e1cda28d73e03e7d738cfb7c5d49d6fd9d3d729353e",
+      "records": 8,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/road_segments.csv": {
+      "sha256": "90e5269c238b429f7aa5a23fc5d0c2a2e152af66abc3ed6c2a228fcc1e63dc95",
+      "records": 12,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/storage_facilities.csv": {
+      "sha256": "6dba0ce697d8a39a15c3b900dc6c57fe8bc5e37f40d235686c7899046e0cb2d2",
+      "records": 3,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/crop_shelf_life_rules.csv": {
+      "sha256": "518e508a0ce6dd70da7d6891359465937df6a8b74fd72b9fa03f66cd3556b7ad",
+      "records": 12,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/freight_rate_cards.csv": {
+      "sha256": "8cdceb79a0d68c8b4fff2026904082154f4f0fbccdbe4cc9d0480b38e7d7bc4a",
+      "records": 4,
+      "status": "LOADED_AND_PARSED"
+    },
+    "verified/settlement_deductions.csv": {
+      "sha256": "6e08449beb866e945dd16425514c6a64144d9de4de9803f1bbc269af753e6b28",
+      "records": 5,
+      "status": "LOADED_AND_PARSED"
+    },
+    "operator_confirmed/fpo_master.csv": {
+      "sha256": "8c2d9c22b387ddb5d957307f844061c7724a1bead396ac41d3bb4ade1e14b80e",
+      "records": 2,
+      "status": "LOADED_AND_PARSED"
+    },
+    "operator_confirmed/farmer_registry.csv": {
+      "sha256": "cb1e19fe3d2c48fbc8fc043a37cc76c7a28fbcc4722aa0a7338be8c58f672888",
+      "records": 3,
+      "status": "LOADED_AND_PARSED"
+    },
+    "operator_confirmed/buyer_registry.csv": {
+      "sha256": "7e7237a9ed549121afb52243760b311ebcaaf712225bb1917c90ee2faa0694d4",
+      "records": 3,
+      "status": "LOADED_AND_PARSED"
+    },
+    "operator_confirmed/vehicle_fleet.csv": {
+      "sha256": "ebee482c1e9b87e92535db3cc1fdbc09eec95d40aabf421c1fd3864d184414ec",
+      "records": 3,
+      "status": "LOADED_AND_PARSED"
+    }
+  },
+  "integrity_checks": {
+    "commodity_integrity": "PASSED",
+    "market_integrity": "PASSED",
+    "fpo_hierarchy_integrity": "PASSED",
+    "location_hierarchy_integrity": "PASSED",
+    "road_network_topology": "PASSED"
+  },
+  "summary": {
+    "total_files": 16,
+    "total_records": 113,
+    "verified_reference_files": 12,
+    "operator_confirmed_files": 4,
+    "quarantined_files": 0,
+    "zero_unverified_proxies": true,
+    "zero_floating_point_currency": true,
+    "zero_floating_point_inventory_mass": true
+  }
+}

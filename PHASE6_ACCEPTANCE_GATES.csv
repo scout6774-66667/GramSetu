@@ -1,0 +1,23 @@
+gate_id,gate,related_gap,pass_condition,starting_status,failure_policy
+P6-M1-01,Source entitlement and raw capture,P6-01,Verified permission and SHA-256 bytes from primary source,BLOCKED_REPORTED,No automatic bypass
+P6-M1-02,Market/commodity crosswalk,P6-02,All in-scope source identities explicitly reviewed/approved,BLOCKED_REPORTED,Quarantine unmapped
+P6-M1-03,Historical training coverage,P6-03,">=730-day span and >=80% observed per eligible series, temporal split",BLOCKED_REPORTED,No model export
+P6-M1-04,Arrival source coverage,P6-04,"Observed source-backed arrivals where claimed, unit/date verified",BLOCKED_REPORTED,Mark unavailable
+P6-M2-01,Farm/site GPS attestation,P6-05,"Site-level consented GNSS with evidence, reviewed accuracy threshold",BLOCKED_REPORTED,No dispatch
+P6-M2-02,Routable road graph,P6-06,"Source-backed nodes/edges, routing tests, real distance",BLOCKED_REPORTED,No dispatch
+P6-M2-03,Freight feasibility,P6-07,Height/weight restrictions verified or mandatory operator signoff for unknowns,BLOCKED_REPORTED,Reject unattended trip
+P6-M3-01,Vehicle/operator confirmation,P6-08,"Fresh confirmed time window, non-overlap, capacity and quote",BLOCKED_REPORTED,No booking
+P6-M3-02,Physical lot custody,P6-09,"Verified receipt, scale and custody for every pilot lot",BLOCKED_REPORTED,No sellable inventory
+P6-M3-03,Buyer offer authority,P6-10,"Authorized buyer offer terms, signature and expiry validated",BLOCKED_REPORTED,No commitment
+P6-M3-04,Cold storage confirmed slot,P6-11,Operator confirms compatible capacity in time window,BLOCKED_REPORTED,No storage recovery
+P6-M3-05,Sensor evidence,P6-12,Calibrated timestamped sensor data if sensor decisions claimed,BLOCKED_REPORTED,No automated sensor-based claim
+P6-M3-06,Settled beneficiary credit,P6-13,Authenticated provider credit + ledger reconciliation; UTR-only rejected,BLOCKED_REPORTED,Never mark PAID
+P6-M3-07,Weather risk evidence,P6-14,Source-issued timestamp and validated crop-risk rule,BLOCKED_REPORTED,No auto weather action
+P6-M4-01,Held-out real-model evaluation,P6-16,"Temporal backtests, baseline gain and per-series results without leakage",BLOCKED_REPORTED,Feature disabled
+P6-M4-02,"Privacy, retention and least privilege",P6-17,"Reviewed data access, consent, deletion/retention and audit evidence",NOT_EVALUATED,No personal-data pilot
+P6-M4-03,Offline/replay/conflict recovery,P6-18,"Offline capture, sync conflict and replay tested",NOT_EVALUATED,Shadow pilot only
+P6-M4-04,"Observability, rollback and incident drill",P6-19,"Successful restore, incident exercise and alert evidence",NOT_EVALUATED,Shadow pilot only
+P6-M5-01,Pilot proof and factual outcomes,P6-15/P6-20,Pre-registered small shadow pilot with real evidence and reconciliation,NOT_EVALUATED,No unattended live decisions
+P6-R01,Backend regression preservation,All,"Re-run repo test suite, reproduce >=176 historical tests if present",REPORTED_PASS_NOT_INDEPENDENTLY_TESTED,No release if regression
+P6-R02,Safety gate truthfulness,All,Readiness remains blocked until every mandatory field gate is verified,REPORTED_PASS_NOT_INDEPENDENTLY_TESTED,Fail closed
+P6-R00,Canonical archive release identity,P6-21,Canonical release archive signature/hash reconciled or per-file equivalence documented and approved,DISCREPANCY_CONFIRMED,Do not sign off canonical release

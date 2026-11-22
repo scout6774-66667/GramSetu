@@ -1,0 +1,6 @@
+market_id,market_name,commodity_id,variety,grade,earliest_date,latest_date,calendar_span_days,observed_days,daily_coverage_pct,min_required_span_days,missing_calendar_days,training_gate_status,operational_blocker
+MKT_000001,Burdwan Mandi,COM_POTATO,Jyoti,A,2026-11-16,2026-11-17,2,2,100.0,730,728,BLOCKED_INSUFFICIENT_HISTORY,Requires 730 calendar days historical backfill from Agmarknet archives
+MKT_000001,Burdwan Mandi,COM_BRINJAL,Not reported,NOT_REPORTED,2026-11-16,2026-11-17,2,2,100.0,730,728,BLOCKED_INSUFFICIENT_HISTORY,Requires 730 calendar days historical backfill from Agmarknet archives
+MKT_000002,Kalna Mandi,COM_CABBAGE,Not reported,NOT_REPORTED,2026-11-17,2026-11-17,1,1,100.0,730,729,BLOCKED_INSUFFICIENT_HISTORY,Single observation; requires multi-year history
+MKT_000003,Katwa Mandi,COM_PADDY,Common,FAQ,2026-11-16,2026-11-17,2,2,100.0,730,728,BLOCKED_INSUFFICIENT_HISTORY,Requires 730 calendar days historical backfill from Agmarknet archives
+ALL_MARKETS,All 12 Mandis Combined,ALL_COMMODITIES,ALL_VARIETIES,ALL_GRADES,2026-11-16,2026-11-17,2,43,100.0,730,728,BLOCKED_GLOBAL_COVERAGE_DEFICIT,Total repository contains only 43 observations on 2 calendar days. 0 models trainable.

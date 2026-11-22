@@ -1,0 +1,30 @@
+{
+  "verdict": "PASS_INTERNAL_STRUCTURE_ONLY",
+  "details": {
+    "tables": 44,
+    "records": 8321,
+    "structural_errors": 0,
+    "issues_by_check": {},
+    "source_geo_references": 84,
+    "price_observations_secondary": 43,
+    "historical_route_estimate_warnings": 32,
+    "future_dated_simulation_events": 56,
+    "verified_real_partner_transactions": 0,
+    "original_official_mandi_export_verified": false,
+    "checks_performed": [
+      "primary / business keys",
+      "foreign keys",
+      "byte hashes",
+      "market-source registry",
+      "price min-modal-max",
+      "shipment ETA / capacity / causality",
+      "recoveries timeline / arithmetic",
+      "snapshot event count / checksum",
+      "ingestion / DQ mapping",
+      "accepted vs delivered",
+      "buyer fulfillment",
+      "combined-view consistency",
+      "unchanged source reference records"
+    ]
+  }
+}

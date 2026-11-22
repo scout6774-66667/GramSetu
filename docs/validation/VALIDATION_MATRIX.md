@@ -1,0 +1,51 @@
+# GramSetu AI — Master Validation Matrix (F0 - F13)
+**Evaluation Mode**: `AUDIT_AND_REPAIR` | **Validation Date**: 2026-11-17 | **Overall Status**: `VALIDATED_FOR_DATABASE_FREE_SINGLE_PROCESS_PROTOTYPE`
+
+---
+
+## 1. Traceability & Acceptance Matrix
+
+| Feature | Requirement / Acceptance Clause | Source Module | Independent Verification Test | Observed Result | Status |
+| :---: | :--- | :--- | :--- | :--- | :---: |
+| **F0** | App factory boots; `/health` and `/docs` accessible; OpenAPI loads | `gramsetu/main.py` | `test_bootstrap.py::test_health_check` | HTTP 200, status="ok", OpenAPI validated | **VERIFIED** |
+| **F0** | Deep-copy isolation: reads return independent copies | `gramsetu/store.py` | `test_val_f0_f3.py::test_f0_deep_copy_isolation` | In-memory store unpolluted by caller mutation | **VERIFIED** |
+| **F0** | Transaction copy-on-write with RAM & snapshot disk rollback | `gramsetu/store.py` | `test_val_f0_f3.py::test_f0_transaction_rollback_in_ram_and_disk` | Disk bytes and RAM restored exactly on exception | **VERIFIED** |
+| **F0** | Corrupt/unreadable JSON snapshot rejection | `gramsetu/store.py` | `test_val_f0_f3.py::test_f0_unreadable_or_corrupt_snapshot_refusal` | Raises `CorruptionError`; no silent reset | **VERIFIED** |
+| **F0** | Integer grams and paise precision enforcement | `gramsetu/schemas.py` | `test_val_f0_f3.py::test_f0_integer_precision_and_non_negative_invariants` | Rejects non-integers and negative amounts | **VERIFIED** |
+| **F1** | Missing/unknown `X-Dev-Actor` rejected with 401 Unauthorized | `gramsetu/core.py` | `test_val_f0_f3.py::test_f1_dev_actor_authentication_and_scoping` | Returns HTTP 401 `UNAUTHORIZED` | **VERIFIED** |
+| **F1** | Role-based authorization rejects unauthorized roles with 403 Forbidden | `gramsetu/core.py` | `test_val_f0_f3.py::test_f1_dev_actor_authentication_and_scoping` | Farmer calling FPO endpoint rejected with 403 | **VERIFIED** |
+| **F1** | Cross-tenant organization isolation (FPO A cannot mutate FPO B) | `gramsetu/core.py` | `test_val_f0_f3.py::test_f1_cross_tenant_organization_isolation` | Cross-FPO split rejected with 403 `FORBIDDEN` | **VERIFIED** |
+| **F1** | Production-like environment fails closed against `X-Dev-Actor` | `gramsetu/core.py` | `test_val_f0_f3.py::test_f1_production_environment_fails_closed_against_x_dev_actor` | Patched via VAL-001; returns 401 in `PRODUCTION` | **VERIFIED** |
+| **F2** | Forecasts are planning-only and never create physical lots | `gramsetu/services/supply.py` | `test_val_f0_f3.py::test_f2_forecasts_never_create_physical_stock` | Zero entries in `lots` or `movements` | **VERIFIED** |
+| **F2** | Demand gap joins eligible forecast supply and open demand | `gramsetu/services/procurement.py` | `test_val_f0_f3.py::test_f2_demand_gap_labeled_as_planning_indicator` | Calculates gap; excludes expired requirements | **VERIFIED** |
+| **F2** | Demand gap explicitly carries provisional disclaimer | `gramsetu/schemas.py` | `test_val_f0_f3.py::test_f2_demand_gap_labeled_as_planning_indicator` | "PLANNING ONLY" disclaimer present | **VERIFIED** |
+| **F3** | Physical receipt creates `InventoryLot` only after FPO verification | `gramsetu/services/inventory.py` | `test_batchtrace.py::test_receipt_creation_and_scoping` | Requires FPO_ADMIN; generates `RECEIPT` movement | **VERIFIED** |
+| **F3** | Lot split conserves total produce mass and zeroes parent mass | `gramsetu/services/inventory.py` | `test_val_f0_f3.py::test_f3_split_and_merge_mass_conservation` | Patched via VAL-004; parent zeroed, children sum = parent | **VERIFIED** |
+| **F3** | Lot merge consolidates identical crop/grade lots and zeroes sources | `gramsetu/services/inventory.py` | `test_val_f0_f3.py::test_f3_split_and_merge_mass_conservation` | Patched via VAL-004; sources zeroed, merged = sum | **VERIFIED** |
+| **F3** | Complete system mass conservation equation holds | `gramsetu/services/inventory.py` | `test_val_f0_f3.py::test_f3_complete_system_mass_equation` | Receipts = on-site + in-transit + delivered + loss | **VERIFIED** |
+| **F4** | Barrier-synchronized concurrent buyers cannot double-book stock | `gramsetu/services/procurement.py` | `test_val_f4_f7.py::test_f4_barrier_synchronized_buyer_race_prevents_double_booking` | Exactly 1 commitment succeeds; 1 fails cleanly | **VERIFIED** |
+| **F4** | Idempotency replay returns cached result; differing payload returns 409 | `gramsetu/services/procurement.py` | `test_val_f4_f7.py::test_f4_idempotency_replay_and_conflict` | Same key/body -> 200 replay; altered body -> 409 | **VERIFIED** |
+| **F4** | Pre-pickup cancellation releases reservation; post-pickup refused | `gramsetu/services/procurement.py` | `test_val_f4_f7.py::test_f4_post_pickup_cancellation_refused` | Pre-pickup releases; post-pickup raises 400 | **VERIFIED** |
+| **F5** | Vehicle capacity overload rejected | `gramsetu/services/logistics.py` | `test_val_f4_f7.py::test_f5_vehicle_capacity_overload_rejected` | Payload > capacity raises `InvariantViolationError` | **VERIFIED** |
+| **F5** | Driver assignment scoping strictly enforced | `gramsetu/services/logistics.py` | `test_val_f4_f7.py::test_f5_driver_assignment_enforced` | Unassigned driver rejected with 403 `FORBIDDEN` | **VERIFIED** |
+| **F5** | Delivery receipt enforces mass conservation ($A + R + L = D$) | `gramsetu/services/logistics.py` | `test_logistics.py::test_shipment_lifecycle_and_custody_conservation` | Non-conserving delivery rejected with 400 | **VERIFIED** |
+| **F5** | Haversine route estimator includes provisional disclaimer | `gramsetu/algorithms.py` | `test_val_f4_f7.py::test_f5_haversine_route_disclaimer_and_multi_stop_metrics` | Includes "PROVISIONAL ESTIMATOR" | **VERIFIED** |
+| **F6** | Disruption scanning detects missed pickups, shortages, rejections | `gramsetu/services/risk.py` | `test_val_f4_f7.py::test_f6_riskwatch_deduplication_prevents_alert_storms` | Generates incidents with calculated severity | **VERIFIED** |
+| **F6** | Deduplication prevents alert storms | `gramsetu/services/risk.py` | `test_val_f4_f7.py::test_f6_riskwatch_deduplication_prevents_alert_storms` | Repeated scans generate exactly 1 unresolved episode | **VERIFIED** |
+| **F7** | Recovery optimizer matches independent brute-force oracle | `gramsetu/services/recovery.py` | `test_val_f4_f7.py::test_f7_recovery_optimizer_vs_brute_force_oracle` | Algorithm recommendation matches exhaustive search | **VERIFIED** |
+| **F7** | Original cancelled buyer excluded from recovery candidates | `gramsetu/services/recovery.py` | `test_val_f4_f7.py::test_f7_recovery_original_cancelled_buyer_excluded` | Patched via VAL-003; defaulting buyer excluded | **VERIFIED** |
+| **F7** | Negative net-return candidates rejected | `gramsetu/services/recovery.py` | `test_val_f4_f7.py::test_f7_recovery_negative_net_return_rejected` | Patched via VAL-002; negative-net yields `NO_FEASIBLE_OPTION` | **VERIFIED** |
+| **F7** | Safe two-step approval: buyer confirms before FPO admin approval | `gramsetu/services/recovery.py` | `test_val_f4_f7.py::test_f7_recovery_two_step_approval_and_atomic_reservation` | Premature approval rejected; post-confirmation succeeds | **VERIFIED** |
+| **F8** | Financial reference oracle matches Decimal ROUND_HALF_UP | `gramsetu/services/settlement.py` | `test_val_f8_f13.py::test_f8_financial_reference_oracle_decimal_half_up` | Exact match with Decimal half-up arithmetic | **VERIFIED** |
+| **F8** | Settlement calculated exclusively on accepted grams, not shipped | `gramsetu/services/settlement.py` | `test_val_f8_f13.py::test_f8_financial_reference_oracle_decimal_half_up` | Rejections and loss deducted before payable | **VERIFIED** |
+| **F8** | Buyer reports payment (unverified); only FPO admin can verify | `gramsetu/services/settlement.py` | `test_val_f8_f13.py::test_f8_payment_reporting_vs_verification_and_unauthorized_verifier` | Buyer self-verification fails 403; FPO verifies to 200 | **VERIFIED** |
+| **F9** | Four role journeys (Farmer, Buyer, Driver, FPO) validated | `gramsetu/services/overview.py` | `test_val_f8_f13.py::test_f9_role_dashboards_and_tenant_isolation` | All 4 projections accurate; cross-FPO query blocked | **VERIFIED** |
+| **F10**| Offline command reconciliation with LWW version checking | `gramsetu/services/sync.py` | `test_val_f8_f13.py::test_f10_offline_command_reconciliation_and_conflict` | Version match applies; version mismatch returns 409 | **VERIFIED** |
+| **F10**| Idempotent replay of offline command envelope | `gramsetu/services/sync.py` | `test_val_f8_f13.py::test_f10_offline_command_reconciliation_and_conflict` | Replay returns 200 `REPLAYED` without side-effects | **VERIFIED** |
+| **F11**| Durable event outbox survives simulated restarts | `gramsetu/workers.py` | `test_val_f8_f13.py::test_f11_event_durability_and_poison_quarantine` | Sequential processing with persisted sequence cursor | **VERIFIED** |
+| **F11**| Poison events quarantined after 3 retries without blocking | `gramsetu/workers.py` | `test_val_f8_f13.py::test_f11_event_durability_and_poison_quarantine` | Marked `POISON`, attempts=3; queue advances | **VERIFIED** |
+| **F12**| Request payload limit enforced (1MB max body) | `gramsetu/main.py` | `test_val_f8_f13.py::test_f12_payload_limit_and_idor_prevention` | Payloads > 1MB rejected with HTTP 413 | **VERIFIED** |
+| **F12**| Sub-millisecond read latency benchmark ($p95 < 1.0\text{ ms}$) | `gramsetu/store.py` | `test_performance.py::test_algorithm_and_transaction_p95_performance` | Observed $p95 = 0.0018\text{ ms}$ | **VERIFIED** |
+| **F13**| End-to-End happy path harvest-to-payout execution | `gramsetu/main.py` | `test_final_acceptance.py::test_complete_end_to_end_happy_path` | Full 9-stage operational cycle completed | **VERIFIED** |
+| **F13**| Disruption and recovery cycle with alternative buyer approval | `gramsetu/main.py` | `test_final_acceptance.py::test_disruption_recovery_cross_feature_flow` | Cancellation $\rightarrow$ incident $\rightarrow$ recovery $\rightarrow$ re-commit | **VERIFIED** |
+| **F13**| Cold restart from snapshot preserves complete state | `gramsetu/store.py` | `test_final_acceptance.py::test_cold_restart_from_snapshot` | Restarts clean; balances, statuses, and logs match | **VERIFIED** |

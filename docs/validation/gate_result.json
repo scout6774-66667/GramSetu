@@ -1,0 +1,55 @@
+{
+  "project": "GramSetu AI",
+  "version": "1.0.0",
+  "evaluation_mode": "AUDIT_AND_REPAIR",
+  "overall_status": "VALIDATED_FOR_DATABASE_FREE_SINGLE_PROCESS_PROTOTYPE",
+  "timestamp": "2026-11-17T14:45:00+05:30",
+  "features": {
+    "F0": { "name": "Bootstrap & Atomic JSON State", "status": "PASS", "requirements_checked": 5, "requirements_passed": 5, "open_defects": 0 },
+    "F1": { "name": "Identity & Role Scoping", "status": "PASS", "requirements_checked": 4, "requirements_passed": 4, "open_defects": 0 },
+    "F2": { "name": "DemandSync Planning", "status": "PASS", "requirements_checked": 3, "requirements_passed": 3, "open_defects": 0 },
+    "F3": { "name": "BatchTrace Inventory Ledger", "status": "PASS", "requirements_checked": 4, "requirements_passed": 4, "open_defects": 0 },
+    "F4": { "name": "CommitGuard Procurement", "status": "PASS", "requirements_checked": 3, "requirements_passed": 3, "open_defects": 0 },
+    "F5": { "name": "Logistics & Custody", "status": "PASS", "requirements_checked": 4, "requirements_passed": 4, "open_defects": 0 },
+    "F6": { "name": "RiskWatch Disruption Detection", "status": "PASS", "requirements_checked": 2, "requirements_passed": 2, "open_defects": 0 },
+    "F7": { "name": "RecoveryOpt Optimization", "status": "PASS", "requirements_checked": 4, "requirements_passed": 4, "open_defects": 0 },
+    "F8": { "name": "SettleTrack Financial Accounting", "status": "PASS", "requirements_checked": 3, "requirements_passed": 3, "open_defects": 0 },
+    "F9": { "name": "Four App Query Contracts", "status": "PASS", "requirements_checked": 2, "requirements_passed": 2, "open_defects": 0 },
+    "F10": { "name": "Offline Command Reconciliation", "status": "PASS", "requirements_checked": 2, "requirements_passed": 2, "open_defects": 0 },
+    "F11": { "name": "Durable Local Event Dispatcher", "status": "PASS", "requirements_checked": 2, "requirements_passed": 2, "open_defects": 0 },
+    "F12": { "name": "Performance, Security & Reliability", "status": "PASS", "requirements_checked": 3, "requirements_passed": 3, "open_defects": 0 },
+    "F13": { "name": "Full Cross-Feature Acceptance", "status": "PASS", "requirements_checked": 3, "requirements_passed": 3, "open_defects": 0 }
+  },
+  "test_execution": {
+    "test_command": "python -m pytest -q",
+    "total_tests": 92,
+    "baseline_tests": 58,
+    "independent_validation_tests": 34,
+    "passed": 92,
+    "failed": 0,
+    "duration_seconds": 3.07
+  },
+  "defects": {
+    "total_logged": 4,
+    "p0_stop": 1,
+    "p1_blocker": 3,
+    "p2_major": 0,
+    "p3_minor": 0,
+    "fixed": 4,
+    "open": 0,
+    "records": [
+      { "id": "VAL-001", "feature": "F1", "severity": "P1", "status": "FIXED", "summary": "X-Dev-Actor accepted in Environment.PRODUCTION without authentication failure" },
+      { "id": "VAL-002", "feature": "F7", "severity": "P1", "status": "FIXED", "summary": "Negative net-return candidates permitted and recommended in recovery plans" },
+      { "id": "VAL-003", "feature": "F7", "severity": "P1", "status": "FIXED", "summary": "Defaulting/cancelling buyer was not excluded from recovery candidates" },
+      { "id": "VAL-004", "feature": "F3", "severity": "P0", "status": "FIXED", "summary": "Consumed parent/source lots retained quantity grams upon split and merge" }
+    ]
+  },
+  "evidence_paths": {
+    "validation_matrix": "docs/validation/VALIDATION_MATRIX.md",
+    "defect_register": "docs/validation/DEFECT_REGISTER.md",
+    "test_evidence": "docs/validation/TEST_EVIDENCE.md",
+    "performance_report": "docs/validation/PERFORMANCE_REPORT.md",
+    "security_report": "docs/validation/SECURITY_REPORT.md",
+    "final_report": "docs/validation/FINAL_VALIDATION_REPORT.md"
+  }
+}

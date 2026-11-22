@@ -1,0 +1,152 @@
+dataset,parameter,unit_or_type,importance,validation_policy
+mandi_prices_primary,market_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,commodity_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,variety,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,grade,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,observed_date,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,min_price_inr_quintal,INR/quintal,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,modal_price_inr_quintal,INR/quintal,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,max_price_inr_quintal,INR/quintal,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,published_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,retrieved_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,source_record_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,source_namespace,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,source_artifact_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,source_review_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+mandi_prices_primary,official_source_record_url,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,market_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,commodity_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,variety,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,observed_date,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,arrival_quantity_tonnes,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,published_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,retrieved_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,source_record_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,source_namespace,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,source_artifact_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,source_review_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+mandi_arrivals_primary,official_source_record_url,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,location_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,district_lgd_code,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,latitude,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,longitude,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,accuracy_m,meters,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,collected_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,collection_method,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,site_verification_status,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,reviewed_by,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,evidence_uri,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+site_gps_attestations,source_artifact_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,market_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,official_market_code,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,official_market_name,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,state_name,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,district_name,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,agency,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,verified_by,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,source_page,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_market_crosswalk,review_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+official_commodity_crosswalk,commodity_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_commodity_crosswalk,official_commodity_code,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_commodity_crosswalk,official_commodity_name,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_commodity_crosswalk,verified_by,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_commodity_crosswalk,source_page,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+official_commodity_crosswalk,review_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,edge_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,source_way_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,from_node,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,to_node,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,length_m,meters,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,travel_time_s,seconds,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,road_type,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,access_rule,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,geometry_geojson_file,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,source_provider,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,source_extract_sha256,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,source_retrieved_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,license,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,vehicle_access_verification,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,reviewer_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+road_network_evidence,review_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,facility_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,partner_org_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,commodity_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,effective_from,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,effective_until,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,nominal_capacity_grams,grams,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,available_capacity_grams,grams,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,quoted_rate_paise_per_kg_day,paise/kg,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,operator_signed_evidence_uri,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,evidence_digest_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,verified_by,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+facility_capacity_confirmations,verification_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,vehicle_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,partner_org_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,payload_capacity_grams,grams,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,gross_weight_limit_kg,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,available_from,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,available_until,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,quotation_paise,paise,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,operator_signed_evidence_uri,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,evidence_digest_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,verified_by,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+vehicle_capacity_confirmations,verification_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,lot_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,farmer_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,fpo_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,commodity_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,grade,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,physical_grams,grams,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,reserved_grams,grams,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,custody_org_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,site_location_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,verified_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,evidence_digest_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,verified_by,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+farm_inventory_confirmations,verification_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,offer_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,buyer_org_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,requirement_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,commodity_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,grade,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,required_grams,grams,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,price_paise_per_kg,paise/kg,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,expires_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,delivery_deadline,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,signed_evidence_uri,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,evidence_digest_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,verified_by,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+buyer_offer_confirmations,verification_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,payment_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,payable_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,verification_provider,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,amount_paise,paise,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,provider_event_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,confirmed_credit_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,beneficiary_token,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,proof_digest_sha256,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,reviewed_by,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+payment_settlement_confirmations,verification_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+weather_observations,site_location_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+weather_observations,observed_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+weather_observations,air_temperature_c,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+weather_observations,relative_humidity_pct,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+weather_observations,rainfall_mm,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+weather_observations,data_resolution,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+weather_observations,source_provider,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+weather_observations,source_record_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+weather_observations,source_artifact_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+weather_observations,review_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,source_artifact_sha256,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,source_original_url,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,source_owner,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,collection_method,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,retrieved_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,published_at,UTC timestamp,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,file_name,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,content_type,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,namespace,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,schema_version,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,reviewer_id,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,review_status,unitless/code/text,REQUIRED_FOR_EVIDENCE,No invented default; evidence-backed or intentionally unavailable
+raw_source_manifest,usage_rights_note,unitless/code/text,CONTRACT_FIELD,No invented default; evidence-backed or intentionally unavailable

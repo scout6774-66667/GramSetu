@@ -1,0 +1,157 @@
+{
+  "timestamp_utc": "2026-11-17T17:09:26Z",
+  "total_runtime_seconds": 17.78,
+  "optimizer": {
+    "candidates_8": {
+      "percentiles_ms": {
+        "p50": 0.0078,
+        "p95": 0.0205,
+        "p99": 1.3883,
+        "avg": 0.0363,
+        "max": 1.3883
+      },
+      "status": "OPTIMAL_PROVEN",
+      "allocated_count": 8
+    },
+    "candidates_16": {
+      "percentiles_ms": {
+        "p50": 0.0141,
+        "p95": 0.0188,
+        "p99": 0.0205,
+        "avg": 0.0146,
+        "max": 0.0205
+      },
+      "status": "OPTIMAL_PROVEN",
+      "allocated_count": 16
+    },
+    "candidates_32": {
+      "percentiles_ms": {
+        "p50": 0.0281,
+        "p95": 0.0318,
+        "p99": 0.0747,
+        "avg": 0.0293,
+        "max": 0.0747
+      },
+      "status": "OPTIMAL_PROVEN",
+      "allocated_count": 32
+    },
+    "candidates_64": {
+      "percentiles_ms": {
+        "p50": 0.0549,
+        "p95": 0.0626,
+        "p99": 0.0733,
+        "avg": 0.0556,
+        "max": 0.0733
+      },
+      "status": "OPTIMAL_PROVEN",
+      "allocated_count": 64
+    }
+  },
+  "routing": {
+    "dijkstra_routing_ms": {
+      "p50": 0.0044,
+      "p95": 0.0064,
+      "p99": 0.0104,
+      "avg": 0.0048,
+      "max": 0.0377
+    }
+  },
+  "tiers": {
+    "small": {
+      "tier": "small",
+      "counts": {
+        "farmers": 10,
+        "buyers": 8,
+        "shipments": 5,
+        "total_objects": 23
+      },
+      "snapshot_bytes": 6207,
+      "write_latency_ms": {
+        "p50": 1.316,
+        "p95": 1.5201,
+        "p99": 1.5201,
+        "avg": 1.3172,
+        "max": 1.5201
+      },
+      "read_latency_ms": {
+        "p50": 0.0035,
+        "p95": 0.0114,
+        "p99": 0.0114,
+        "avg": 0.0044,
+        "max": 0.0114
+      },
+      "cold_restart_latency_ms": {
+        "p50": 0.3018,
+        "p95": 0.366,
+        "p99": 0.366,
+        "avg": 0.2952,
+        "max": 0.366
+      },
+      "estimated_max_writes_per_sec": 759.9
+    },
+    "medium": {
+      "tier": "medium",
+      "counts": {
+        "farmers": 100,
+        "buyers": 20,
+        "shipments": 30,
+        "total_objects": 150
+      },
+      "snapshot_bytes": 39613,
+      "write_latency_ms": {
+        "p50": 1.9945,
+        "p95": 2.8795,
+        "p99": 3.486,
+        "avg": 2.007,
+        "max": 3.486
+      },
+      "read_latency_ms": {
+        "p50": 0.003,
+        "p95": 0.0035,
+        "p99": 0.0111,
+        "avg": 0.0032,
+        "max": 0.0111
+      },
+      "cold_restart_latency_ms": {
+        "p50": 0.7634,
+        "p95": 0.8029,
+        "p99": 0.8029,
+        "avg": 0.7621,
+        "max": 0.8029
+      },
+      "estimated_max_writes_per_sec": 501.4
+    },
+    "large": {
+      "tier": "large",
+      "counts": {
+        "farmers": 1000,
+        "buyers": 100,
+        "shipments": 200,
+        "total_objects": 1300
+      },
+      "snapshot_bytes": 343083,
+      "write_latency_ms": {
+        "p50": 8.1545,
+        "p95": 51.7156,
+        "p99": 65.9829,
+        "avg": 17.4458,
+        "max": 136.7141
+      },
+      "read_latency_ms": {
+        "p50": 0.0032,
+        "p95": 0.0042,
+        "p99": 0.0134,
+        "avg": 0.004,
+        "max": 0.1366
+      },
+      "cold_restart_latency_ms": {
+        "p50": 6.1351,
+        "p95": 6.503,
+        "p99": 6.503,
+        "avg": 6.0895,
+        "max": 6.503
+      },
+      "estimated_max_writes_per_sec": 122.6
+    }
+  }
+}

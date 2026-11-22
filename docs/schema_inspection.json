@@ -1,0 +1,2114 @@
+{
+  "BaseModel": {},
+  "BaseSchema": {},
+  "BuyerCommitmentCreate": {
+    "requirement_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "agreed_price_paise_per_gram": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Agreed unit price in integer paise per gram"
+    },
+    "allocations": {
+      "type": "typing.List[gramsetu.schemas.CommitmentAllocationItem]",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "idempotency_key": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "BuyerCommitmentResponse": {
+    "commitment_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "requirement_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "buyer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "agreed_price_paise_per_gram": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "committed_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "allocations": {
+      "type": "typing.List[gramsetu.schemas.CommitmentAllocationItem]",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "updated_at": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "idempotency_key": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "CONFIRMED",
+      "description": null
+    }
+  },
+  "BuyerOverviewResponse": {
+    "buyer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "open_requirements_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "open_needed_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "active_commitments_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "active_committed_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "in_transit_shipments_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_payable_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_paid_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "outstanding_balance_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "as_of": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "BuyerRequirementCreate": {
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "variety": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "needed_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Required quantity in integer grams"
+    },
+    "delivery_window_start": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "delivery_window_end": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "max_price_paise_per_gram": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Maximum price in integer paise per gram"
+    },
+    "idempotency_key": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "BuyerRequirementResponse": {
+    "requirement_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "buyer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "variety": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "needed_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "allocated_grams": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "delivery_window_start": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "delivery_window_end": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "max_price_paise_per_gram": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "updated_at": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "idempotency_key": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "OPEN",
+      "description": null
+    }
+  },
+  "ChildPortion": {
+    "quantity_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "storage_location": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "CommitmentAllocationItem": {
+    "lot_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "allocated_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Allocated quantity in integer grams"
+    }
+  },
+  "DeliveryConfirmationRequest": {
+    "accepted_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "rejected_grams": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "loss_grams": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    }
+  },
+  "DemandGapAnalysis": {
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_demand_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_forecast_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "net_gap_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "coverage_ratio": {
+      "type": "<class 'float'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "as_of": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "planning_disclaimer": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "PLANNING ONLY: Unverified forecasts do NOT represent physical stock and buyer requirements are not guarantees.",
+      "description": null
+    }
+  },
+  "DriverActionPayload": {
+    "assigned_driver_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "action": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "DriverOverviewResponse": {
+    "driver_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "assigned_vehicle_id": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "pending_pickups_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "active_deliveries_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "completed_trips_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "as_of": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "ErrorResponse": {
+    "error": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "message": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "status_code": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "details": {
+      "type": "typing.Optional[typing.Dict[str, typing.Any]]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "trace_id": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "FarmerOverviewResponse": {
+    "farmer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "active_forecasts_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "active_forecasts_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "delivered_lots_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "delivered_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_earned_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "pending_payout_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "as_of": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "FpoOverviewResponse": {
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_physical_stock_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_available_stock_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_reserved_stock_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "at_risk_lots_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "unfulfilled_commitments_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "pending_collections_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "pending_settlements_count": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_settlement_payable_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_settlement_paid_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "as_of": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "GradeAdjustmentRequest": {
+    "new_grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "reason": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "HarvestForecastCreate": {
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "variety": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "estimated_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Estimated harvest quantity in integer grams"
+    },
+    "harvest_start_date": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "harvest_end_date": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "confidence_score": {
+      "type": "<class 'float'>",
+      "required": false,
+      "default": "0.8",
+      "description": null
+    },
+    "idempotency_key": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "HarvestForecastResponse": {
+    "forecast_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "farmer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "variety": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "estimated_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "harvest_start_date": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "harvest_end_date": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "confidence_score": {
+      "type": "<class 'float'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "idempotency_key": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "ACTIVE",
+      "description": null
+    }
+  },
+  "HealthStatus": {
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "ok",
+      "description": null
+    },
+    "version": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "environment": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "timestamp": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "stats": {
+      "type": "typing.Dict[str, int]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "IncidentResolveRequest": {
+    "resolution_note": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Verifiable reason or action taken to close the incident"
+    }
+  },
+  "InventoryLotResponse": {
+    "lot_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "farmer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "variety": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "quantity_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "reserved_grams": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "available_grams": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "storage_location": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "custody": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "FPO_WAREHOUSE",
+      "description": null
+    },
+    "version": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "1",
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "updated_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "parent_lot_ids": {
+      "type": "typing.List[str]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "AVAILABLE",
+      "description": null
+    }
+  },
+  "InventoryMovementResponse": {
+    "movement_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "lot_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "movement_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "quantity_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "source_location": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "dest_location": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "source_custody": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "dest_custody": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "recorded_by": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "LotMergeRequest": {
+    "source_lot_ids": {
+      "type": "typing.List[str]",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "target_storage_location": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "LotMergeResponse": {
+    "merged_lot": {
+      "type": "<class 'gramsetu.schemas.InventoryLotResponse'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "retired_lot_ids": {
+      "type": "typing.List[str]",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "LotReceiptCreate": {
+    "farmer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "variety": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "quantity_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Verified physical quantity in integer grams"
+    },
+    "storage_location": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "LotSplitRequest": {
+    "child_portions": {
+      "type": "typing.List[gramsetu.schemas.ChildPortion]",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "LotSplitResponse": {
+    "parent_lot": {
+      "type": "<class 'gramsetu.schemas.InventoryLotResponse'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "child_lots": {
+      "type": "typing.List[gramsetu.schemas.InventoryLotResponse]",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "OfflineCommandEnvelope": {
+    "command_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "actor_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "device_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "command_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "resource_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "resource_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "expected_version": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "1",
+      "description": null
+    },
+    "client_timestamp": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "payload": {
+      "type": "typing.Dict[str, typing.Any]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "PaginatedResponse": {
+    "items": {
+      "type": "typing.List[typing.Any]",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "limit": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "offset": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "PaginationParams": {
+    "limit": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "50",
+      "description": null
+    },
+    "offset": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    }
+  },
+  "PaymentCreateRequest": {
+    "amount_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Payment amount in integer paise"
+    },
+    "payment_method": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "NEFT",
+      "description": null
+    },
+    "reference_number": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "evidence_note": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "PaymentRecord": {
+    "payment_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "amount_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "payment_method": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "NEFT",
+      "description": null
+    },
+    "reference_number": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "evidence_note": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "evidence_id": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "verification_status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "REPORTED",
+      "description": null
+    },
+    "payload_digest": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "source_type": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "MANUAL_ENTRY",
+      "description": null
+    },
+    "recorded_by": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "recorded_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "verified": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "False",
+      "description": null
+    },
+    "verified_by": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "verified_at": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "PaymentReportRequest": {
+    "amount_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Reported payment amount in integer paise"
+    },
+    "payment_method": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "NEFT",
+      "description": null
+    },
+    "reference_number": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "evidence_note": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "PaymentVerifyRequest": {
+    "verification_note": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "external_token": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "ProvenanceEvidenceRecord": {
+    "evidence_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "source_type": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "OPERATOR_MANUAL",
+      "description": null
+    },
+    "source_identity": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "raw_reference": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "payload_digest": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "quantity_or_amount": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "unit_or_currency": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "verification_status": {
+      "type": "<enum 'VerificationStatus'>",
+      "required": false,
+      "default": "VerificationStatus.REPORTED",
+      "description": null
+    },
+    "verifier_identity": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "calibration_metadata": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "recorded_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "verified_at": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "ReconciliationResponse": {
+    "command_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "applied_resource_version": {
+      "type": "typing.Optional[int]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "current_server_state": {
+      "type": "typing.Optional[typing.Dict[str, typing.Any]]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "conflict_reason": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "processed_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "RecoveryCandidate": {
+    "buyer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "requirement_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "offered_price_paise_per_gram": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "allocable_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "gross_revenue_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "estimated_transport_cost_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "net_return_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "effective_price_paise_per_gram": {
+      "type": "<class 'float'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "rank": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "1",
+      "description": null
+    }
+  },
+  "RecoveryPlanResponse": {
+    "plan_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "incident_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "lot_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "crop": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "grade": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "available_recovery_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "candidates": {
+      "type": "typing.List[gramsetu.schemas.RecoveryCandidate]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "recommended_candidate": {
+      "type": "typing.Optional[gramsetu.schemas.RecoveryCandidate]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "RECOMMENDED",
+      "description": null
+    },
+    "optimality_status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "OPTIMAL_PROVEN",
+      "description": null
+    },
+    "solver_runtime_ms": {
+      "type": "<class 'float'>",
+      "required": false,
+      "default": "0.0",
+      "description": null
+    },
+    "candidate_count": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "objective_value_paise": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "model_version": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "2.0-exact",
+      "description": null
+    },
+    "buyer_confirmed_at": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "fpo_approved_at": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "disclaimer": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "RECOMMENDATION ONLY: AI recovery plans do not bind buyers or guarantee stock rescue until explicit buyer confirmation and FPO approval are executed.",
+      "description": null
+    }
+  },
+  "RiskIncidentResponse": {
+    "incident_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "incident_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "dedup_key": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "severity": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "title": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "description": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "resource_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "resource_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "affected_grams": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "affected_paise": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "OPEN",
+      "description": null
+    },
+    "resolution_note": {
+      "type": "typing.Optional[str]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "updated_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "RouteVerificationRequest": {
+    "origin": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "destination": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "payload_weight_grams": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    }
+  },
+  "RouteVerificationResponse": {
+    "origin": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "destination": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "distance_meters": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "duration_seconds": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "distance_km": {
+      "type": "<class 'float'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "estimated_hours": {
+      "type": "<class 'float'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "estimated_cost_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "route_status": {
+      "type": "<enum 'RouteStatus'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "path_nodes": {
+      "type": "typing.List[str]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "road_restrictions_applied": {
+      "type": "typing.List[str]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "provider_name": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "confidence": {
+      "type": "<class 'float'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "disclaimer": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "SettlementDeduction": {
+    "deduction_type": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "TRANSPORT",
+      "description": null
+    },
+    "amount_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Deduction in integer paise"
+    },
+    "reason": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "SettlementGenerateRequest": {
+    "shipment_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "deductions": {
+      "type": "typing.List[gramsetu.schemas.SettlementDeduction]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "SettlementResponse": {
+    "settlement_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "shipment_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "commitment_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "farmer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "buyer_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "accepted_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "unit_price_paise_per_gram": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "gross_amount_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "deductions": {
+      "type": "typing.List[gramsetu.schemas.SettlementDeduction]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "total_deductions_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "net_payable_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "paid_amount_paise": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "0",
+      "description": null
+    },
+    "remaining_balance_paise": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "payments": {
+      "type": "typing.List[gramsetu.schemas.PaymentRecord]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "audit_events": {
+      "type": "typing.List[str]",
+      "required": false,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "PENDING",
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "updated_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "ShipmentCreate": {
+    "commitment_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "vehicle_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "driver_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  },
+  "ShipmentResponse": {
+    "shipment_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "commitment_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "vehicle_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "driver_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "dispatched_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "version": {
+      "type": "<class 'int'>",
+      "required": false,
+      "default": "1",
+      "description": null
+    },
+    "status": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "PLANNED",
+      "description": null
+    },
+    "custody": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "SCHEDULED",
+      "description": null
+    },
+    "actual_pickup_time": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "actual_delivery_time": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "accepted_grams": {
+      "type": "typing.Optional[int]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "rejected_grams": {
+      "type": "typing.Optional[int]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "loss_grams": {
+      "type": "typing.Optional[int]",
+      "required": false,
+      "default": null,
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "updated_at": {
+      "type": "typing.Optional[datetime.datetime]",
+      "required": false,
+      "default": null,
+      "description": null
+    }
+  },
+  "VehicleCreate": {
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "driver_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "capacity_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": "Payload capacity in integer grams"
+    },
+    "vehicle_type": {
+      "type": "<class 'str'>",
+      "required": false,
+      "default": "Mini Truck",
+      "description": null
+    }
+  },
+  "VehicleResponse": {
+    "vehicle_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "fpo_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "driver_id": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "capacity_grams": {
+      "type": "<class 'int'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "vehicle_type": {
+      "type": "<class 'str'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    },
+    "is_available": {
+      "type": "<class 'bool'>",
+      "required": false,
+      "default": "True",
+      "description": null
+    },
+    "created_at": {
+      "type": "<class 'datetime.datetime'>",
+      "required": true,
+      "default": "PydanticUndefined",
+      "description": null
+    }
+  }
+}

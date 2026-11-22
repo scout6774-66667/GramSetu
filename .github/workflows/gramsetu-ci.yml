@@ -1,0 +1,96 @@
+name: GramSetu AI Production Hardening & CI/CD Verification
+
+on:
+  push:
+    branches:
+      - main
+      - 'refactor/**'
+      - 'release/**'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  gramsetu-ci:
+    name: 9-Stage Principal Engineering Quality Gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: 3. Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov ruff mypy httpx pydantic fastapi uvicorn cryptography pyjwt
+
+      - name: "Stage 1: Repository Structure & Integrity Gate"
+        run: |
+          python -c "
+          import os, sys
+          required_dirs = ['gramsetu/core', 'gramsetu/infrastructure', 'gramsetu/ingestion', 'gramsetu/optimization', 'gramsetu/ml', 'gramsetu/api', 'REFACTOR_REPORTS']
+          missing = [d for d in required_dirs if not os.path.isdir(d)]
+          if missing:
+              print(f'Missing required architectural directories: {missing}')
+              sys.exit(1)
+          print('Stage 1 Passed: Repository layout strictly conforms to modular architecture.')
+          "
+
+      - name: "Stage 2: Code Quality & Linting Gate"
+        run: |
+          ruff check gramsetu/ --select=E,F,W --ignore=E501
+          python -m py_compile $(find gramsetu -name "*.py")
+
+      - name: "Stage 3: Security & Secret Scanning Gate"
+        run: |
+          python -c "
+          import os, re, sys
+          pattern = re.compile(r'(?i)(api[_-]?key|secret|password|private[_-]?key)\s*=\s*[\'\"][A-Za-z0-9/\+=]{16,}[\'\"]')
+          violations = []
+          for root, _, files in os.walk('gramsetu'):
+              for f in files:
+                  if f.endswith('.py'):
+                      p = os.path.join(root, f)
+                      with open(p, 'r', encoding='utf-8', errors='ignore') as fp:
+                          for idx, line in enumerate(fp, start=1):
+                              if pattern.search(line) and 'test' not in line.lower() and 'example' not in line.lower():
+                                  violations.append(f'{p}:{idx}')
+          if violations:
+              print(f'Hardcoded secrets detected: {violations}')
+              sys.exit(1)
+          print('Stage 3 Passed: Zero hardcoded production secrets found.')
+          "
+
+      - name: "Stage 4: Domain Core & Unit Contract Gate"
+        run: |
+          pytest tests/test_auth_scoping.py tests/hardening/test_auth_negative.py tests/test_phase6_contracts.py -v
+
+      - name: "Stage 5: Data Pipeline & Serialization Gate"
+        run: |
+          pytest tests/test_phase3_contracts.py VALIDATION_TESTS/test_data_quality_10_layers.py -v
+
+      - name: "Stage 6: Integration & API Compatibility Gate"
+        run: |
+          pytest tests/test_demandsync.py tests/test_commitguard.py tests/test_batchtrace.py tests/test_logistics.py tests/test_riskwatch.py tests/test_recoveryopt.py tests/test_settletrack.py tests/test_overview.py tests/test_offline_sync.py -v
+
+      - name: "Stage 7: Concurrency & Persistence Crash-Safety Gate"
+        run: |
+          pytest tests/hardening/test_process_writer_lock.py tests/test_durable_events.py tests/hardening/test_full_regression.py -v
+
+      - name: "Stage 8: ML Safety & Data Leakage Gate"
+        run: |
+          pytest tests/test_phase4_mlops.py tests/test_phase5_readiness.py tests/hardening/test_evidence_integrity.py tests/hardening/test_road_graph_routing.py -v
+
+      - name: "Stage 9: Package Validation & Full Regression Gate"
+        run: |
+          pip install -e .
+          pytest tests/ VALIDATION_TESTS/ --durations=10 -q

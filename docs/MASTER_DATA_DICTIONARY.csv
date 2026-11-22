@@ -1,0 +1,230 @@
+Dataset,Field,Type,Unit,Required,Unique_FK,Source,Validation,Module
+commodity_master.csv,commodity_id,string,None,True,PRIMARY_KEY,Agmarknet/AGMARK,"Regex: ^CMD-[A-Z0-9]{4,8}$",DemandSync
+commodity_master.csv,commodity_name,string,None,True,UNIQUE,Agmarknet,"Titlecase, min 2 chars, e.g. 'Soybean', 'Wheat'",DemandSync
+commodity_master.csv,scientific_name,string,None,False,NONE,ICAR,"Botanical binomial, e.g. 'Glycine max'",DemandSync
+commodity_master.csv,category,string,None,True,NONE,Agmarknet,"Enum: CEREALS, PULSES, OILSEEDS, VEGETABLES, FRUITS, FIBRES, SPICES",DemandSync
+commodity_master.csv,hsn_code,string,None,True,NONE,GSTN,"Regex: ^[0-9]{4,8}$",SettleTrack
+commodity_master.csv,standard_moisture_max_pct,float,percentage,True,NONE,BIS/AGMARK,Range: 5.0 to 25.0,BatchTrace
+commodity_master.csv,default_shelf_life_days,integer,days,True,NONE,ICAR Post-Harvest,Range: 1 to 365,RiskWatch
+commodity_master.csv,is_perishable,boolean,None,True,NONE,ICAR,Boolean true/false,RiskWatch
+commodity_grades.csv,grade_id,string,None,True,PRIMARY_KEY,BIS/AGMARK,"Regex: ^GRD-[A-Z0-9-]{4,12}$",BatchTrace
+commodity_grades.csv,commodity_id,string,None,True,FOREIGN_KEY(commodity_master.commodity_id),Agmarknet,Must exist in commodity_master,BatchTrace
+commodity_grades.csv,grade_code,string,None,True,NONE,BIS,"Enum/Code: 'A', 'B', 'C', 'FAQ', 'SPECIAL'",BatchTrace
+commodity_grades.csv,min_purity_pct,float,percentage,True,NONE,BIS,Range: 80.0 to 100.0,BatchTrace
+commodity_grades.csv,max_foreign_matter_pct,float,percentage,True,NONE,BIS,Range: 0.0 to 10.0,BatchTrace
+commodity_grades.csv,max_moisture_pct,float,percentage,True,NONE,BIS,Range: 5.0 to 20.0,BatchTrace
+commodity_grades.csv,description,string,None,False,NONE,AGMARK,Text specification,BatchTrace
+mandi_master.csv,market_id,string,None,True,PRIMARY_KEY,Agmarknet/eNAM,"Regex: ^MKT-[A-Z]{2}-[0-9]{3,6}$",Market Intel
+mandi_master.csv,market_name,string,None,True,NONE,Agmarknet,"APMC Mandi Name e.g. 'Baramati APMC', 'Vashi APMC'",Market Intel
+mandi_master.csv,apmc_code,string,None,False,UNIQUE,State Marketing Board,Official APMC code,Market Intel
+mandi_master.csv,state_code,string,None,True,NONE,LGD/Census,"2-letter state code e.g. 'MH', 'MP'",Market Intel
+mandi_master.csv,district_name,string,None,True,NONE,LGD,"Official district name e.g. 'Pune', 'Nashik'",Market Intel
+mandi_master.csv,latitude,float,degrees_north,True,NONE,Survey of India/OSM,Range: 8.0 to 37.0 (India bounding box),Logistics
+mandi_master.csv,longitude,float,degrees_east,True,NONE,Survey of India/OSM,Range: 68.0 to 97.0 (India bounding box),Logistics
+mandi_master.csv,is_enam_integrated,boolean,None,True,NONE,eNAM,Boolean flag,Market Intel
+daily_mandi_prices.csv,observation_id,string,None,True,PRIMARY_KEY,Agmarknet,"Regex: ^PRC-[0-9]{8}-[0-9]{4,8}$",Market Intel
+daily_mandi_prices.csv,market_id,string,None,True,FOREIGN_KEY(mandi_master.market_id),Agmarknet,Must exist in mandi_master,Market Intel
+daily_mandi_prices.csv,commodity_id,string,None,True,FOREIGN_KEY(commodity_master.commodity_id),Agmarknet,Must exist in commodity_master,Market Intel
+daily_mandi_prices.csv,variety,string,None,True,NONE,Agmarknet,"Reported variety e.g. 'JS-335', 'Lokwan'",Market Intel
+daily_mandi_prices.csv,grade,string,None,True,NONE,Agmarknet,"Grade e.g. 'FAQ', 'Medium', 'A'",Market Intel
+daily_mandi_prices.csv,price_date,string,YYYY-MM-DD,True,NONE,Agmarknet,ISO 8601 Date: <= current_date,Market Intel
+daily_mandi_prices.csv,min_price_paise_per_gram,integer,paise/gram,True,NONE,Agmarknet (converted),Integer > 0. Invariant: min <= modal <= max,Market Intel
+daily_mandi_prices.csv,max_price_paise_per_gram,integer,paise/gram,True,NONE,Agmarknet (converted),Integer > 0. Invariant: max >= modal,Market Intel
+daily_mandi_prices.csv,modal_price_paise_per_gram,integer,paise/gram,True,NONE,Agmarknet (converted),Integer > 0. Primary price benchmark,Market Intel
+daily_mandi_prices.csv,original_reported_unit,string,None,True,NONE,Agmarknet,Literal e.g. 'Rs/Quintal',Market Intel
+daily_mandi_prices.csv,raw_modal_price_rs_per_quintal,float,Rs/Quintal,True,NONE,Agmarknet,Exact original Agmarknet value,Market Intel
+daily_mandi_prices.csv,source_url,string,URL,True,NONE,Data.gov.in / Agmarknet,Authentic URL or API endpoint,Market Intel
+daily_mandi_arrivals.csv,arrival_id,string,None,True,PRIMARY_KEY,Agmarknet,"Regex: ^ARV-[0-9]{8}-[0-9]{4,8}$",Market Intel
+daily_mandi_arrivals.csv,market_id,string,None,True,FOREIGN_KEY(mandi_master.market_id),Agmarknet,Must exist in mandi_master,Market Intel
+daily_mandi_arrivals.csv,commodity_id,string,None,True,FOREIGN_KEY(commodity_master.commodity_id),Agmarknet,Must exist in commodity_master,Market Intel
+daily_mandi_arrivals.csv,arrival_date,string,YYYY-MM-DD,True,NONE,Agmarknet,ISO 8601 Date,Market Intel
+daily_mandi_arrivals.csv,arrival_quantity_grams,integer,grams,True,NONE,Agmarknet (converted),"Integer >= 0. Exactly 100,000g per quintal",Market Intel
+daily_mandi_arrivals.csv,original_reported_quantity_tonnes,float,tonnes,True,NONE,Agmarknet,Float >= 0.0,Market Intel
+administrative_locations.csv,location_id,string,None,True,PRIMARY_KEY,LGD / Census,"Regex: ^LOC-[A-Z]{2}-[0-9]{4,8}$",Logistics
+administrative_locations.csv,lgd_code,integer,None,True,UNIQUE,Local Government Directory,Official LGD village/block/district code,Logistics
+administrative_locations.csv,location_name,string,None,True,NONE,LGD,Official location name,Logistics
+administrative_locations.csv,location_type,string,None,True,NONE,LGD,"Enum: VILLAGE, TALUK, DISTRICT, STATE, TERMINAL",Logistics
+administrative_locations.csv,district_name,string,None,True,NONE,LGD,District name,Logistics
+administrative_locations.csv,state_code,string,None,True,NONE,LGD,"State 2-letter code e.g. 'MH', 'MP'",Logistics
+administrative_locations.csv,pincode,string,None,True,NONE,India Post,Regex: ^[1-9][0-9]{5}$,Logistics
+administrative_locations.csv,latitude,float,degrees_north,True,NONE,Survey of India/OSM,Range: 8.0 to 37.0,Logistics
+administrative_locations.csv,longitude,float,degrees_east,True,NONE,Survey of India/OSM,Range: 68.0 to 97.0,Logistics
+road_nodes.csv,node_id,string,None,True,PRIMARY_KEY,Backend Graph / OSM,Unique node identifier e.g. 'FPO_WH_ALPHA',Logistics
+road_nodes.csv,name,string,None,True,NONE,OSM,Human-readable label e.g. 'River Krishna Bridge',Logistics
+road_nodes.csv,lat,float,degrees_north,True,NONE,Verified GPS,Valid latitude in decimal degrees,Logistics
+road_nodes.csv,lon,float,degrees_east,True,NONE,Verified GPS,Valid longitude in decimal degrees,Logistics
+road_nodes.csv,node_type,string,None,True,NONE,Backend,"Enum: WAREHOUSE, JUNCTION, BRIDGE, CAUSEWAY, BUYER_TERMINAL, MANDI, HAMLET",Logistics
+road_segments.csv,edge_id,string,None,True,PRIMARY_KEY,Backend Graph / OSM,Unique edge identifier e.g. 'e-hub-bridge',Logistics
+road_segments.csv,source_node,string,None,True,FOREIGN_KEY(road_nodes.node_id),Road Nodes,Must exist in road_nodes.node_id,Logistics
+road_segments.csv,target_node,string,None,True,FOREIGN_KEY(road_nodes.node_id),Road Nodes,Must exist in road_nodes.node_id,Logistics
+road_segments.csv,distance_meters,integer,meters,True,NONE,OSM Highway,Integer > 0. Exact road distance,Logistics
+road_segments.csv,speed_kmh,float,km/h,True,NONE,NHAI / Regional Union,Range: 10.0 to 100.0,Logistics
+road_segments.csv,road_class,string,None,True,NONE,OSM,"Enum: NATIONAL_HIGHWAY, STATE_HIGHWAY, MAJOR_DISTRICT_ROAD, RURAL_ROAD, UNPAVED_TRACK",Logistics
+road_segments.csv,weight_limit_grams,integer,grams,False,NONE,NHAI/Bridge Auth,"Null or Integer > 0 (e.g. 5,000,000 for 5t limit)",Logistics
+road_segments.csv,is_open,boolean,None,True,NONE,Disaster Mgmt / PWD,Boolean: False when flooded/closed,Logistics
+road_segments.csv,closure_reason,string,None,False,NONE,Operator/IMD Alert,Text explanation e.g. 'MONSOON_FLOODING',Logistics
+farmer_registry.csv,farmer_id,string,None,True,PRIMARY_KEY,FPO Membership,Regex: ^farmer-[a-z0-9-]+$,Overview
+farmer_registry.csv,farmer_name,string,None,True,NONE,FPO Record,Farmer full name,Overview
+farmer_registry.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Must exist in fpo_master,Overview
+farmer_registry.csv,village_location_id,string,None,True,FOREIGN_KEY(administrative_locations.location_id),LGD,Must exist in administrative_locations,Overview
+farmer_registry.csv,landholding_acres,float,acres,True,NONE,PM-KISAN / Revenue,Range: 0.1 to 100.0,Overview
+farmer_registry.csv,primary_crop,string,None,True,FOREIGN_KEY(commodity_master.commodity_name),Commodity Master,Must exist in commodity_master,Overview
+farmer_registry.csv,kyc_verified,boolean,None,True,NONE,FPO Operator,Boolean flag,Overview
+fpo_master.csv,fpo_id,string,None,True,PRIMARY_KEY,SFAC / MCA,Regex: ^fpo-[a-z0-9-]+$,Overview
+fpo_master.csv,fpo_name,string,None,True,UNIQUE,Registrar of Companies,Official legal registered entity name,Overview
+fpo_master.csv,cin_registration_no,string,None,True,UNIQUE,Ministry of Corporate Affairs,Alphanumeric corporate/society registration,Overview
+fpo_master.csv,head_office_location_id,string,None,True,FOREIGN_KEY(administrative_locations.location_id),LGD,Must exist in administrative_locations,Overview
+fpo_master.csv,operating_district,string,None,True,NONE,LGD,District name,Overview
+fpo_master.csv,member_farmer_count,integer,count,True,NONE,SFAC Report,Integer >= 10,Overview
+harvest_forecasts.csv,forecast_id,string,None,True,PRIMARY_KEY,DemandSync (F2),"Regex: ^fc-[a-f0-9]{8,12}$",DemandSync
+harvest_forecasts.csv,farmer_id,string,None,True,FOREIGN_KEY(farmer_registry.farmer_id),Farmer Registry,Must match authenticated actor or farmer master,DemandSync
+harvest_forecasts.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Must match farmer's registered FPO,DemandSync
+harvest_forecasts.csv,crop,string,None,True,FOREIGN_KEY(commodity_master.commodity_name),Commodity Master,Valid crop name,DemandSync
+harvest_forecasts.csv,variety,string,None,False,NONE,Farmer Declaration,Reported variety,DemandSync
+harvest_forecasts.csv,grade,string,None,True,NONE,Commodity Grades,"Target grade e.g. 'A', 'B'",DemandSync
+harvest_forecasts.csv,estimated_grams,integer,grams,True,NONE,Farmer Declaration,Integer > 0. Invariant: mass in integer grams,DemandSync
+harvest_forecasts.csv,harvest_start_date,string,ISO8601 UTC,True,NONE,Farmer Declaration,Datetime string with timezone,DemandSync
+harvest_forecasts.csv,harvest_end_date,string,ISO8601 UTC,True,NONE,Farmer Declaration,Invariant: harvest_end_date >= harvest_start_date,DemandSync
+harvest_forecasts.csv,confidence_score,float,ratio,True,NONE,Farmer / ML Model,Range: 0.0 to 1.0 (default: 0.8),DemandSync
+harvest_forecasts.csv,created_at,string,ISO8601 UTC,True,NONE,System Clock,Current UTC timestamp,DemandSync
+harvest_forecasts.csv,status,string,None,True,NONE,System State,"Enum: ACTIVE, SUPERSEDED, FULFILLED",DemandSync
+harvest_forecasts.csv,idempotency_key,string,None,False,UNIQUE,Client Request,Unique UUID preventing duplicate creation,DemandSync
+inventory_lots.csv,lot_id,string,None,True,PRIMARY_KEY,BatchTrace (F3),"Regex: ^lot-[a-f0-9]{8,12}$",BatchTrace
+inventory_lots.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Must exist in fpo_master,BatchTrace
+inventory_lots.csv,farmer_id,string,None,True,FOREIGN_KEY(farmer_registry.farmer_id),Farmer Registry,Producing farmer ID,BatchTrace
+inventory_lots.csv,crop,string,None,True,FOREIGN_KEY(commodity_master.commodity_name),Commodity Master,Valid crop name,BatchTrace
+inventory_lots.csv,variety,string,None,False,NONE,BatchTrace,Crop variety,BatchTrace
+inventory_lots.csv,grade,string,None,True,NONE,Commodity Grades,Assayed quality grade e.g. 'A',BatchTrace
+inventory_lots.csv,quantity_grams,integer,grams,True,NONE,Physical Weighbridge,Integer > 0. Physical mass,BatchTrace
+inventory_lots.csv,reserved_grams,integer,grams,True,NONE,CommitGuard (F4),Integer >= 0. Invariant: 0 <= reserved <= quantity,BatchTrace
+inventory_lots.csv,available_grams,integer,grams,True,NONE,System Invariant,Invariant: available == quantity - reserved,BatchTrace
+inventory_lots.csv,storage_location,string,None,True,NONE,Warehouse Registry,Silo / Bay identifier in warehouse,BatchTrace
+inventory_lots.csv,custody,string,None,True,NONE,BatchTrace Ledger,"Enum: FPO_WAREHOUSE, IN_TRANSIT, BUYER_ACCEPTED",BatchTrace
+inventory_lots.csv,version,integer,version,True,NONE,Optimistic Lock,Monotonic integer >= 1,BatchTrace
+inventory_lots.csv,created_at,string,ISO8601 UTC,True,NONE,System Clock,Current UTC timestamp,BatchTrace
+inventory_lots.csv,status,string,None,True,NONE,BatchTrace Ledger,"Enum: AVAILABLE, RESERVED, DISPATCHED, DELIVERED, SPLIT, MERGED, REJECTED",BatchTrace
+inventory_movements.csv,movement_id,string,None,True,PRIMARY_KEY,BatchTrace (F3),"Regex: ^mov-[a-f0-9]{8,12}$",BatchTrace
+inventory_movements.csv,lot_id,string,None,True,FOREIGN_KEY(inventory_lots.lot_id),Inventory Lots,Must exist in inventory_lots,BatchTrace
+inventory_movements.csv,movement_type,string,None,True,NONE,BatchTrace Ledger,"Enum: INWARD_RECEIPT, SPLIT_CHILD, MERGE_COMBINED, GRADE_ADJUSTMENT, COMMITMENT_RESERVATION, DISPATCH_PICKUP, DELIVERY_ACCEPTED, RETURN_REJECTED, IN_TRANSIT_LOSS",BatchTrace
+inventory_movements.csv,quantity_grams,integer,grams,True,NONE,Physical Measurement,Integer > 0. Quantity involved in movement,BatchTrace
+inventory_movements.csv,source_location,string,None,True,NONE,Movement Event,Origin facility or 'FARM_GATE',BatchTrace
+inventory_movements.csv,dest_location,string,None,True,NONE,Movement Event,Destination facility or 'BUYER_PREMISES',BatchTrace
+inventory_movements.csv,source_custody,string,None,True,NONE,Movement Event,Source custody state,BatchTrace
+inventory_movements.csv,dest_custody,string,None,True,NONE,Movement Event,Destination custody state,BatchTrace
+inventory_movements.csv,recorded_by,string,None,True,NONE,DevActor / User,Actor ID of authorizer,BatchTrace
+inventory_movements.csv,created_at,string,ISO8601 UTC,True,NONE,System Clock,Current UTC timestamp,BatchTrace
+buyer_registry.csv,buyer_id,string,None,True,PRIMARY_KEY,GSTN / MCA,Regex: ^buyer-[a-z0-9-]+$,Procurement
+buyer_registry.csv,business_name,string,None,True,UNIQUE,Registrar of Companies,Legal business entity name,Procurement
+buyer_registry.csv,gstin,string,None,True,UNIQUE,Goods & Services Tax Network,15-digit valid GSTIN e.g. '27AAACR1234F1Z5',Procurement
+buyer_registry.csv,buyer_category,string,None,True,NONE,Business Classification,"Enum: MODERN_RETAIL, FOOD_PROCESSOR, EXPORTER, MANDI_TRADER, INSTITUTIONAL",Procurement
+buyer_registry.csv,terminal_location_id,string,None,True,FOREIGN_KEY(administrative_locations.location_id),LGD,Must exist in administrative_locations,Logistics
+buyer_registry.csv,credit_rating,string,None,True,NONE,Financial Assessment,"Enum: AAA, AA, A, BBB, UNRATED",Procurement
+buyer_requirements.csv,requirement_id,string,None,True,PRIMARY_KEY,Procurement (F2),"Regex: ^req-[a-f0-9]{8,12}$",Procurement
+buyer_requirements.csv,buyer_id,string,None,True,FOREIGN_KEY(buyer_registry.buyer_id),Buyer Registry,Must match authenticated buyer,Procurement
+buyer_requirements.csv,crop,string,None,True,FOREIGN_KEY(commodity_master.commodity_name),Commodity Master,Valid crop name,Procurement
+buyer_requirements.csv,variety,string,None,False,NONE,Buyer Requirement,Requested variety,Procurement
+buyer_requirements.csv,grade,string,None,True,NONE,Commodity Grades,Required grade e.g. 'A',Procurement
+buyer_requirements.csv,needed_grams,integer,grams,True,NONE,Buyer Requirement,Integer > 0. Total demanded mass,Procurement
+buyer_requirements.csv,allocated_grams,integer,grams,True,NONE,CommitGuard (F4),Integer >= 0. Invariant: allocated <= needed,Procurement
+buyer_requirements.csv,delivery_window_start,string,ISO8601 UTC,True,NONE,Buyer Requirement,Datetime string with timezone,Procurement
+buyer_requirements.csv,delivery_window_end,string,ISO8601 UTC,True,NONE,Buyer Requirement,Invariant: window_end >= window_start,Procurement
+buyer_requirements.csv,max_price_paise_per_gram,integer,paise/gram,True,NONE,Buyer Requirement,Integer > 0. Maximum willing to pay,Procurement
+buyer_requirements.csv,status,string,None,True,NONE,System State,"Enum: OPEN, PARTIALLY_FULFILLED, FULFILLED, EXPIRED, CANCELLED",Procurement
+buyer_requirements.csv,created_at,string,ISO8601 UTC,True,NONE,System Clock,Current UTC timestamp,Procurement
+buyer_commitments.csv,commitment_id,string,None,True,PRIMARY_KEY,CommitGuard (F4),"Regex: ^com-[a-f0-9]{8,12}$",CommitGuard
+buyer_commitments.csv,requirement_id,string,None,True,FOREIGN_KEY(buyer_requirements.requirement_id),Buyer Requirements,Must exist in buyer_requirements,CommitGuard
+buyer_commitments.csv,buyer_id,string,None,True,FOREIGN_KEY(buyer_registry.buyer_id),Buyer Registry,Purchasing buyer,CommitGuard
+buyer_commitments.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Selling FPO organization,CommitGuard
+buyer_commitments.csv,crop,string,None,True,FOREIGN_KEY(commodity_master.commodity_name),Commodity Master,Committed crop,CommitGuard
+buyer_commitments.csv,grade,string,None,True,NONE,Commodity Grades,Committed grade,CommitGuard
+buyer_commitments.csv,agreed_price_paise_per_gram,integer,paise/gram,True,NONE,Contractual Term,Integer > 0. Invariant: price <= req.max_price,CommitGuard
+buyer_commitments.csv,committed_grams,integer,grams,True,NONE,Contractual Term,Integer > 0. Invariant: sum(allocated_grams),CommitGuard
+buyer_commitments.csv,allocations_json,string,JSON,True,NONE,Lot Allocations,"JSON list: [{'lot_id': str, 'allocated_grams': int}]",CommitGuard
+buyer_commitments.csv,status,string,None,True,NONE,System State,"Enum: ACTIVE, IN_TRANSIT, FULFILLED, CANCELLED",CommitGuard
+buyer_commitments.csv,created_at,string,ISO8601 UTC,True,NONE,System Clock,Current UTC timestamp,CommitGuard
+storage_facilities.csv,facility_id,string,None,True,PRIMARY_KEY,WDRA / FPO Asset,"Regex: ^FAC-[A-Z0-9-]{4,10}$",BatchTrace
+storage_facilities.csv,facility_name,string,None,True,NONE,WDRA,Official warehouse name e.g. 'FPO Central Silo-1',BatchTrace
+storage_facilities.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Owner FPO,BatchTrace
+storage_facilities.csv,facility_type,string,None,True,NONE,WDRA Classification,"Enum: SILO, DRY_GODOWN, COLD_STORAGE, OPEN_PLINTH",BatchTrace
+storage_facilities.csv,total_capacity_grams,integer,grams,True,NONE,Certified Measurement,"Integer > 0 (e.g. 500,000,000 for 500 MT)",BatchTrace
+storage_facilities.csv,temperature_controlled,boolean,None,True,NONE,Facility Spec,Boolean flag,BatchTrace
+storage_facilities.csv,latitude,float,degrees_north,True,NONE,Verified GPS,Valid latitude in decimal degrees,Logistics
+storage_facilities.csv,longitude,float,degrees_east,True,NONE,Verified GPS,Valid longitude in decimal degrees,Logistics
+vehicle_fleet.csv,vehicle_id,string,None,True,PRIMARY_KEY,Logistics (F5),"Regex: ^veh-[a-f0-9]{8,12}$",Logistics
+vehicle_fleet.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Operating FPO,Logistics
+vehicle_fleet.csv,driver_id,string,None,True,NONE,Transporter Master,Assigned driver ID e.g. 'driver-1',Logistics
+vehicle_fleet.csv,capacity_grams,integer,grams,True,NONE,Vahan Registration,Integer > 0. Maximum safe cargo payload,Logistics
+vehicle_fleet.csv,vehicle_type,string,None,True,NONE,Vahan Class,"Enum: TRUCK_4T, REEFER_VAN, PICKUP_1T, TRACTOR_TROLLEY, HEAVY_TRUCK_16T",Logistics
+vehicle_fleet.csv,is_available,boolean,None,True,NONE,Logistics Dispatch,Boolean flag,Logistics
+vehicle_fleet.csv,created_at,string,ISO8601 UTC,True,NONE,System Clock,Current UTC timestamp,Logistics
+logistics_shipments.csv,shipment_id,string,None,True,PRIMARY_KEY,Logistics (F5),"Regex: ^ship-[a-f0-9]{8,12}$",Logistics
+logistics_shipments.csv,commitment_id,string,None,True,FOREIGN_KEY(buyer_commitments.commitment_id),CommitGuard,Must exist in buyer_commitments,Logistics
+logistics_shipments.csv,vehicle_id,string,None,True,FOREIGN_KEY(vehicle_fleet.vehicle_id),Vehicle Fleet,Must exist in vehicle_fleet,Logistics
+logistics_shipments.csv,driver_id,string,None,True,NONE,Transporter Master,Driver assigned to consignment,Logistics
+logistics_shipments.csv,dispatched_grams,integer,grams,True,NONE,Warehouse Scale Slip,Integer > 0. Invariant: <= vehicle.capacity,Logistics
+logistics_shipments.csv,version,integer,version,True,NONE,Optimistic Lock,Monotonic integer >= 1,Logistics
+logistics_shipments.csv,status,string,None,True,NONE,Logistics Ledger,"Enum: PLANNED, IN_TRANSIT, DELIVERED, PARTIAL_DELIVERY, CANCELLED",Logistics
+logistics_shipments.csv,custody,string,None,True,NONE,Logistics Ledger,"Enum: SCHEDULED, DRIVER_CUSTODY, BUYER_ACCEPTED",Logistics
+logistics_shipments.csv,actual_pickup_time,string,ISO8601 UTC,False,NONE,Driver Action,Timestamp when driver acknowledged pickup,Logistics
+logistics_shipments.csv,actual_delivery_time,string,ISO8601 UTC,False,NONE,Buyer/Driver Action,Timestamp when delivery completed,Logistics
+logistics_shipments.csv,accepted_grams,integer,grams,False,NONE,Delivery Weighment,Invariant: accepted + rejected + loss == dispatched,Logistics
+logistics_shipments.csv,rejected_grams,integer,grams,False,NONE,Delivery Quality Inspection,Integer >= 0. Produce rejected on delivery,Logistics
+logistics_shipments.csv,loss_grams,integer,grams,False,NONE,Transit Weighment,Integer >= 0. In-transit physical shrinkage/loss,Logistics
+crop_shelf_life_rules.csv,rule_id,string,None,True,PRIMARY_KEY,ICAR / Horticulture,"Regex: ^SHL-[A-Z0-9-]{4,10}$",RiskWatch
+crop_shelf_life_rules.csv,crop_name,string,None,True,FOREIGN_KEY(commodity_master.commodity_name),Commodity Master,Must exist in commodity_master,RiskWatch
+crop_shelf_life_rules.csv,ambient_shelf_life_days,integer,days,True,NONE,ICAR Guidelines,"Range: 1 to 365 (e.g. Tomato=3, Onion=30)",RiskWatch
+crop_shelf_life_rules.csv,cold_storage_shelf_life_days,integer,days,True,NONE,ICAR Guidelines,"Range: 7 to 365 (e.g. Tomato=21, Apple=180)",RiskWatch
+crop_shelf_life_rules.csv,optimal_storage_temp_c,float,celsius,True,NONE,ICAR Guidelines,Range: -2.0 to 30.0,RiskWatch
+crop_shelf_life_rules.csv,optimal_humidity_pct,float,percentage,True,NONE,ICAR Guidelines,Range: 50.0 to 98.0,RiskWatch
+risk_incidents.csv,incident_id,string,None,True,PRIMARY_KEY,RiskWatch (F6),"Regex: ^inc-[a-f0-9]{8,12}$",RiskWatch
+risk_incidents.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Affected FPO,RiskWatch
+risk_incidents.csv,incident_type,string,None,True,NONE,Risk Rule Engine,"Enum: QUALITY_REJECTION, SHORT_DELIVERY, MISSED_PICKUP, CANCELLED_ORDER, LOT_EXPIRY_RISK",RiskWatch
+risk_incidents.csv,dedup_key,string,None,True,UNIQUE,Risk Engine,Deduplication signature: f'{type}:{resource_id}',RiskWatch
+risk_incidents.csv,severity,string,None,True,NONE,Risk Rule Engine,"Enum: LOW, MEDIUM, HIGH, CRITICAL",RiskWatch
+risk_incidents.csv,title,string,None,True,NONE,Risk Rule Engine,Short descriptive title,RiskWatch
+risk_incidents.csv,description,string,None,True,NONE,Risk Rule Engine,Detailed narrative with impact context,RiskWatch
+risk_incidents.csv,resource_type,string,None,True,NONE,Domain Entity,"Enum: shipment, commitment, lot",RiskWatch
+risk_incidents.csv,resource_id,string,None,True,NONE,Target Entity,Target resource identifier,RiskWatch
+risk_incidents.csv,affected_grams,integer,grams,True,NONE,Risk Engine,Integer >= 0. Impacted physical mass,RiskWatch
+risk_incidents.csv,affected_paise,integer,paise,True,NONE,Risk Engine,Integer >= 0. Impacted commercial value,RiskWatch
+risk_incidents.csv,status,string,None,True,NONE,Risk Lifecycle,"Enum: OPEN, ACKNOWLEDGED, RESOLVED",RiskWatch
+risk_incidents.csv,resolution_note,string,None,False,NONE,FPO Admin Action,Documented corrective action,RiskWatch
+recovery_plans.csv,plan_id,string,None,True,PRIMARY_KEY,RecoveryOpt (F7),"Regex: ^rec-[a-f0-9]{8,12}$",RecoveryOpt
+recovery_plans.csv,incident_id,string,None,True,FOREIGN_KEY(risk_incidents.incident_id),Risk Incidents,Must exist in risk_incidents,RecoveryOpt
+recovery_plans.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Operating FPO,RecoveryOpt
+recovery_plans.csv,lot_id,string,None,True,FOREIGN_KEY(inventory_lots.lot_id),Inventory Lots,Distressed lot identifier,RecoveryOpt
+recovery_plans.csv,crop,string,None,True,FOREIGN_KEY(commodity_master.commodity_name),Commodity Master,Commodity being recovered,RecoveryOpt
+recovery_plans.csv,grade,string,None,True,NONE,Commodity Grades,Assayed grade,RecoveryOpt
+recovery_plans.csv,available_recovery_grams,integer,grams,True,NONE,Lot Available Mass,Integer > 0. Physical produce to reallocate,RecoveryOpt
+recovery_plans.csv,candidates_json,string,JSON,True,NONE,Recovery Optimizer,JSON array of ranked RecoveryCandidate objects,RecoveryOpt
+recovery_plans.csv,recommended_candidate_json,string,JSON,False,NONE,Recovery Optimizer,JSON object of Rank 1 candidate,RecoveryOpt
+recovery_plans.csv,status,string,None,True,NONE,Recovery Workflow,"Enum: PROPOSED, BUYER_CONFIRMED, APPROVED, REJECTED",RecoveryOpt
+recovery_plans.csv,optimality_status,string,None,True,NONE,Exact Oracle Flag,"Enum: OPTIMAL_PROVEN, FEASIBLE_NOT_PROVEN_OPTIMAL, NO_POSITIVE_NET_OPTION",RecoveryOpt
+recovery_plans.csv,solver_runtime_ms,float,milliseconds,True,NONE,Performance Timer,Execution time of optimization run,RecoveryOpt
+recovery_plans.csv,objective_value_paise,integer,paise,True,NONE,Optimizer Metric,Total maximized net return in integer paise,RecoveryOpt
+settlement_records.csv,settlement_id,string,None,True,PRIMARY_KEY,SettleTrack (F8),"Regex: ^set-[a-f0-9]{8,12}$",SettleTrack
+settlement_records.csv,shipment_id,string,None,True,FOREIGN_KEY(logistics_shipments.shipment_id),Logistics Shipments,Must exist in shipments,SettleTrack
+settlement_records.csv,commitment_id,string,None,True,FOREIGN_KEY(buyer_commitments.commitment_id),Buyer Commitments,Must exist in commitments,SettleTrack
+settlement_records.csv,fpo_id,string,None,True,FOREIGN_KEY(fpo_master.fpo_id),FPO Master,Beneficiary FPO,SettleTrack
+settlement_records.csv,farmer_id,string,None,True,FOREIGN_KEY(farmer_registry.farmer_id),Farmer Registry,Producing farmer,SettleTrack
+settlement_records.csv,buyer_id,string,None,True,FOREIGN_KEY(buyer_registry.buyer_id),Buyer Registry,Obligated buyer,SettleTrack
+settlement_records.csv,accepted_grams,integer,grams,True,NONE,Shipment Weighment,Delivered accepted mass,SettleTrack
+settlement_records.csv,unit_price_paise_per_gram,integer,paise/gram,True,NONE,Agreed Contract Price,Agreed price per gram,SettleTrack
+settlement_records.csv,gross_amount_paise,integer,paise,True,NONE,Invoice Calculation,Invariant: accepted_grams * unit_price,SettleTrack
+settlement_records.csv,total_deductions_paise,integer,paise,True,NONE,Deductions Ledger,Invariant: sum(deductions.amount_paise),SettleTrack
+settlement_records.csv,net_payable_paise,integer,paise,True,NONE,Invoice Calculation,"Invariant: max(0, gross - total_deductions)",SettleTrack
+settlement_records.csv,paid_amount_paise,integer,paise,True,NONE,Payment Receipts,Integer >= 0. Total verified payments,SettleTrack
+settlement_records.csv,remaining_balance_paise,integer,paise,True,NONE,Ledger Invariant,Invariant: net_payable - paid_amount,SettleTrack
+settlement_records.csv,status,string,None,True,NONE,Settlement State,"Enum: PENDING, PAID_REPORTED, PARTIALLY_PAID, SETTLED, DISPUTED",SettleTrack
+payment_evidence_records.csv,evidence_id,string,None,True,PRIMARY_KEY,EvidenceManager (R5),"Regex: ^evi-(pay|scale)-[a-f0-9]{8,12}$",SettleTrack
+payment_evidence_records.csv,source_type,string,None,True,NONE,Origin Source,"Enum: BANK_API, WEIGHBRIDGE_IOT, OPERATOR_MANUAL, OFFLINE_SYNC",SettleTrack
+payment_evidence_records.csv,source_identity,string,None,True,NONE,Actor/Bank Code,Submitting actor ID or bank identifier,SettleTrack
+payment_evidence_records.csv,raw_reference,string,None,True,UNIQUE,Banking / Physical Seal,"Bank UTR, NEFT Reference, or Scale Ticket No",SettleTrack
+payment_evidence_records.csv,payload_digest,string,SHA-256 hex,True,NONE,Cryptographic Hash,64-char canonical SHA-256 payload digest,SettleTrack
+payment_evidence_records.csv,quantity_or_amount,integer,grams or paise,True,NONE,Financial / Physical Slip,Integer > 0. Monetary paise or weighbridge grams,SettleTrack
+payment_evidence_records.csv,unit_or_currency,string,None,True,NONE,Dimension Spec,"Enum: PAISE, GRAMS",SettleTrack
+payment_evidence_records.csv,verification_status,string,None,True,NONE,Honest State Machine,"Enum: REPORTED, OPERATOR_CONFIRMED, EXTERNALLY_VERIFIED, DISPUTED, REVERSED",SettleTrack
+payment_evidence_records.csv,verifier_identity,string,None,False,NONE,FPO Admin / Bank Key,Identity of verifying operator or cert hash,SettleTrack
+payment_evidence_records.csv,calibration_metadata,string,None,False,NONE,Legal Metrology,Scale calibration cert or bank digital signature token,SettleTrack
+payment_evidence_records.csv,recorded_at,string,ISO8601 UTC,True,NONE,System Clock,Current UTC timestamp at registration,SettleTrack
+payment_evidence_records.csv,verified_at,string,ISO8601 UTC,False,NONE,System Clock,Current UTC timestamp when verified,SettleTrack

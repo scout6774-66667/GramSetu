@@ -1,0 +1,4525 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "GramSetu AI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "summary": "Auth Me",
+        "operationId": "auth_me_api_v1_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/fpo-only": {
+      "get": {
+        "summary": "Auth Fpo Only",
+        "operationId": "auth_fpo_only_api_v1_auth_fpo_only_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/fpo/{fpo_id}/check": {
+      "get": {
+        "summary": "Auth Fpo Org Check",
+        "operationId": "auth_fpo_org_check_api_v1_auth_fpo__fpo_id__check_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Fpo Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/driver-action": {
+      "post": {
+        "summary": "Auth Driver Action",
+        "operationId": "auth_driver_action_api_v1_auth_driver_action_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DriverActionPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/forecasts": {
+      "post": {
+        "summary": "Post Forecast",
+        "operationId": "post_forecast_api_v1_forecasts_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HarvestForecastCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HarvestForecastResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Forecasts",
+        "operationId": "get_forecasts_api_v1_forecasts_get",
+        "parameters": [
+          {
+            "name": "crop",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Crop"
+            }
+          },
+          {
+            "name": "grade",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HarvestForecastResponse"
+                  },
+                  "title": "Response Get Forecasts Api V1 Forecasts Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/requirements": {
+      "post": {
+        "summary": "Post Requirement",
+        "operationId": "post_requirement_api_v1_requirements_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuyerRequirementCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuyerRequirementResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Requirements",
+        "operationId": "get_requirements_api_v1_requirements_get",
+        "parameters": [
+          {
+            "name": "crop",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Crop"
+            }
+          },
+          {
+            "name": "grade",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BuyerRequirementResponse"
+                  },
+                  "title": "Response Get Requirements Api V1 Requirements Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/demand-gaps": {
+      "get": {
+        "summary": "Get Demand Gap",
+        "operationId": "get_demand_gap_api_v1_demand_gaps_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "crop",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Crop"
+            }
+          },
+          {
+            "name": "grade",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DemandGapAnalysis"
+                  },
+                  "title": "Response Get Demand Gap Api V1 Demand Gaps Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/demand-gap": {
+      "get": {
+        "summary": "Get Demand Gap",
+        "operationId": "get_demand_gap_api_v1_demand_gap_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "crop",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Crop"
+            }
+          },
+          {
+            "name": "grade",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DemandGapAnalysis"
+                  },
+                  "title": "Response Get Demand Gap Api V1 Demand Gap Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/commitments": {
+      "post": {
+        "summary": "Post Commitment",
+        "operationId": "post_commitment_api_v1_commitments_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuyerCommitmentCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuyerCommitmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get All Commitments",
+        "operationId": "get_all_commitments_api_v1_commitments_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "buyer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Buyer Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BuyerCommitmentResponse"
+                  },
+                  "title": "Response Get All Commitments Api V1 Commitments Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/commitments/{commitment_id}": {
+      "get": {
+        "summary": "Get Single Commitment",
+        "operationId": "get_single_commitment_api_v1_commitments__commitment_id__get",
+        "parameters": [
+          {
+            "name": "commitment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Commitment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuyerCommitmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/commitments/{commitment_id}/cancel": {
+      "post": {
+        "summary": "Post Cancel Commitment",
+        "operationId": "post_cancel_commitment_api_v1_commitments__commitment_id__cancel_post",
+        "parameters": [
+          {
+            "name": "commitment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Commitment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuyerCommitmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vehicles": {
+      "post": {
+        "summary": "Post Vehicle",
+        "operationId": "post_vehicle_api_v1_vehicles_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get All Vehicles",
+        "operationId": "get_all_vehicles_api_v1_vehicles_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "is_available",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Is Available"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleResponse"
+                  },
+                  "title": "Response Get All Vehicles Api V1 Vehicles Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shipments": {
+      "post": {
+        "summary": "Post Shipment",
+        "operationId": "post_shipment_api_v1_shipments_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipmentCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShipmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get All Shipments",
+        "operationId": "get_all_shipments_api_v1_shipments_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "driver_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Driver Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShipmentResponse"
+                  },
+                  "title": "Response Get All Shipments Api V1 Shipments Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shipments/{shipment_id}": {
+      "get": {
+        "summary": "Get Single Shipment",
+        "operationId": "get_single_shipment_api_v1_shipments__shipment_id__get",
+        "parameters": [
+          {
+            "name": "shipment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Shipment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShipmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shipments/{shipment_id}/pickup": {
+      "post": {
+        "summary": "Post Pickup",
+        "operationId": "post_pickup_api_v1_shipments__shipment_id__pickup_post",
+        "parameters": [
+          {
+            "name": "shipment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Shipment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShipmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shipments/{shipment_id}/delivery": {
+      "post": {
+        "summary": "Post Delivery",
+        "operationId": "post_delivery_api_v1_shipments__shipment_id__delivery_post",
+        "parameters": [
+          {
+            "name": "shipment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Shipment Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryConfirmationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShipmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/risk/scan": {
+      "post": {
+        "summary": "Post Risk Scan",
+        "operationId": "post_risk_scan_api_v1_risk_scan_post",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Fpo Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RiskIncidentResponse"
+                  },
+                  "title": "Response Post Risk Scan Api V1 Risk Scan Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/risk/incidents": {
+      "get": {
+        "summary": "Get All Incidents",
+        "operationId": "get_all_incidents_api_v1_risk_incidents_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RiskIncidentResponse"
+                  },
+                  "title": "Response Get All Incidents Api V1 Risk Incidents Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/risk/incidents/{incident_id}/acknowledge": {
+      "post": {
+        "summary": "Post Acknowledge Incident",
+        "operationId": "post_acknowledge_incident_api_v1_risk_incidents__incident_id__acknowledge_post",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Incident Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RiskIncidentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/risk/incidents/{incident_id}/resolve": {
+      "post": {
+        "summary": "Post Resolve Incident",
+        "operationId": "post_resolve_incident_api_v1_risk_incidents__incident_id__resolve_post",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Incident Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncidentResolveRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RiskIncidentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recovery/plans/generate": {
+      "post": {
+        "summary": "Post Generate Recovery",
+        "operationId": "post_generate_recovery_api_v1_recovery_plans_generate_post",
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Incident Id"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryPlanResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recovery/plans/{plan_id}": {
+      "get": {
+        "summary": "Get Single Recovery Plan",
+        "operationId": "get_single_recovery_plan_api_v1_recovery_plans__plan_id__get",
+        "parameters": [
+          {
+            "name": "plan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Plan Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryPlanResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recovery/plans": {
+      "get": {
+        "summary": "Get All Recovery Plans",
+        "operationId": "get_all_recovery_plans_api_v1_recovery_plans_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecoveryPlanResponse"
+                  },
+                  "title": "Response Get All Recovery Plans Api V1 Recovery Plans Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recovery/plans/{plan_id}/buyer-confirm": {
+      "post": {
+        "summary": "Post Buyer Confirm Recovery",
+        "operationId": "post_buyer_confirm_recovery_api_v1_recovery_plans__plan_id__buyer_confirm_post",
+        "parameters": [
+          {
+            "name": "plan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Plan Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryPlanResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recovery/plans/{plan_id}/approve": {
+      "post": {
+        "summary": "Post Approve Recovery",
+        "operationId": "post_approve_recovery_api_v1_recovery_plans__plan_id__approve_post",
+        "parameters": [
+          {
+            "name": "plan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Plan Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryPlanResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settlements/generate": {
+      "post": {
+        "summary": "Post Generate Settlement",
+        "operationId": "post_generate_settlement_api_v1_settlements_generate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SettlementGenerateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettlementResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settlements/{settlement_id}": {
+      "get": {
+        "summary": "Get Single Settlement",
+        "operationId": "get_single_settlement_api_v1_settlements__settlement_id__get",
+        "parameters": [
+          {
+            "name": "settlement_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Settlement Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettlementResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settlements": {
+      "get": {
+        "summary": "Get All Settlements",
+        "operationId": "get_all_settlements_api_v1_settlements_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "farmer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Farmer Id"
+            }
+          },
+          {
+            "name": "buyer_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Buyer Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SettlementResponse"
+                  },
+                  "title": "Response Get All Settlements Api V1 Settlements Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settlements/{settlement_id}/payments": {
+      "post": {
+        "summary": "Post Record Payment",
+        "operationId": "post_record_payment_api_v1_settlements__settlement_id__payments_post",
+        "parameters": [
+          {
+            "name": "settlement_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Settlement Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettlementResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settlements/{settlement_id}/report-payment": {
+      "post": {
+        "summary": "Post Report Payment",
+        "operationId": "post_report_payment_api_v1_settlements__settlement_id__report_payment_post",
+        "parameters": [
+          {
+            "name": "settlement_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Settlement Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettlementResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settlements/{settlement_id}/payments/{payment_id}/verify": {
+      "post": {
+        "summary": "Post Verify Payment",
+        "operationId": "post_verify_payment_api_v1_settlements__settlement_id__payments__payment_id__verify_post",
+        "parameters": [
+          {
+            "name": "settlement_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Settlement Id"
+            }
+          },
+          {
+            "name": "payment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Payment Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/PaymentVerifyRequest"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Payload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettlementResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/movements": {
+      "get": {
+        "summary": "Get Movements",
+        "operationId": "get_movements_api_v1_movements_get",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Lot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoryMovementResponse"
+                  },
+                  "title": "Response Get Movements Api V1 Movements Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lots/{lot_id}/movements": {
+      "get": {
+        "summary": "Get Lot Movements",
+        "operationId": "get_lot_movements_api_v1_lots__lot_id__movements_get",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Lot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoryMovementResponse"
+                  },
+                  "title": "Response Get Lot Movements Api V1 Lots  Lot Id  Movements Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/overview/farmer": {
+      "get": {
+        "summary": "Get Overview Farmer",
+        "operationId": "get_overview_farmer_api_v1_overview_farmer_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FarmerOverviewResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/overview/buyer": {
+      "get": {
+        "summary": "Get Overview Buyer",
+        "operationId": "get_overview_buyer_api_v1_overview_buyer_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuyerOverviewResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/overview/driver": {
+      "get": {
+        "summary": "Get Overview Driver",
+        "operationId": "get_overview_driver_api_v1_overview_driver_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DriverOverviewResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/overview/fpo": {
+      "get": {
+        "summary": "Get Overview Fpo",
+        "operationId": "get_overview_fpo_api_v1_overview_fpo_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Fpo Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FpoOverviewResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sync/reconcile": {
+      "post": {
+        "summary": "Post Reconcile Command",
+        "operationId": "post_reconcile_command_api_v1_sync_reconcile_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfflineCommandEnvelope"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReconciliationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/export/data": {
+      "get": {
+        "summary": "Get Export Data",
+        "operationId": "get_export_data_api_v1_export_data_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lots/receipt": {
+      "post": {
+        "summary": "Post Lot Receipt",
+        "operationId": "post_lot_receipt_api_v1_lots_receipt_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LotReceiptCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventoryLotResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lots/{lot_id}": {
+      "get": {
+        "summary": "Get Lot",
+        "operationId": "get_lot_api_v1_lots__lot_id__get",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Lot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventoryLotResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lots": {
+      "get": {
+        "summary": "Get Lots",
+        "operationId": "get_lots_api_v1_lots_get",
+        "parameters": [
+          {
+            "name": "fpo_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fpo Id"
+            }
+          },
+          {
+            "name": "crop",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Crop"
+            }
+          },
+          {
+            "name": "grade",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoryLotResponse"
+                  },
+                  "title": "Response Get Lots Api V1 Lots Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lots/{lot_id}/split": {
+      "post": {
+        "summary": "Post Split Lot",
+        "operationId": "post_split_lot_api_v1_lots__lot_id__split_post",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Lot Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LotSplitRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LotSplitResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lots/merge": {
+      "post": {
+        "summary": "Post Merge Lots",
+        "operationId": "post_merge_lots_api_v1_lots_merge_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LotMergeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LotMergeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lots/{lot_id}/grade": {
+      "post": {
+        "summary": "Post Adjust Grade",
+        "operationId": "post_adjust_grade_api_v1_lots__lot_id__grade_post",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Lot Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GradeAdjustmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventoryLotResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BuyerCommitmentCreate": {
+        "properties": {
+          "requirement_id": {
+            "type": "string",
+            "title": "Requirement Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "agreed_price_paise_per_gram": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Agreed Price Paise Per Gram",
+            "description": "Agreed unit price in integer paise per gram"
+          },
+          "allocations": {
+            "items": {
+              "$ref": "#/components/schemas/CommitmentAllocationItem"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Allocations"
+          },
+          "idempotency_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idempotency Key"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "requirement_id",
+          "fpo_id",
+          "agreed_price_paise_per_gram",
+          "allocations"
+        ],
+        "title": "BuyerCommitmentCreate"
+      },
+      "BuyerCommitmentResponse": {
+        "properties": {
+          "commitment_id": {
+            "type": "string",
+            "title": "Commitment Id"
+          },
+          "requirement_id": {
+            "type": "string",
+            "title": "Requirement Id"
+          },
+          "buyer_id": {
+            "type": "string",
+            "title": "Buyer Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "agreed_price_paise_per_gram": {
+            "type": "integer",
+            "title": "Agreed Price Paise Per Gram"
+          },
+          "committed_grams": {
+            "type": "integer",
+            "title": "Committed Grams"
+          },
+          "allocations": {
+            "items": {
+              "$ref": "#/components/schemas/CommitmentAllocationItem"
+            },
+            "type": "array",
+            "title": "Allocations"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "idempotency_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idempotency Key"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "CONFIRMED"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commitment_id",
+          "requirement_id",
+          "buyer_id",
+          "fpo_id",
+          "crop",
+          "grade",
+          "agreed_price_paise_per_gram",
+          "committed_grams",
+          "allocations",
+          "created_at"
+        ],
+        "title": "BuyerCommitmentResponse"
+      },
+      "BuyerOverviewResponse": {
+        "properties": {
+          "buyer_id": {
+            "type": "string",
+            "title": "Buyer Id"
+          },
+          "open_requirements_count": {
+            "type": "integer",
+            "title": "Open Requirements Count"
+          },
+          "open_needed_grams": {
+            "type": "integer",
+            "title": "Open Needed Grams"
+          },
+          "active_commitments_count": {
+            "type": "integer",
+            "title": "Active Commitments Count"
+          },
+          "active_committed_grams": {
+            "type": "integer",
+            "title": "Active Committed Grams"
+          },
+          "in_transit_shipments_count": {
+            "type": "integer",
+            "title": "In Transit Shipments Count"
+          },
+          "total_payable_paise": {
+            "type": "integer",
+            "title": "Total Payable Paise"
+          },
+          "total_paid_paise": {
+            "type": "integer",
+            "title": "Total Paid Paise"
+          },
+          "outstanding_balance_paise": {
+            "type": "integer",
+            "title": "Outstanding Balance Paise"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "buyer_id",
+          "open_requirements_count",
+          "open_needed_grams",
+          "active_commitments_count",
+          "active_committed_grams",
+          "in_transit_shipments_count",
+          "total_payable_paise",
+          "total_paid_paise",
+          "outstanding_balance_paise",
+          "as_of"
+        ],
+        "title": "BuyerOverviewResponse"
+      },
+      "BuyerRequirementCreate": {
+        "properties": {
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "variety": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variety"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "needed_grams": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Needed Grams",
+            "description": "Required quantity in integer grams"
+          },
+          "delivery_window_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Delivery Window Start"
+          },
+          "delivery_window_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Delivery Window End"
+          },
+          "max_price_paise_per_gram": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Max Price Paise Per Gram",
+            "description": "Maximum price in integer paise per gram"
+          },
+          "idempotency_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idempotency Key"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "crop",
+          "grade",
+          "needed_grams",
+          "delivery_window_start",
+          "delivery_window_end",
+          "max_price_paise_per_gram"
+        ],
+        "title": "BuyerRequirementCreate"
+      },
+      "BuyerRequirementResponse": {
+        "properties": {
+          "requirement_id": {
+            "type": "string",
+            "title": "Requirement Id"
+          },
+          "buyer_id": {
+            "type": "string",
+            "title": "Buyer Id"
+          },
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "variety": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variety"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "needed_grams": {
+            "type": "integer",
+            "title": "Needed Grams"
+          },
+          "allocated_grams": {
+            "type": "integer",
+            "title": "Allocated Grams",
+            "default": 0
+          },
+          "delivery_window_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Delivery Window Start"
+          },
+          "delivery_window_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Delivery Window End"
+          },
+          "max_price_paise_per_gram": {
+            "type": "integer",
+            "title": "Max Price Paise Per Gram"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "idempotency_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idempotency Key"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "OPEN"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "requirement_id",
+          "buyer_id",
+          "crop",
+          "grade",
+          "needed_grams",
+          "delivery_window_start",
+          "delivery_window_end",
+          "max_price_paise_per_gram",
+          "created_at"
+        ],
+        "title": "BuyerRequirementResponse"
+      },
+      "ChildPortion": {
+        "properties": {
+          "quantity_grams": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Quantity Grams"
+          },
+          "storage_location": {
+            "type": "string",
+            "title": "Storage Location"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "quantity_grams",
+          "storage_location"
+        ],
+        "title": "ChildPortion"
+      },
+      "CommitmentAllocationItem": {
+        "properties": {
+          "lot_id": {
+            "type": "string",
+            "title": "Lot Id"
+          },
+          "allocated_grams": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Allocated Grams",
+            "description": "Allocated quantity in integer grams"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lot_id",
+          "allocated_grams"
+        ],
+        "title": "CommitmentAllocationItem"
+      },
+      "DeliveryConfirmationRequest": {
+        "properties": {
+          "accepted_grams": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Accepted Grams"
+          },
+          "rejected_grams": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Rejected Grams",
+            "default": 0
+          },
+          "loss_grams": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Loss Grams",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "accepted_grams"
+        ],
+        "title": "DeliveryConfirmationRequest"
+      },
+      "DemandGapAnalysis": {
+        "properties": {
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "total_demand_grams": {
+            "type": "integer",
+            "title": "Total Demand Grams"
+          },
+          "total_forecast_grams": {
+            "type": "integer",
+            "title": "Total Forecast Grams"
+          },
+          "net_gap_grams": {
+            "type": "integer",
+            "title": "Net Gap Grams"
+          },
+          "coverage_ratio": {
+            "type": "number",
+            "title": "Coverage Ratio"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          },
+          "planning_disclaimer": {
+            "type": "string",
+            "title": "Planning Disclaimer",
+            "default": "PLANNING ONLY: Unverified forecasts do NOT represent physical stock and buyer requirements are not guarantees."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "fpo_id",
+          "crop",
+          "grade",
+          "total_demand_grams",
+          "total_forecast_grams",
+          "net_gap_grams",
+          "coverage_ratio",
+          "as_of"
+        ],
+        "title": "DemandGapAnalysis"
+      },
+      "DriverActionPayload": {
+        "properties": {
+          "assigned_driver_id": {
+            "type": "string",
+            "title": "Assigned Driver Id"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "assigned_driver_id",
+          "action"
+        ],
+        "title": "DriverActionPayload"
+      },
+      "DriverOverviewResponse": {
+        "properties": {
+          "driver_id": {
+            "type": "string",
+            "title": "Driver Id"
+          },
+          "assigned_vehicle_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assigned Vehicle Id"
+          },
+          "pending_pickups_count": {
+            "type": "integer",
+            "title": "Pending Pickups Count"
+          },
+          "active_deliveries_count": {
+            "type": "integer",
+            "title": "Active Deliveries Count"
+          },
+          "completed_trips_count": {
+            "type": "integer",
+            "title": "Completed Trips Count"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "driver_id",
+          "pending_pickups_count",
+          "active_deliveries_count",
+          "completed_trips_count",
+          "as_of"
+        ],
+        "title": "DriverOverviewResponse"
+      },
+      "FarmerOverviewResponse": {
+        "properties": {
+          "farmer_id": {
+            "type": "string",
+            "title": "Farmer Id"
+          },
+          "active_forecasts_count": {
+            "type": "integer",
+            "title": "Active Forecasts Count"
+          },
+          "active_forecasts_grams": {
+            "type": "integer",
+            "title": "Active Forecasts Grams"
+          },
+          "delivered_lots_count": {
+            "type": "integer",
+            "title": "Delivered Lots Count"
+          },
+          "delivered_grams": {
+            "type": "integer",
+            "title": "Delivered Grams"
+          },
+          "total_earned_paise": {
+            "type": "integer",
+            "title": "Total Earned Paise"
+          },
+          "pending_payout_paise": {
+            "type": "integer",
+            "title": "Pending Payout Paise"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "farmer_id",
+          "active_forecasts_count",
+          "active_forecasts_grams",
+          "delivered_lots_count",
+          "delivered_grams",
+          "total_earned_paise",
+          "pending_payout_paise",
+          "as_of"
+        ],
+        "title": "FarmerOverviewResponse"
+      },
+      "FpoOverviewResponse": {
+        "properties": {
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "total_physical_stock_grams": {
+            "type": "integer",
+            "title": "Total Physical Stock Grams"
+          },
+          "total_available_stock_grams": {
+            "type": "integer",
+            "title": "Total Available Stock Grams"
+          },
+          "total_reserved_stock_grams": {
+            "type": "integer",
+            "title": "Total Reserved Stock Grams"
+          },
+          "at_risk_lots_count": {
+            "type": "integer",
+            "title": "At Risk Lots Count"
+          },
+          "unfulfilled_commitments_count": {
+            "type": "integer",
+            "title": "Unfulfilled Commitments Count"
+          },
+          "pending_collections_count": {
+            "type": "integer",
+            "title": "Pending Collections Count"
+          },
+          "pending_settlements_count": {
+            "type": "integer",
+            "title": "Pending Settlements Count"
+          },
+          "total_settlement_payable_paise": {
+            "type": "integer",
+            "title": "Total Settlement Payable Paise"
+          },
+          "total_settlement_paid_paise": {
+            "type": "integer",
+            "title": "Total Settlement Paid Paise"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "fpo_id",
+          "total_physical_stock_grams",
+          "total_available_stock_grams",
+          "total_reserved_stock_grams",
+          "at_risk_lots_count",
+          "unfulfilled_commitments_count",
+          "pending_collections_count",
+          "pending_settlements_count",
+          "total_settlement_payable_paise",
+          "total_settlement_paid_paise",
+          "as_of"
+        ],
+        "title": "FpoOverviewResponse"
+      },
+      "GradeAdjustmentRequest": {
+        "properties": {
+          "new_grade": {
+            "type": "string",
+            "title": "New Grade"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "new_grade",
+          "reason"
+        ],
+        "title": "GradeAdjustmentRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HarvestForecastCreate": {
+        "properties": {
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "variety": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variety"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "estimated_grams": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Estimated Grams",
+            "description": "Estimated harvest quantity in integer grams"
+          },
+          "harvest_start_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Harvest Start Date"
+          },
+          "harvest_end_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Harvest End Date"
+          },
+          "confidence_score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence Score",
+            "default": 0.8
+          },
+          "idempotency_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idempotency Key"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "crop",
+          "grade",
+          "estimated_grams",
+          "harvest_start_date",
+          "harvest_end_date"
+        ],
+        "title": "HarvestForecastCreate"
+      },
+      "HarvestForecastResponse": {
+        "properties": {
+          "forecast_id": {
+            "type": "string",
+            "title": "Forecast Id"
+          },
+          "farmer_id": {
+            "type": "string",
+            "title": "Farmer Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "variety": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variety"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "estimated_grams": {
+            "type": "integer",
+            "title": "Estimated Grams"
+          },
+          "harvest_start_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Harvest Start Date"
+          },
+          "harvest_end_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Harvest End Date"
+          },
+          "confidence_score": {
+            "type": "number",
+            "title": "Confidence Score"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "idempotency_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idempotency Key"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "ACTIVE"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "forecast_id",
+          "farmer_id",
+          "fpo_id",
+          "crop",
+          "grade",
+          "estimated_grams",
+          "harvest_start_date",
+          "harvest_end_date",
+          "confidence_score",
+          "created_at"
+        ],
+        "title": "HarvestForecastResponse"
+      },
+      "HealthStatus": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "ok"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "environment": {
+            "type": "string",
+            "title": "Environment"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "stats": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Stats"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "environment",
+          "timestamp"
+        ],
+        "title": "HealthStatus"
+      },
+      "IncidentResolveRequest": {
+        "properties": {
+          "resolution_note": {
+            "type": "string",
+            "minLength": 3,
+            "title": "Resolution Note",
+            "description": "Verifiable reason or action taken to close the incident"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "resolution_note"
+        ],
+        "title": "IncidentResolveRequest"
+      },
+      "InventoryLotResponse": {
+        "properties": {
+          "lot_id": {
+            "type": "string",
+            "title": "Lot Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "farmer_id": {
+            "type": "string",
+            "title": "Farmer Id"
+          },
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "variety": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variety"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "quantity_grams": {
+            "type": "integer",
+            "title": "Quantity Grams"
+          },
+          "reserved_grams": {
+            "type": "integer",
+            "title": "Reserved Grams",
+            "default": 0
+          },
+          "available_grams": {
+            "type": "integer",
+            "title": "Available Grams",
+            "default": 0
+          },
+          "storage_location": {
+            "type": "string",
+            "title": "Storage Location"
+          },
+          "custody": {
+            "type": "string",
+            "title": "Custody",
+            "default": "FPO_WAREHOUSE"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version",
+            "default": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "parent_lot_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Parent Lot Ids"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "AVAILABLE"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lot_id",
+          "fpo_id",
+          "farmer_id",
+          "crop",
+          "grade",
+          "quantity_grams",
+          "storage_location",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "InventoryLotResponse"
+      },
+      "InventoryMovementResponse": {
+        "properties": {
+          "movement_id": {
+            "type": "string",
+            "title": "Movement Id"
+          },
+          "lot_id": {
+            "type": "string",
+            "title": "Lot Id"
+          },
+          "movement_type": {
+            "type": "string",
+            "title": "Movement Type"
+          },
+          "quantity_grams": {
+            "type": "integer",
+            "title": "Quantity Grams"
+          },
+          "source_location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Location"
+          },
+          "dest_location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dest Location"
+          },
+          "source_custody": {
+            "type": "string",
+            "title": "Source Custody"
+          },
+          "dest_custody": {
+            "type": "string",
+            "title": "Dest Custody"
+          },
+          "recorded_by": {
+            "type": "string",
+            "title": "Recorded By"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "movement_id",
+          "lot_id",
+          "movement_type",
+          "quantity_grams",
+          "source_custody",
+          "dest_custody",
+          "recorded_by",
+          "created_at"
+        ],
+        "title": "InventoryMovementResponse"
+      },
+      "LotMergeRequest": {
+        "properties": {
+          "source_lot_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "minItems": 2,
+            "title": "Source Lot Ids"
+          },
+          "target_storage_location": {
+            "type": "string",
+            "title": "Target Storage Location"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source_lot_ids",
+          "target_storage_location"
+        ],
+        "title": "LotMergeRequest"
+      },
+      "LotMergeResponse": {
+        "properties": {
+          "merged_lot": {
+            "$ref": "#/components/schemas/InventoryLotResponse"
+          },
+          "retired_lot_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Retired Lot Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "merged_lot",
+          "retired_lot_ids"
+        ],
+        "title": "LotMergeResponse"
+      },
+      "LotReceiptCreate": {
+        "properties": {
+          "farmer_id": {
+            "type": "string",
+            "title": "Farmer Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "variety": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variety"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "quantity_grams": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Quantity Grams",
+            "description": "Verified physical quantity in integer grams"
+          },
+          "storage_location": {
+            "type": "string",
+            "title": "Storage Location"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "farmer_id",
+          "fpo_id",
+          "crop",
+          "grade",
+          "quantity_grams",
+          "storage_location"
+        ],
+        "title": "LotReceiptCreate"
+      },
+      "LotSplitRequest": {
+        "properties": {
+          "child_portions": {
+            "items": {
+              "$ref": "#/components/schemas/ChildPortion"
+            },
+            "type": "array",
+            "minItems": 2,
+            "title": "Child Portions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "child_portions"
+        ],
+        "title": "LotSplitRequest"
+      },
+      "LotSplitResponse": {
+        "properties": {
+          "parent_lot": {
+            "$ref": "#/components/schemas/InventoryLotResponse"
+          },
+          "child_lots": {
+            "items": {
+              "$ref": "#/components/schemas/InventoryLotResponse"
+            },
+            "type": "array",
+            "title": "Child Lots"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "parent_lot",
+          "child_lots"
+        ],
+        "title": "LotSplitResponse"
+      },
+      "OfflineCommandEnvelope": {
+        "properties": {
+          "command_id": {
+            "type": "string",
+            "title": "Command Id"
+          },
+          "actor_id": {
+            "type": "string",
+            "title": "Actor Id"
+          },
+          "device_id": {
+            "type": "string",
+            "title": "Device Id"
+          },
+          "command_type": {
+            "type": "string",
+            "title": "Command Type"
+          },
+          "resource_type": {
+            "type": "string",
+            "title": "Resource Type"
+          },
+          "resource_id": {
+            "type": "string",
+            "title": "Resource Id"
+          },
+          "expected_version": {
+            "type": "integer",
+            "title": "Expected Version",
+            "default": 1
+          },
+          "client_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Client Timestamp"
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Payload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "command_id",
+          "actor_id",
+          "device_id",
+          "command_type",
+          "resource_type",
+          "resource_id",
+          "client_timestamp"
+        ],
+        "title": "OfflineCommandEnvelope"
+      },
+      "PaymentCreateRequest": {
+        "properties": {
+          "amount_paise": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Amount Paise",
+            "description": "Payment amount in integer paise"
+          },
+          "payment_method": {
+            "type": "string",
+            "title": "Payment Method",
+            "default": "NEFT"
+          },
+          "reference_number": {
+            "type": "string",
+            "minLength": 3,
+            "title": "Reference Number"
+          },
+          "evidence_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evidence Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "amount_paise",
+          "reference_number"
+        ],
+        "title": "PaymentCreateRequest"
+      },
+      "PaymentRecord": {
+        "properties": {
+          "payment_id": {
+            "type": "string",
+            "title": "Payment Id"
+          },
+          "amount_paise": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Amount Paise"
+          },
+          "payment_method": {
+            "type": "string",
+            "title": "Payment Method",
+            "default": "NEFT"
+          },
+          "reference_number": {
+            "type": "string",
+            "title": "Reference Number"
+          },
+          "evidence_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evidence Note"
+          },
+          "recorded_by": {
+            "type": "string",
+            "title": "Recorded By"
+          },
+          "recorded_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recorded At"
+          },
+          "verified": {
+            "type": "boolean",
+            "title": "Verified",
+            "default": false
+          },
+          "verified_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verified By"
+          },
+          "verified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verified At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "payment_id",
+          "amount_paise",
+          "reference_number",
+          "recorded_by",
+          "recorded_at"
+        ],
+        "title": "PaymentRecord"
+      },
+      "PaymentReportRequest": {
+        "properties": {
+          "amount_paise": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Amount Paise",
+            "description": "Reported payment amount in integer paise"
+          },
+          "payment_method": {
+            "type": "string",
+            "title": "Payment Method",
+            "default": "NEFT"
+          },
+          "reference_number": {
+            "type": "string",
+            "minLength": 3,
+            "title": "Reference Number"
+          },
+          "evidence_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evidence Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "amount_paise",
+          "reference_number"
+        ],
+        "title": "PaymentReportRequest"
+      },
+      "PaymentVerifyRequest": {
+        "properties": {
+          "verification_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verification Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "PaymentVerifyRequest"
+      },
+      "ReconciliationResponse": {
+        "properties": {
+          "command_id": {
+            "type": "string",
+            "title": "Command Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "applied_resource_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applied Resource Version"
+          },
+          "current_server_state": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Server State"
+          },
+          "conflict_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Conflict Reason"
+          },
+          "processed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Processed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "command_id",
+          "status",
+          "processed_at"
+        ],
+        "title": "ReconciliationResponse"
+      },
+      "RecoveryCandidate": {
+        "properties": {
+          "buyer_id": {
+            "type": "string",
+            "title": "Buyer Id"
+          },
+          "requirement_id": {
+            "type": "string",
+            "title": "Requirement Id"
+          },
+          "offered_price_paise_per_gram": {
+            "type": "integer",
+            "title": "Offered Price Paise Per Gram"
+          },
+          "allocable_grams": {
+            "type": "integer",
+            "title": "Allocable Grams"
+          },
+          "gross_revenue_paise": {
+            "type": "integer",
+            "title": "Gross Revenue Paise"
+          },
+          "estimated_transport_cost_paise": {
+            "type": "integer",
+            "title": "Estimated Transport Cost Paise"
+          },
+          "net_return_paise": {
+            "type": "integer",
+            "title": "Net Return Paise"
+          },
+          "effective_price_paise_per_gram": {
+            "type": "number",
+            "title": "Effective Price Paise Per Gram"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "buyer_id",
+          "requirement_id",
+          "offered_price_paise_per_gram",
+          "allocable_grams",
+          "gross_revenue_paise",
+          "estimated_transport_cost_paise",
+          "net_return_paise",
+          "effective_price_paise_per_gram"
+        ],
+        "title": "RecoveryCandidate"
+      },
+      "RecoveryPlanResponse": {
+        "properties": {
+          "plan_id": {
+            "type": "string",
+            "title": "Plan Id"
+          },
+          "incident_id": {
+            "type": "string",
+            "title": "Incident Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "lot_id": {
+            "type": "string",
+            "title": "Lot Id"
+          },
+          "crop": {
+            "type": "string",
+            "title": "Crop"
+          },
+          "grade": {
+            "type": "string",
+            "title": "Grade"
+          },
+          "available_recovery_grams": {
+            "type": "integer",
+            "title": "Available Recovery Grams"
+          },
+          "candidates": {
+            "items": {
+              "$ref": "#/components/schemas/RecoveryCandidate"
+            },
+            "type": "array",
+            "title": "Candidates"
+          },
+          "recommended_candidate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecoveryCandidate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "RECOMMENDED"
+          },
+          "buyer_confirmed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Confirmed At"
+          },
+          "fpo_approved_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fpo Approved At"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer",
+            "default": "RECOMMENDATION ONLY: AI recovery plans do not bind buyers or guarantee stock rescue until explicit buyer confirmation and FPO approval are executed."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "plan_id",
+          "incident_id",
+          "fpo_id",
+          "lot_id",
+          "crop",
+          "grade",
+          "available_recovery_grams",
+          "created_at"
+        ],
+        "title": "RecoveryPlanResponse"
+      },
+      "RiskIncidentResponse": {
+        "properties": {
+          "incident_id": {
+            "type": "string",
+            "title": "Incident Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "incident_type": {
+            "type": "string",
+            "title": "Incident Type"
+          },
+          "dedup_key": {
+            "type": "string",
+            "title": "Dedup Key"
+          },
+          "severity": {
+            "type": "string",
+            "title": "Severity"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "resource_type": {
+            "type": "string",
+            "title": "Resource Type"
+          },
+          "resource_id": {
+            "type": "string",
+            "title": "Resource Id"
+          },
+          "affected_grams": {
+            "type": "integer",
+            "title": "Affected Grams",
+            "default": 0
+          },
+          "affected_paise": {
+            "type": "integer",
+            "title": "Affected Paise",
+            "default": 0
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "OPEN"
+          },
+          "resolution_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution Note"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "incident_id",
+          "fpo_id",
+          "incident_type",
+          "dedup_key",
+          "severity",
+          "title",
+          "description",
+          "resource_type",
+          "resource_id",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "RiskIncidentResponse"
+      },
+      "SettlementDeduction": {
+        "properties": {
+          "deduction_type": {
+            "type": "string",
+            "title": "Deduction Type",
+            "default": "TRANSPORT"
+          },
+          "amount_paise": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Amount Paise",
+            "description": "Deduction in integer paise"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "amount_paise",
+          "reason"
+        ],
+        "title": "SettlementDeduction"
+      },
+      "SettlementGenerateRequest": {
+        "properties": {
+          "shipment_id": {
+            "type": "string",
+            "title": "Shipment Id"
+          },
+          "deductions": {
+            "items": {
+              "$ref": "#/components/schemas/SettlementDeduction"
+            },
+            "type": "array",
+            "title": "Deductions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "shipment_id"
+        ],
+        "title": "SettlementGenerateRequest"
+      },
+      "SettlementResponse": {
+        "properties": {
+          "settlement_id": {
+            "type": "string",
+            "title": "Settlement Id"
+          },
+          "shipment_id": {
+            "type": "string",
+            "title": "Shipment Id"
+          },
+          "commitment_id": {
+            "type": "string",
+            "title": "Commitment Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "farmer_id": {
+            "type": "string",
+            "title": "Farmer Id"
+          },
+          "buyer_id": {
+            "type": "string",
+            "title": "Buyer Id"
+          },
+          "accepted_grams": {
+            "type": "integer",
+            "title": "Accepted Grams"
+          },
+          "unit_price_paise_per_gram": {
+            "type": "integer",
+            "title": "Unit Price Paise Per Gram"
+          },
+          "gross_amount_paise": {
+            "type": "integer",
+            "title": "Gross Amount Paise"
+          },
+          "deductions": {
+            "items": {
+              "$ref": "#/components/schemas/SettlementDeduction"
+            },
+            "type": "array",
+            "title": "Deductions"
+          },
+          "total_deductions_paise": {
+            "type": "integer",
+            "title": "Total Deductions Paise"
+          },
+          "net_payable_paise": {
+            "type": "integer",
+            "title": "Net Payable Paise"
+          },
+          "paid_amount_paise": {
+            "type": "integer",
+            "title": "Paid Amount Paise",
+            "default": 0
+          },
+          "remaining_balance_paise": {
+            "type": "integer",
+            "title": "Remaining Balance Paise"
+          },
+          "payments": {
+            "items": {
+              "$ref": "#/components/schemas/PaymentRecord"
+            },
+            "type": "array",
+            "title": "Payments"
+          },
+          "audit_events": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Audit Events"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "PENDING"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "settlement_id",
+          "shipment_id",
+          "commitment_id",
+          "fpo_id",
+          "farmer_id",
+          "buyer_id",
+          "accepted_grams",
+          "unit_price_paise_per_gram",
+          "gross_amount_paise",
+          "total_deductions_paise",
+          "net_payable_paise",
+          "remaining_balance_paise",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "SettlementResponse"
+      },
+      "ShipmentCreate": {
+        "properties": {
+          "commitment_id": {
+            "type": "string",
+            "title": "Commitment Id"
+          },
+          "vehicle_id": {
+            "type": "string",
+            "title": "Vehicle Id"
+          },
+          "driver_id": {
+            "type": "string",
+            "title": "Driver Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commitment_id",
+          "vehicle_id",
+          "driver_id"
+        ],
+        "title": "ShipmentCreate"
+      },
+      "ShipmentResponse": {
+        "properties": {
+          "shipment_id": {
+            "type": "string",
+            "title": "Shipment Id"
+          },
+          "commitment_id": {
+            "type": "string",
+            "title": "Commitment Id"
+          },
+          "vehicle_id": {
+            "type": "string",
+            "title": "Vehicle Id"
+          },
+          "driver_id": {
+            "type": "string",
+            "title": "Driver Id"
+          },
+          "dispatched_grams": {
+            "type": "integer",
+            "title": "Dispatched Grams"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version",
+            "default": 1
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "PLANNED"
+          },
+          "custody": {
+            "type": "string",
+            "title": "Custody",
+            "default": "SCHEDULED"
+          },
+          "actual_pickup_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Pickup Time"
+          },
+          "actual_delivery_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Delivery Time"
+          },
+          "accepted_grams": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accepted Grams"
+          },
+          "rejected_grams": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejected Grams"
+          },
+          "loss_grams": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Loss Grams"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "shipment_id",
+          "commitment_id",
+          "vehicle_id",
+          "driver_id",
+          "dispatched_grams",
+          "created_at"
+        ],
+        "title": "ShipmentResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VehicleCreate": {
+        "properties": {
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "driver_id": {
+            "type": "string",
+            "title": "Driver Id"
+          },
+          "capacity_grams": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Capacity Grams",
+            "description": "Payload capacity in integer grams"
+          },
+          "vehicle_type": {
+            "type": "string",
+            "title": "Vehicle Type",
+            "default": "Mini Truck"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "fpo_id",
+          "driver_id",
+          "capacity_grams"
+        ],
+        "title": "VehicleCreate"
+      },
+      "VehicleResponse": {
+        "properties": {
+          "vehicle_id": {
+            "type": "string",
+            "title": "Vehicle Id"
+          },
+          "fpo_id": {
+            "type": "string",
+            "title": "Fpo Id"
+          },
+          "driver_id": {
+            "type": "string",
+            "title": "Driver Id"
+          },
+          "capacity_grams": {
+            "type": "integer",
+            "title": "Capacity Grams"
+          },
+          "vehicle_type": {
+            "type": "string",
+            "title": "Vehicle Type"
+          },
+          "is_available": {
+            "type": "boolean",
+            "title": "Is Available",
+            "default": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "vehicle_id",
+          "fpo_id",
+          "driver_id",
+          "capacity_grams",
+          "vehicle_type",
+          "created_at"
+        ],
+        "title": "VehicleResponse"
+      }
+    }
+  }
+}

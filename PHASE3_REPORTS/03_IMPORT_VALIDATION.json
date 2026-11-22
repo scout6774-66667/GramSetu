@@ -1,0 +1,787 @@
+{
+  "release_version": "2.2.0",
+  "validation_status": "PASSED",
+  "total_tables": 44,
+  "total_rows": 8321,
+  "file_hashes_verified": 44,
+  "sha256_integrity": "100% MATCH against manifest file_hashes_sha256.json",
+  "schema_conformance": "100% MATCH against manifest table column definitions",
+  "zero_row_tables": [
+    "market_arrivals",
+    "price_forecasts"
+  ],
+  "synthetic_trust_classification": "VALIDATED_RELEASE_STRUCTURE_SANDBOX_ONLY",
+  "table_summary": {
+    "actors": {
+      "row_count": 43,
+      "pk": "actor_id",
+      "columns": [
+        "actor_id",
+        "org_id",
+        "actor_type",
+        "role",
+        "active_from",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "buyer_requirements": {
+      "row_count": 100,
+      "pk": "requirement_id",
+      "columns": [
+        "requirement_id",
+        "buyer_org_id",
+        "commodity_id",
+        "grade",
+        "required_grams",
+        "remaining_grams",
+        "min_lot_grams",
+        "delivery_deadline",
+        "verification_status",
+        "status",
+        "created_at",
+        "simulation_flag",
+        "uncommitted_grams",
+        "buyer_accepted_grams",
+        "outstanding_contract_grams",
+        "remaining_quantity_basis"
+      ],
+      "sha256": null
+    },
+    "buyers": {
+      "row_count": 11,
+      "pk": "buyer_org_id",
+      "columns": [
+        "buyer_org_id",
+        "buyer_location_id",
+        "buyer_type",
+        "verification_status",
+        "onboarded_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "commitments": {
+      "row_count": 100,
+      "pk": "commitment_id",
+      "columns": [
+        "commitment_id",
+        "offer_id",
+        "requirement_id",
+        "buyer_org_id",
+        "lot_id",
+        "committed_grams",
+        "delivered_grams",
+        "reserved_grams",
+        "unit_price_paise_per_kg",
+        "status",
+        "committed_at",
+        "delivery_deadline",
+        "version",
+        "simulation_flag",
+        "buyer_accepted_grams",
+        "buyer_rejected_grams",
+        "physical_arrival_basis",
+        "contract_fulfillment_status"
+      ],
+      "sha256": null
+    },
+    "commodities": {
+      "row_count": 17,
+      "pk": "commodity_id",
+      "columns": [
+        "commodity_id",
+        "commodity_name",
+        "default_variety",
+        "unit",
+        "price_quote_unit",
+        "perishability_class",
+        "simulation_flag",
+        "master_data_status"
+      ],
+      "sha256": null
+    },
+    "cost_records": {
+      "row_count": 750,
+      "pk": "cost_id",
+      "columns": [
+        "cost_id",
+        "reference_type",
+        "reference_id",
+        "lot_id",
+        "cost_type",
+        "amount_paise",
+        "quantity_basis_grams",
+        "cost_timing",
+        "quote_or_actual",
+        "recorded_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "data_quality_results": {
+      "row_count": 43,
+      "pk": "dq_result_id",
+      "columns": [
+        "dq_result_id",
+        "ingestion_run_id",
+        "table_name",
+        "check_name",
+        "passed_rows",
+        "failed_rows",
+        "check_status",
+        "evaluated_at",
+        "simulation_flag",
+        "check_scope"
+      ],
+      "sha256": null
+    },
+    "delivery_acceptances": {
+      "row_count": 32,
+      "pk": "delivery_id",
+      "columns": [
+        "delivery_id",
+        "commitment_id",
+        "lot_id",
+        "buyer_org_id",
+        "inspected_grams",
+        "accepted_grams",
+        "rejected_grams",
+        "rejection_reason",
+        "accepted_at",
+        "proof_status",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "domain_events": {
+      "row_count": 2869,
+      "pk": "event_id",
+      "columns": [
+        "event_id",
+        "entity_type",
+        "entity_id",
+        "event_type",
+        "actor_id",
+        "occurred_at",
+        "committed_at",
+        "idempotency_key",
+        "event_payload_sha256",
+        "schema_version",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "facilities": {
+      "row_count": 22,
+      "pk": "facility_id",
+      "columns": [
+        "facility_id",
+        "location_id",
+        "operator_org_id",
+        "facility_type",
+        "nominal_capacity_grams",
+        "available_capacity_grams",
+        "verification_level",
+        "last_confirmed_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "facility_commodities": {
+      "row_count": 264,
+      "pk": "facility_commodity_id",
+      "columns": [
+        "facility_commodity_id",
+        "facility_id",
+        "commodity_id",
+        "accepted_grade",
+        "temperature_min_c",
+        "temperature_max_c",
+        "verified_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "farmers": {
+      "row_count": 180,
+      "pk": "farmer_id",
+      "columns": [
+        "farmer_id",
+        "fpo_id",
+        "home_location_id",
+        "enrollment_status",
+        "created_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "freight_quotes": {
+      "row_count": 242,
+      "pk": "quote_id",
+      "columns": [
+        "quote_id",
+        "route_id",
+        "vehicle_id",
+        "fixed_cost_paise",
+        "variable_cost_paise_per_km",
+        "valid_from",
+        "valid_until",
+        "quote_status",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "geography_reference_points": {
+      "row_count": 84,
+      "pk": "reference_id",
+      "columns": [
+        "reference_id",
+        "admin_area_name",
+        "district_name",
+        "subdistrict_census_2011_code",
+        "latitude",
+        "longitude",
+        "point_kind",
+        "source_url",
+        "source_vintage",
+        "site_coordinate_verified",
+        "source_validation"
+      ],
+      "sha256": null
+    },
+    "harvest_forecasts": {
+      "row_count": 250,
+      "pk": "forecast_id",
+      "columns": [
+        "forecast_id",
+        "farmer_id",
+        "commodity_id",
+        "forecast_harvest_date",
+        "forecast_quantity_grams",
+        "confidence_pct",
+        "captured_at",
+        "forecast_status",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "ingestion_runs": {
+      "row_count": 44,
+      "pk": "ingestion_run_id",
+      "columns": [
+        "ingestion_run_id",
+        "source_id",
+        "dataset_name",
+        "started_at",
+        "finished_at",
+        "records_ingested",
+        "records_quarantined",
+        "schema_version",
+        "raw_sha256",
+        "simulation_flag",
+        "run_kind",
+        "hash_scope",
+        "source_authenticity_scope"
+      ],
+      "sha256": null
+    },
+    "inventory_lots": {
+      "row_count": 250,
+      "pk": "lot_id",
+      "columns": [
+        "lot_id",
+        "forecast_id",
+        "farmer_id",
+        "fpo_id",
+        "commodity_id",
+        "grade",
+        "location_id",
+        "custody_org_id",
+        "received_grams",
+        "physical_grams",
+        "held_grams",
+        "reserved_grams",
+        "received_at",
+        "version",
+        "lot_status",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "inventory_movements": {
+      "row_count": 634,
+      "pk": "movement_id",
+      "columns": [
+        "movement_id",
+        "lot_id",
+        "movement_type",
+        "from_location_id",
+        "to_location_id",
+        "quantity_grams",
+        "occurred_at",
+        "reference_type",
+        "reference_id",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "locations": {
+      "row_count": 79,
+      "pk": "location_id",
+      "columns": [
+        "location_id",
+        "location_name",
+        "location_type",
+        "district_code",
+        "state_code",
+        "country_code",
+        "latitude",
+        "longitude",
+        "coordinate_provenance",
+        "simulation_flag",
+        "district_name",
+        "admin_reference_id",
+        "admin_area_name",
+        "geo_source_url",
+        "site_coordinate_verified"
+      ],
+      "sha256": null
+    },
+    "market_arrivals": {
+      "row_count": 0,
+      "pk": "arrival_id",
+      "columns": [
+        "arrival_id",
+        "market_id",
+        "commodity_id",
+        "variety",
+        "observed_date",
+        "arrival_quantity_tonnes",
+        "published_at",
+        "quality_flag",
+        "source_id",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "market_prices": {
+      "row_count": 43,
+      "pk": "price_observation_id",
+      "columns": [
+        "price_observation_id",
+        "market_id",
+        "commodity_id",
+        "variety",
+        "observed_date",
+        "grade",
+        "min_price_inr_quintal",
+        "modal_price_inr_quintal",
+        "max_price_inr_quintal",
+        "published_at",
+        "quality_flag",
+        "source_id",
+        "simulation_flag",
+        "source_url",
+        "retrieval_date",
+        "publication_time_status"
+      ],
+      "sha256": null
+    },
+    "markets": {
+      "row_count": 12,
+      "pk": "market_id",
+      "columns": [
+        "market_id",
+        "market_name",
+        "location_id",
+        "market_type",
+        "is_active",
+        "simulation_flag",
+        "source_url",
+        "identity_source_level",
+        "market_site_coordinate_verified",
+        "price_reference_source_id",
+        "source_reference_scope"
+      ],
+      "sha256": null
+    },
+    "organizations": {
+      "row_count": 42,
+      "pk": "org_id",
+      "columns": [
+        "org_id",
+        "org_name",
+        "org_type",
+        "verification_status",
+        "created_at",
+        "simulation_flag",
+        "legal_entity_verified"
+      ],
+      "sha256": null
+    },
+    "payable_ledger": {
+      "row_count": 32,
+      "pk": "payable_id",
+      "columns": [
+        "payable_id",
+        "commitment_id",
+        "delivery_id",
+        "buyer_org_id",
+        "farmer_id",
+        "accepted_grams",
+        "unit_price_paise_per_kg",
+        "gross_payable_paise",
+        "authorized_deductions_paise",
+        "net_payable_paise",
+        "verified_paid_paise",
+        "payment_status",
+        "issued_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "payment_evidence": {
+      "row_count": 16,
+      "pk": "evidence_id",
+      "columns": [
+        "evidence_id",
+        "payment_id",
+        "evidence_type",
+        "provider_response_code",
+        "verification_provider",
+        "verified_at",
+        "evidence_digest_sha256",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "payment_transactions": {
+      "row_count": 22,
+      "pk": "payment_id",
+      "columns": [
+        "payment_id",
+        "payable_id",
+        "amount_paise",
+        "verification_status",
+        "evidence_digest_sha256",
+        "verification_provider",
+        "recorded_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "price_forecasts": {
+      "row_count": 0,
+      "pk": "price_forecast_id",
+      "columns": [
+        "price_forecast_id",
+        "market_id",
+        "commodity_id",
+        "forecast_for_date",
+        "predicted_modal_price_inr_quintal",
+        "lower_bound_inr_quintal",
+        "upper_bound_inr_quintal",
+        "model_version",
+        "generated_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "procurement_offers": {
+      "row_count": 128,
+      "pk": "offer_id",
+      "columns": [
+        "offer_id",
+        "requirement_id",
+        "buyer_org_id",
+        "lot_id",
+        "offered_quantity_grams",
+        "unit_price_paise_per_kg",
+        "expires_at",
+        "offer_status",
+        "verification_status",
+        "created_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "quality_inspections": {
+      "row_count": 250,
+      "pk": "inspection_id",
+      "columns": [
+        "inspection_id",
+        "lot_id",
+        "facility_id",
+        "inspected_grams",
+        "accepted_grams",
+        "rejected_grams",
+        "rejection_reason",
+        "inspected_at",
+        "verification_level",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "recovery_candidates": {
+      "row_count": 209,
+      "pk": "candidate_id",
+      "columns": [
+        "candidate_id",
+        "recovery_run_id",
+        "candidate_type",
+        "target_entity_type",
+        "target_entity_id",
+        "allocated_grams",
+        "expected_revenue_paise",
+        "future_incremental_cost_paise",
+        "expected_net_paise",
+        "candidate_rank",
+        "feasible",
+        "feasibility_reason",
+        "simulation_flag",
+        "projected_future_sale_unverified",
+        "revenue_evidence_status"
+      ],
+      "sha256": null
+    },
+    "recovery_decisions": {
+      "row_count": 67,
+      "pk": "decision_id",
+      "columns": [
+        "decision_id",
+        "recovery_run_id",
+        "candidate_id",
+        "decision_status",
+        "decision_at",
+        "allocated_grams",
+        "expected_net_paise",
+        "actual_net_paise",
+        "actual_outcome_known",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "recovery_outcomes": {
+      "row_count": 16,
+      "pk": "outcome_id",
+      "columns": [
+        "outcome_id",
+        "decision_id",
+        "measured_at",
+        "quantity_recovered_grams",
+        "realized_revenue_paise",
+        "incremental_cost_paise",
+        "actual_net_paise",
+        "verified_by",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "recovery_runs": {
+      "row_count": 75,
+      "pk": "recovery_run_id",
+      "columns": [
+        "recovery_run_id",
+        "incident_id",
+        "input_snapshot_version",
+        "candidate_set_hash",
+        "solver_status",
+        "optimality_gap_pct",
+        "optimality_gap_status",
+        "expected_net_paise",
+        "evaluated_at",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "risk_incidents": {
+      "row_count": 75,
+      "pk": "incident_id",
+      "columns": [
+        "incident_id",
+        "risk_type",
+        "source_entity_type",
+        "source_entity_id",
+        "affected_quantity_grams",
+        "severity",
+        "detected_at",
+        "deadline_at",
+        "incident_status",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "road_edges": {
+      "row_count": 620,
+      "pk": "edge_id",
+      "columns": [
+        "edge_id",
+        "from_node",
+        "to_node",
+        "length_m",
+        "travel_time_s",
+        "road_class",
+        "surface",
+        "max_vehicle_weight_kg",
+        "weight_limit_status",
+        "passable",
+        "observed_at",
+        "simulation_flag",
+        "road_geometry_provenance",
+        "passable_is_live_verified"
+      ],
+      "sha256": null
+    },
+    "road_nodes": {
+      "row_count": 69,
+      "pk": "node_id",
+      "columns": [
+        "node_id",
+        "location_id",
+        "latitude",
+        "longitude",
+        "node_type",
+        "simulation_flag",
+        "geometry_status"
+      ],
+      "sha256": null
+    },
+    "shipments": {
+      "row_count": 32,
+      "pk": "shipment_id",
+      "columns": [
+        "shipment_id",
+        "commitment_id",
+        "lot_id",
+        "vehicle_id",
+        "route_id",
+        "delivery_id",
+        "quantity_grams",
+        "planned_departure_at",
+        "planned_arrival_at",
+        "shipment_status",
+        "actual_delivered_grams",
+        "simulation_flag",
+        "schedule_validation",
+        "route_estimate_usable_at_dispatch"
+      ],
+      "sha256": null
+    },
+    "snapshot_versions": {
+      "row_count": 1,
+      "pk": "snapshot_id",
+      "columns": [
+        "snapshot_id",
+        "snapshot_version",
+        "created_at",
+        "store_sha256",
+        "event_count",
+        "snapshot_state",
+        "simulation_flag",
+        "event_ledger_sha256",
+        "store_hash_status",
+        "event_count_basis"
+      ],
+      "sha256": null
+    },
+    "source_registry": {
+      "row_count": 8,
+      "pk": "source_id",
+      "columns": [
+        "source_id",
+        "source_name",
+        "source_url",
+        "retrieved_at",
+        "schema_version",
+        "raw_sha256",
+        "ingestion_mode",
+        "simulation_flag",
+        "retrieval_date",
+        "raw_hash_status"
+      ],
+      "sha256": null
+    },
+    "storage_conditions": {
+      "row_count": 220,
+      "pk": "condition_id",
+      "columns": [
+        "condition_id",
+        "facility_id",
+        "observed_at",
+        "temperature_c",
+        "humidity_pct",
+        "power_status",
+        "condition_flag",
+        "source_device_id",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "storage_reservations": {
+      "row_count": 56,
+      "pk": "storage_reservation_id",
+      "columns": [
+        "storage_reservation_id",
+        "facility_id",
+        "lot_id",
+        "reserved_grams",
+        "start_at",
+        "end_at",
+        "storage_rate_paise_per_kg_day",
+        "confirmation_status",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "transport_routes": {
+      "row_count": 242,
+      "pk": "route_id",
+      "columns": [
+        "route_id",
+        "from_node",
+        "to_node",
+        "edge_ids_json",
+        "distance_m",
+        "estimated_travel_time_s",
+        "weight_limit_status",
+        "route_status",
+        "computed_at",
+        "simulation_flag",
+        "route_geometry_provenance"
+      ],
+      "sha256": null
+    },
+    "vehicle_availability": {
+      "row_count": 36,
+      "pk": "availability_id",
+      "columns": [
+        "availability_id",
+        "vehicle_id",
+        "available_from",
+        "available_until",
+        "capacity_available_grams",
+        "availability_status",
+        "simulation_flag"
+      ],
+      "sha256": null
+    },
+    "vehicles": {
+      "row_count": 36,
+      "pk": "vehicle_id",
+      "columns": [
+        "vehicle_id",
+        "operator_org_id",
+        "home_location_id",
+        "vehicle_type",
+        "payload_capacity_grams",
+        "tare_weight_kg",
+        "gross_vehicle_weight_kg",
+        "refrigeration_available",
+        "verification_level",
+        "simulation_flag"
+      ],
+      "sha256": null
+    }
+  }
+}

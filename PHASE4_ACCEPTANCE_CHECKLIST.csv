@@ -1,0 +1,15 @@
+gate_id,gate,status,observed_evidence,next_action
+P4-00,Phase3 158-test baseline rerun,NOT_TESTED,Backend repository absent,Existing tests must be executed on actual source tree
+P4-01,Raw official source data acquired,BLOCKED,No authenticated historical official export available in workspace,Download authorized official historical records
+P4-02,Raw source file SHA-256 and immutable provenance,STARTER_READY,Normalizer computes raw hash and row-level lineage,Archive original raw bytes in repo-approved secure location
+P4-03,Canonical price schema and anomaly quarantine,STARTER_READY,Strict contract and per-row reject file,Review source-specific column names and metadata
+P4-04,Market identity crosswalk verified,BLOCKED,RAW_ identifiers cannot be treated as canonical sites,Approved crosswalk and site-level provenance
+P4-05,Market-price history sufficient for temporal evaluation,BLOCKED,Only 43 rows on 2 dates,Acquire multi-year day-level history
+P4-06,Arrival history available,BLOCKED,market_arrivals.csv has 0 rows,Authorized arrival data acquisition
+P4-07,Feature engineering uses only prior dates,STARTER_READY,Exact calendar lags tested,Integrate into production feature pipeline and test causality
+P4-08,Chronological model training with baseline comparison,STARTER_READY_NOT_TRAINED,Train script provided; strict data approval required,Run against authenticated history and save evidence
+P4-09,Reproducible heldout metrics,BLOCKED,No data for test holdout,Evaluate on actual historical holdout
+P4-10,Safe API inference via DemandSync,NOT_TESTED,No backend source available,Implement typed route and error conditions
+P4-11,Settlement half-up and partial inspections verified against backend,NOT_TESTED,Standalone examples tested only,Compare Phase 3 production contract and add regressions
+P4-12,No synthetic data in live training,STARTER_READY,Hard fail for synthetic flags,Validate backend promotion pipeline
+P4-13,Production-readiness honesty,PASS_FOR_STARTER,No trained model claimed; source authenticity not overstated,Maintain overall production block

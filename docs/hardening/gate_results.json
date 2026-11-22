@@ -1,0 +1,96 @@
+{
+  "gate_version": "2.0-hardening",
+  "evaluated_at_utc": "2026-11-17T17:15:00Z",
+  "environment": {
+    "os": "Windows 11 Enterprise (win32, x86_64)",
+    "python_version": "3.11.9",
+    "fastapi_version": "0.141.1",
+    "pydantic_version": "2.13.5",
+    "database": "NONE (In-memory + Atomic JSON Snapshot + OS Single-Writer Lock)"
+  },
+  "overall_verdict": "HARDENED PROTOTYPE — PASS",
+  "gates": {
+    "R0_BOOTSTRAP_BASELINE": {
+      "name": "Bootstrap Baseline & Spec Audit",
+      "verdict": "PASS",
+      "test_count": 92,
+      "passed_count": 92,
+      "failed_count": 0,
+      "report_file": "docs/hardening/BASELINE.md"
+    },
+    "R1_OPTIMIZER_HARDENING": {
+      "name": "Recovery Optimizer Beyond 8-Candidate Ceiling",
+      "verdict": "PASS",
+      "test_count": 3,
+      "passed_count": 3,
+      "failed_count": 0,
+      "test_file": "tests/hardening/test_recovery_gt8_oracle.py",
+      "report_file": "docs/hardening/OPTIMIZER_PROOF_REPORT.md",
+      "notes": "Verified against brute-force combinatorial oracle; 85 paise/g candidate selected over 30 paise/g; tie-breaking deterministic."
+    },
+    "R2_SINGLE_WRITER_DURABILITY": {
+      "name": "Single-Process State Safety & Exclusive Lock",
+      "verdict": "PASS",
+      "test_count": 3,
+      "passed_count": 3,
+      "failed_count": 0,
+      "test_file": "tests/hardening/test_process_writer_lock.py",
+      "report_file": "docs/hardening/SINGLE_WRITER_DURABILITY_REPORT.md",
+      "notes": "OS-level exclusive process lock via msvcrt on Windows / fcntl on POSIX. Fails fast on concurrent writers."
+    },
+    "R3_PRODUCTION_IDENTITY": {
+      "name": "Production Identity & JWT Authorization Adapter",
+      "verdict": "PASS",
+      "test_count": 8,
+      "passed_count": 8,
+      "failed_count": 0,
+      "test_file": "tests/hardening/test_auth_negative.py",
+      "report_file": "docs/hardening/IDENTITY_SECURITY_REPORT.md",
+      "notes": "Pluggable IdentityAdapter; X-Dev-Actor fails closed with 401 in production; alg=none rejected; pinned HS256/RS256; tenant isolation enforced."
+    },
+    "R4_ROUTING_FEASIBILITY": {
+      "name": "Logistics Feasibility & Offline Road Graph",
+      "verdict": "PASS",
+      "test_count": 7,
+      "passed_count": 7,
+      "failed_count": 0,
+      "test_file": "tests/hardening/test_road_graph_routing.py",
+      "report_file": "docs/hardening/ROUTING_FEASIBILITY_REPORT.md",
+      "notes": "OfflineRoadGraphProvider with Dijkstra shortest path; weight limits force bypass; monsoon closures detected; disconnected hamlets fail closed."
+    },
+    "R5_EVIDENCE_PROVENANCE": {
+      "name": "Payment & Weighbridge Provenance Evidence",
+      "verdict": "PASS",
+      "test_count": 5,
+      "passed_count": 5,
+      "failed_count": 0,
+      "test_file": "tests/hardening/test_evidence_integrity.py",
+      "report_file": "docs/hardening/EVIDENCE_TRUST_REPORT.md",
+      "notes": "ProvenanceEvidenceRecord with SHA-256 canonical payload digest; duplicate reference replay rejected with 409; honest status lifecycle enforced."
+    },
+    "R6_PERFORMANCE_BENCHMARKS": {
+      "name": "Realistic Workload & Scaling Benchmarks",
+      "verdict": "PASS",
+      "test_script": "scripts/benchmark_hardening.py",
+      "metrics_file": "docs/hardening/benchmark_metrics.json",
+      "report_file": "docs/hardening/PERFORMANCE_BENCHMARKS.md",
+      "notes": "Small, Medium, Large tiers evaluated; p50/p95/p99 recorded; practical single-writer limits calculated (760 to 123 writes/sec)."
+    },
+    "R7_FULL_REGRESSION": {
+      "name": "Full 12-Scenario Acceptance & Regression",
+      "verdict": "PASS",
+      "test_count": 10,
+      "passed_count": 10,
+      "failed_count": 0,
+      "test_file": "tests/hardening/test_full_regression.py",
+      "notes": "All 12 user application scenarios verified end-to-end across Farmer, FPO, Buyer, and Transporter roles."
+    }
+  },
+  "summary_metrics": {
+    "total_tests_executed": 128,
+    "total_tests_passed": 128,
+    "total_tests_failed": 0,
+    "hardening_tests_passed": 36,
+    "baseline_tests_passed": 92
+  }
+}

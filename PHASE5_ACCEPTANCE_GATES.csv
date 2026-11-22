@@ -1,0 +1,16 @@
+gate_id,workstream,acceptance_criteria,verification_method,initial_status
+P5-G01,Baseline release,"44 CSVs, hashes, PKs, FKs and row counts reconcile",AUTOMATED,PASS_PRECHECK
+P5-A01,Market history,Primary DMI/AGMARKNET source bytes and real per-record evidence,HUMAN+AUTOMATED,BLOCKED
+P5-A02,Historical coverage,"Each eligible market/commodity series >=730-day observed span, >=80% days",AUTOMATED,BLOCKED
+P5-A03,Market crosswalk,Government market identity and commodity codes approved; no fuzzy auto-join,HUMAN+AUTOMATED,BLOCKED
+P5-A04,Arrivals history,Original arrivals feed and distinct no-arrival reporting statuses,HUMAN+AUTOMATED,BLOCKED
+P5-G02,Farm GPS,"Real on-site GPS evidence, precision and independent area checks",HUMAN+FIELD,BLOCKED
+P5-G03,Road network,Real geometry and vehicle restrictions; route graph provenance,HUMAN+AUTOMATED,BLOCKED
+P5-O01,Farmer stock,Authorized physical inventory and custody checks,PARTNER+AUTOMATED,BLOCKED
+P5-O02,Storage/vehicles,Operator-confirmed capacity and availability windows,PARTNER+AUTOMATED,BLOCKED
+P5-O03,Buyer procurement,Signed dated offer; expiry and acceptance provenance,PARTNER+AUTOMATED,BLOCKED
+P5-F01,Bank payment,Actual beneficiary-credit verification through authorized partner,PARTNER+AUTOMATED,BLOCKED
+P5-ML01,Forecast evaluation,"Temporal evaluation and frozen test holdout, outperform baselines",AUTOMATED,BLOCKED
+P5-ML02,Safe inference,"Feature provenance and trained artifact version, disabled until sign-off",AUTOMATED,BLOCKED
+P5-R01,Regression,Earlier 168 suite retained and rerun on full backend repo,AUTOMATED,NOT_RUN_NO_REPOSITORY
+P5-R02,Operational readiness,Production gate fail-closed; evidence-based readiness,AUTOMATED,BLOCKED
