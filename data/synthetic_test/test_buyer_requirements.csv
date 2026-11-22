@@ -1,0 +1,1 @@
+requirement_id,buyer_id,crop,variety,grade,needed_grams,allocated_grams,delivery_window_start,delivery_window_end,max_price_paise_per_gram,status,created_at

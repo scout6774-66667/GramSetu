@@ -15,7 +15,8 @@ dependencies = [
     "python-dateutil>=2.8.2",
     "scikit-learn>=1.4.0",
     "scipy>=1.12.0",
-    "sqlalchemy>=2.0.0"
+    "sqlalchemy>=2.0.0",
+    "pytest-timeout>=2.2.0"
 ]
 
 [tool.setuptools]
@@ -46,6 +47,8 @@ gramsetu = [
 [tool.pytest.ini_options]
 testpaths = ["tests", "VALIDATION_TESTS"]
 pythonpath = ["."]
+timeout = 30
+addopts = "-ra -q --timeout=30"
 filterwarnings = [
     "ignore::DeprecationWarning",
 ]

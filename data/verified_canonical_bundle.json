@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-11-22T18:18:03.902014+00:00",
+  "commodities": [],
+  "commodity_grades": [],
+  "administrative_locations": [],
+  "mandi_master": [],
+  "daily_mandi_prices": [],
+  "daily_mandi_arrivals": [],
+  "road_network": {
+    "nodes": {},
+    "edges": []
+  },
+  "storage_facilities": [],
+  "crop_shelf_life_rules": [],
+  "freight_rate_cards": [],
+  "settlement_deductions": [],
+  "fpos": [],
+  "farmers": [],
+  "buyers": [],
+  "vehicles": []
+}
