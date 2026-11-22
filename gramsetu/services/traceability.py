@@ -11,16 +11,12 @@ or external bank confirmations without fabricating evidence.
 """
 from __future__ import annotations
 
-import uuid
-from datetime import datetime, timezone
-from typing import List, Optional, Dict, Any
+from datetime import datetime
+from typing import List
 
 from gramsetu.core import (
     DevActor,
-    Role,
-    AuthorizationError,
     NotFoundError,
-    get_current_utc,
 )
 from gramsetu.store import InMemoryStore
 from gramsetu.schemas import (
@@ -158,7 +154,7 @@ def get_lot_traceability_timeline(
                         actor_id=s.get("driver_id", "driver-1"),
                         actor_role="DRIVER",
                         title="Carrier Custody Handover (Pickup)",
-                        description=f"Driver confirmed custody pickup from warehouse silo.",
+                        description="Driver confirmed custody pickup from warehouse silo.",
                         quantity_grams=s.get("dispatched_grams"),
                         evidence_type="CARRIER_RECEIPT",
                         verification_level="DRIVER_CONFIRMED_MOBILE",

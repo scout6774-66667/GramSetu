@@ -20,7 +20,7 @@ from datetime import datetime, timezone, timedelta
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
-from gramsetu.core import Settings, Environment, Role, DEV_ACTOR_HEADER
+from gramsetu.core import Settings, Environment, DEV_ACTOR_HEADER
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 
 

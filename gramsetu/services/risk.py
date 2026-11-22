@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone, timedelta
-from typing import List, Optional, Dict, Any
+from datetime import datetime, timedelta
+from typing import List, Optional
 from gramsetu.core import (
     DevActor,
     Role,
@@ -96,7 +96,7 @@ def scan_risk_incidents(
                     "dedup_key": f"MISSED_PICKUP:{ship_id}",
                     "severity": "HIGH",
                     "title": f"Missed Pickup on Shipment {ship_id}",
-                    "description": f"Shipment has remained planned for over 24 hours without driver pickup.",
+                    "description": "Shipment has remained planned for over 24 hours without driver pickup.",
                     "resource_type": "shipment",
                     "resource_id": ship_id,
                     "affected_grams": s.get("dispatched_grams", 0),
@@ -121,25 +121,25 @@ def scan_risk_incidents(
             })
 
     # 3. Scan Lots (perishability / aging risk)
-    lots = store.list_items("lots", lambda l: l.get("fpo_id") == fpo_id and l.get("status") == "AVAILABLE")
-    for l in lots:
-        crop_lower = l.get("crop", "").lower()
+    lots = store.list_items("lots", lambda item: item.get("fpo_id") == fpo_id and item.get("status") == "AVAILABLE")
+    for lot_item in lots:
+        crop_lower = lot_item.get("crop", "").lower()
         shelf_life = CROP_SHELF_LIFE_DAYS.get(crop_lower, CROP_SHELF_LIFE_DAYS["default"])
-        created_dt = datetime.fromisoformat(l["created_at"])
+        created_dt = datetime.fromisoformat(lot_item["created_at"])
         age_days = (now - created_dt).total_seconds() / 86400.0
 
         if age_days > shelf_life:
             severity = "CRITICAL" if age_days > (shelf_life * 2) else "HIGH"
-            lot_id = l["lot_id"]
+            lot_id = lot_item["lot_id"]
             detected_incidents.append({
                 "incident_type": "AGING_RISK",
                 "dedup_key": f"AGING_RISK:{lot_id}",
                 "severity": severity,
                 "title": f"Perishable Aging Alert on Lot {lot_id}",
-                "description": f"{l.get('crop')} lot has been in storage for {round(age_days, 1)} days (shelf-life: {shelf_life} days).",
+                "description": f"{lot_item.get('crop')} lot has been in storage for {round(age_days, 1)} days (shelf-life: {shelf_life} days).",
                 "resource_type": "lot",
                 "resource_id": lot_id,
-                "affected_grams": l.get("quantity_grams", 0),
+                "affected_grams": lot_item.get("quantity_grams", 0),
                 "affected_paise": 0,
             })
 

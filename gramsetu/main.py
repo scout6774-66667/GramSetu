@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import os
 import uuid
 from typing import Optional
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from fastapi.exceptions import RequestValidationError
+from fastapi.staticfiles import StaticFiles
 
 from gramsetu.core import (
     Settings,
@@ -15,6 +17,13 @@ from gramsetu.schemas import HealthStatus
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 from gramsetu.security.identity import get_identity_adapter
 from gramsetu.api.v1.router import api_v1_router
+
+_STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
+_STATIC_DIR_EXISTS = os.path.exists(_STATIC_DIR)
+_ASSETS_DIR = os.path.join(_STATIC_DIR, "assets")
+_ASSETS_DIR_EXISTS = os.path.exists(_ASSETS_DIR)
+_INDEX_HTML = os.path.join(_STATIC_DIR, "index.html")
+_INDEX_HTML_EXISTS = os.path.exists(_INDEX_HTML)
 
 
 def create_app(
@@ -116,36 +125,29 @@ def create_app(
         )
 
     # Mount static assets and UI routes
-    import os
-    from fastapi.staticfiles import StaticFiles
-    from fastapi.responses import FileResponse
+    if _STATIC_DIR_EXISTS:
+        app.mount("/static", StaticFiles(directory=_STATIC_DIR), name="static")
 
-    static_dir = os.path.join(os.path.dirname(__file__), "static")
-    if os.path.exists(static_dir):
-        app.mount("/static", StaticFiles(directory=static_dir), name="static")
-
-        assets_dir = os.path.join(static_dir, "assets")
-        if os.path.exists(assets_dir):
-            app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+        if _ASSETS_DIR_EXISTS:
+            app.mount("/assets", StaticFiles(directory=_ASSETS_DIR), name="assets")
 
         @app.get("/", include_in_schema=False)
         @app.get("/app", include_in_schema=False)
         @app.get("/ui", include_in_schema=False)
         async def serve_ui():
-            return FileResponse(os.path.join(static_dir, "index.html"))
+            return FileResponse(_INDEX_HTML)
 
     # Mount API v1 router
     app.include_router(api_v1_router)
 
     # SPA Client-side Route Catch-all (for HTML5 pushState routing)
-    if os.path.exists(static_dir):
+    if _STATIC_DIR_EXISTS:
         @app.get("/{full_path:path}", include_in_schema=False)
         async def spa_fallback(full_path: str):
             if full_path.startswith("api/") or full_path in ("docs", "redoc", "openapi.json"):
                 return JSONResponse(status_code=404, content={"error": "NOT_FOUND", "message": "Endpoint not found"})
-            index_path = os.path.join(static_dir, "index.html")
-            if os.path.exists(index_path):
-                return FileResponse(index_path)
+            if _INDEX_HTML_EXISTS:
+                return FileResponse(_INDEX_HTML)
             return JSONResponse(status_code=404, content={"error": "NOT_FOUND", "message": "UI not found"})
 
     return app

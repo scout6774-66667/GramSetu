@@ -19,7 +19,6 @@ from typing import Dict, Any, List, Optional, Callable
 from gramsetu.core.exceptions import (
     CorruptionError,
     ProcessLockError,
-    NotFoundError,
 )
 
 SCHEMA_VERSION = "2.2.0"

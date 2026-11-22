@@ -1,8 +1,7 @@
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
-from gramsetu.core import DEV_ACTOR_HEADER, InvariantViolationError
+from gramsetu.core import DEV_ACTOR_HEADER
 
 
 def test_receipt_creation_and_scoping():

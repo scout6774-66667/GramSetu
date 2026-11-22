@@ -1,25 +1,19 @@
 from __future__ import annotations
 
 import threading
-import uuid
 import pytest
-from datetime import datetime, timezone, timedelta
-from typing import List, Dict, Any
+from datetime import timedelta
 
 from gramsetu.core import (
-    Settings,
-    Environment,
-    Role,
     DevActor,
     DEV_ACTORS,
     InvariantViolationError,
     ConflictError,
-    NotFoundError,
     AuthorizationError,
     get_current_utc,
 )
 from gramsetu.store import InMemoryStore, TransactionCoordinator
-from gramsetu.algorithms import haversine_distance_km, estimate_route_metrics
+from gramsetu.algorithms import estimate_route_metrics
 from gramsetu.schemas import (
     LotReceiptCreate,
     BuyerRequirementCreate,
@@ -27,8 +21,6 @@ from gramsetu.schemas import (
     CommitmentAllocationItem,
     VehicleCreate,
     ShipmentCreate,
-    DeliveryConfirmationRequest,
-    IncidentResolveRequest,
 )
 from gramsetu.services.inventory import receive_inventory_lot
 from gramsetu.services.procurement import (
@@ -40,12 +32,9 @@ from gramsetu.services.logistics import (
     register_vehicle,
     create_shipment,
     record_pickup,
-    record_delivery,
 )
 from gramsetu.services.risk import (
     scan_risk_incidents,
-    resolve_incident,
-    acknowledge_incident,
 )
 from gramsetu.services.recovery import (
     generate_recovery_plan,
@@ -394,7 +383,6 @@ def test_f5_driver_assignment_enforced():
     coord = TransactionCoordinator(store=store)
     admin = DEV_ACTORS["fpo-admin-alpha"]
     buyer = DEV_ACTORS["buyer-reliance"]
-    assigned_driver = DEV_ACTORS["driver-1"]
     intruder_driver = DEV_ACTORS["driver-2"]
 
     lot = receive_inventory_lot(

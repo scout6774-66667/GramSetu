@@ -9,9 +9,9 @@ from __future__ import annotations
 import json
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any
 
-from gramsetu.core import Settings, Environment, DevActor, Role, GramSetuError
+from gramsetu.core import Settings, Environment, DevActor, GramSetuError
 from gramsetu.store import InMemoryStore
 from gramsetu.schemas import MarketForecastResponse
 from gramsetu.pipeline import predict_one, read_normalized, DataGateError
@@ -141,7 +141,7 @@ def get_market_price_forecast(
     try:
         req_d = date.fromisoformat(t_date)
         res = predict_one(model_artifact, history_rows, group, req_d)
-        
+
         feature_status = {
             "lag_1": "AVAILABLE",
             "lag_7": "AVAILABLE",

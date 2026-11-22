@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends
 
-from gramsetu.core import DevActor, Role, get_current_actor
 from gramsetu.api.deps import get_store
 from gramsetu.store import InMemoryStore
 from gramsetu.schemas import VoiceQueryRequest, VoiceQueryResponse

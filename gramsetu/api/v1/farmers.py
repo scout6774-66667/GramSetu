@@ -4,7 +4,7 @@ from __future__ import annotations
 from typing import List, Optional
 from fastapi import APIRouter, Depends, Query, status
 
-from gramsetu.core import DevActor, Role, get_current_actor, require_roles
+from gramsetu.core import DevActor, get_current_actor
 from gramsetu.api.deps import get_store, get_coordinator
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 from gramsetu.schemas import (

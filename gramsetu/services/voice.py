@@ -18,7 +18,6 @@ Provides:
 from __future__ import annotations
 
 import re
-from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional, Tuple
 
 from gramsetu.store import InMemoryStore

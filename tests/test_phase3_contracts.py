@@ -20,19 +20,14 @@ Verifies the 15 mandatory Gate 5 tests:
 
 from __future__ import annotations
 
-import copy
-import io
 import json
-import os
-import shutil
-import tempfile
 from decimal import Decimal
 from pathlib import Path
 from zipfile import ZipFile
 import pytest
 from fastapi.testclient import TestClient
 
-from gramsetu.core import Settings, Environment, Role, DevActor, DEV_ACTOR_HEADER
+from gramsetu.core import Settings, Environment, DEV_ACTOR_HEADER
 from gramsetu.main import create_app
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 from gramsetu.units import (
@@ -357,7 +352,6 @@ def test_12_cross_module_contracts_and_availability():
 # ==============================================================================
 def test_13_core_store_invariants_preserved():
     store = InMemoryStore()
-    coord = TransactionCoordinator(store=store)
     # Existing collections remain defined
     assert "lots" in store._data
     assert "forecasts" in store._data

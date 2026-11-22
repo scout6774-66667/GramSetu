@@ -18,7 +18,6 @@ import json
 import os
 import re
 from datetime import datetime
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
@@ -372,7 +371,7 @@ def test_layer_10_backend_compatibility():
 
     # 4. Post a buyer requirement using verified buyer
     buyers = read_csv_rows(os.path.join(OPERATOR_DIR, "buyer_registry.csv"))
-    first_buyer = buyers[0]
+    assert len(buyers) > 0, "No registered buyers found"
     req_payload = {
         "crop": "Soybean",
         "variety": "JS-335",

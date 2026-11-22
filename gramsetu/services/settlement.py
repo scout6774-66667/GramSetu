@@ -20,11 +20,10 @@ from gramsetu.schemas import (
     PaymentReportRequest,
     PaymentVerifyRequest,
     SettlementResponse,
-    PaymentRecord,
 )
 from gramsetu.store import InMemoryStore, TransactionCoordinator
-from gramsetu.adapters.evidence import EvidenceManager, compute_payload_digest
-from gramsetu.units import calculate_gross_paise, gross_paise_half_up
+from gramsetu.adapters.evidence import EvidenceManager
+from gramsetu.units import calculate_gross_paise
 
 
 def generate_settlement(

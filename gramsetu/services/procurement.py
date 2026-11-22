@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import List, Optional, Tuple, Dict
 from gramsetu.core import (
     DevActor,
@@ -20,7 +20,6 @@ from gramsetu.schemas import (
     DemandGapAnalysis,
     BuyerCommitmentCreate,
     BuyerCommitmentResponse,
-    CommitmentAllocationItem,
 )
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 

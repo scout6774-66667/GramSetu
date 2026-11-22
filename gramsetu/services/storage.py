@@ -9,15 +9,12 @@ Provides:
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone
-from typing import List, Optional, Tuple, Dict, Any
+from datetime import datetime
+from typing import List, Optional, Dict, Any
 
 from gramsetu.core import (
     DevActor,
-    Role,
-    AuthorizationError,
     NotFoundError,
-    DomainValidationError,
     get_current_utc,
 )
 from gramsetu.store import InMemoryStore, TransactionCoordinator
@@ -166,7 +163,6 @@ def compute_facility_spoilage_risks(
             days_stored = 1
 
         risk_pct = min(100.0, round((days_stored / float(shelf_life)) * 100.0, 1))
-        days_remaining = max(0, shelf_life - days_stored)
 
         if risk_pct >= 90.0:
             level = "CRITICAL"

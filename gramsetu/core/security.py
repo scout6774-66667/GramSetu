@@ -1,7 +1,7 @@
 """Security, dev actor fixtures, authentication dependencies, and scoping checks."""
 from __future__ import annotations
 
-from typing import Optional, Dict, Any, Callable
+from typing import Optional, Dict, Callable
 from pydantic import BaseModel, ConfigDict
 from fastapi import Request, Depends
 

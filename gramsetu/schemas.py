@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Optional, Dict, Any, List
 from enum import Enum
 from datetime import datetime
-from pydantic import BaseModel, Field, ConfigDict, field_validator
+from pydantic import BaseModel, Field, ConfigDict
 from gramsetu.core.config import Role
 
 

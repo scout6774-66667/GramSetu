@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Tuple, Optional
+from typing import Tuple
 from gramsetu.core import (
     DevActor,
     Role,

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import itertools
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
@@ -12,7 +10,7 @@ from gramsetu.algorithms import (
     OfflineRoadGraphProvider,
     get_default_road_network,
 )
-from gramsetu.schemas import RouteVerificationRequest, RouteStatus
+from gramsetu.schemas import RouteStatus
 
 
 def test_r4_baseline_dijkstra_shortest_path():

@@ -20,10 +20,8 @@ from sqlalchemy import (
     ForeignKey,
     Text,
     CheckConstraint,
-    UniqueConstraint,
     Index,
 )
-from sqlalchemy.orm import relationship
 from gramsetu.database.session import Base
 
 

@@ -18,13 +18,11 @@ import hashlib
 import os
 import time
 import uuid
-from typing import Optional, Dict, Any, Tuple
+from typing import Optional, Tuple
 import jwt
 
 from gramsetu.core import (
     Settings,
-    Role,
-    DevActor,
     DEV_ACTORS,
     GramSetuError,
     AuthorizationError,

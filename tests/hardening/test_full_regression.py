@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 import tempfile
 import uuid
-from datetime import datetime, timezone
 import pytest
 from fastapi.testclient import TestClient
 
@@ -11,14 +10,8 @@ from gramsetu.main import create_app
 from gramsetu.core import (
     DEV_ACTOR_HEADER,
     Settings,
-    Role,
-    DevActor,
     get_current_utc,
-    ConflictError,
-    InvariantViolationError,
 )
-from gramsetu.store import InMemoryStore, TransactionCoordinator
-from gramsetu.schemas import RouteStatus
 
 
 @pytest.fixture
@@ -324,7 +317,7 @@ def test_scenario_08_and_09_risk_incident_and_recovery_plan(app_env):
     )
     lot_id = res_lot.json()["lot_id"]
 
-    res_req = client.post(
+    client.post(
         "/api/v1/requirements",
         headers={DEV_ACTOR_HEADER: "buyer-reliance"},
         json={
@@ -608,7 +601,6 @@ def test_scenario_11_offline_command_sync_and_conflict_detection(app_env):
 def test_scenario_12_crash_and_restart_byte_preservation(app_env):
     """Scenario 12: Process killed mid-operation, restarted from snapshot cleanly."""
     client = app_env["client"]
-    snap_path = app_env["snap_path"]
     settings = app_env["settings"]
 
     # Write initial lot

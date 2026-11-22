@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 from abc import ABC, abstractmethod
-from typing import Optional, List, Dict, Any
+from typing import Optional, List
 import jwt
 from fastapi import Request
 
@@ -159,13 +159,13 @@ class JwtIdentityAdapter(IdentityAdapter):
             ) from exc
         except jwt.InvalidIssuerError as exc:
             raise GramSetuError(
-                message=f"Invalid JWT issuer.",
+                message="Invalid JWT issuer.",
                 status_code=401,
                 error_code="UNAUTHORIZED",
             ) from exc
         except jwt.InvalidAudienceError as exc:
             raise GramSetuError(
-                message=f"Invalid JWT audience.",
+                message="Invalid JWT audience.",
                 status_code=401,
                 error_code="UNAUTHORIZED",
             ) from exc

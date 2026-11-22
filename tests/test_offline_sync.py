@@ -1,6 +1,5 @@
 import uuid
 from datetime import datetime, timezone, timedelta
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app

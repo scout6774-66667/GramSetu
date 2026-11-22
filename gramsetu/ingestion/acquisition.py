@@ -10,13 +10,12 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
-import os
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from datetime import date, datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Tuple, Any
 
-from gramsetu.pipeline import FIELDS, SOURCE_TIERS, DataGateError, sha256_file, require_price, parse_source_date
+from gramsetu.pipeline import FIELDS, SOURCE_TIERS, DataGateError, require_price, parse_source_date
 
 # Official Government Catalog Reference
 OFFICIAL_DMI_CATALOG_URL = "https://data.gov.in/catalog/current-daily-price-various-commodities-various-markets-mandi"

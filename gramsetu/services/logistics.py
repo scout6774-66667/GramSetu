@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import uuid
 from typing import List, Optional
+from gramsetu.algorithms import get_default_road_network, OfflineRoadGraphProvider
 from gramsetu.core import (
     DevActor,
     Role,
@@ -18,6 +19,8 @@ from gramsetu.schemas import (
     ShipmentCreate,
     ShipmentResponse,
     DeliveryConfirmationRequest,
+    RouteVerificationRequest,
+    RouteVerificationResponse,
 )
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 from gramsetu.services.inventory import record_movement
@@ -322,9 +325,6 @@ def list_shipments(
     items = store.list_items("shipments", filter_fn)
     return [ShipmentResponse(**item) for item in items]
 
-
-from gramsetu.algorithms import get_default_road_network, OfflineRoadGraphProvider
-from gramsetu.schemas import RouteVerificationRequest, RouteVerificationResponse
 
 _DEFAULT_ROAD_GRAPH: Optional[OfflineRoadGraphProvider] = None
 

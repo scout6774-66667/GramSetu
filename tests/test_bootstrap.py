@@ -1,14 +1,13 @@
 import os
 import tempfile
 import threading
-from datetime import datetime, timezone
+from datetime import datetime
 import pytest
 from pydantic import ValidationError
 from fastapi.testclient import TestClient
 
-from gramsetu.core import Settings, CorruptionError, GramSetuError
+from gramsetu.core import CorruptionError
 from gramsetu.main import create_app
-from gramsetu.schemas import HealthStatus
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 
 
@@ -53,7 +52,6 @@ def test_transaction_rollback():
 def test_atomic_snapshot_persistence():
     with tempfile.TemporaryDirectory() as tmpdir:
         snap_path = os.path.join(tmpdir, "state.json")
-        settings = Settings(SNAPSHOT_PATH=snap_path)
         coordinator = TransactionCoordinator(store=InMemoryStore(), snapshot_path=snap_path)
 
         with coordinator.transaction():
@@ -129,7 +127,6 @@ def test_unacceptable_schema_version():
 
 
 def test_invalid_quantity_precision():
-    from pydantic import BaseModel, ValidationError
     from gramsetu.schemas import BaseSchema
 
     class ProduceItem(BaseSchema):

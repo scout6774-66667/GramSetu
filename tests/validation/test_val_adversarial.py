@@ -1,24 +1,18 @@
 from __future__ import annotations
 
-import os
 import random
 import uuid
 from decimal import Decimal, ROUND_HALF_UP
 import pytest
-from datetime import datetime, timezone, timedelta
+from datetime import timedelta
 from fastapi.testclient import TestClient
 
 from gramsetu.core import (
     Settings,
     Environment,
-    Role,
-    DevActor,
     DEV_ACTORS,
     DEV_ACTOR_HEADER,
     InvariantViolationError,
-    ConflictError,
-    NotFoundError,
-    AuthorizationError,
     get_current_utc,
 )
 from gramsetu.store import InMemoryStore, TransactionCoordinator
@@ -28,38 +22,17 @@ from gramsetu.schemas import (
     BuyerRequirementCreate,
     BuyerCommitmentCreate,
     CommitmentAllocationItem,
-    VehicleCreate,
-    ShipmentCreate,
-    DeliveryConfirmationRequest,
-    SettlementGenerateRequest,
-    SettlementDeduction,
-    PaymentReportRequest,
-    PaymentVerifyRequest,
 )
 from gramsetu.services.inventory import (
     receive_inventory_lot,
-    split_inventory_lot,
-    list_movements,
 )
 from gramsetu.services.procurement import (
     create_buyer_requirement,
     create_commitment,
     cancel_commitment,
 )
-from gramsetu.services.logistics import (
-    register_vehicle,
-    create_shipment,
-    record_pickup,
-    record_delivery,
-)
-from gramsetu.services.settlement import (
-    generate_settlement,
-    report_payment,
-    verify_payment,
-)
 from gramsetu.services.recovery import (
     generate_recovery_plan,
-    _calc_transport_paise,
 )
 from gramsetu.algorithms import estimate_route_metrics
 
@@ -113,8 +86,6 @@ def test_adversarial_stateful_property_invariants():
         elif action == "RESERVE" and active_lots:
             # Pick a lot and try to reserve random amount
             target_lot_id = rng.choice(active_lots)
-            lot_rec = store.get_item("lots", target_lot_id)
-            avail = lot_rec["quantity_grams"] - lot_rec.get("reserved_grams", 0)
 
             # Sometimes request valid amount, sometimes excessive
             request_grams = rng.randint(10, 300) * 1_000
@@ -160,12 +131,12 @@ def test_adversarial_stateful_property_invariants():
 
         # ASSERT SYSTEM-WIDE INVARIANTS AFTER EVERY STEP
         all_lots = store.list_items("lots")
-        for l in all_lots:
-            q = l["quantity_grams"]
-            r = l.get("reserved_grams", 0)
-            assert q >= 0, f"[Seed {seed}, Step {step}] Lot {l['lot_id']} has negative quantity: {q}"
-            assert r >= 0, f"[Seed {seed}, Step {step}] Lot {l['lot_id']} has negative reserved: {r}"
-            assert r <= q, f"[Seed {seed}, Step {step}] Lot {l['lot_id']} reserved ({r}g) exceeds quantity ({q}g)"
+        for lot in all_lots:
+            q = lot["quantity_grams"]
+            r = lot.get("reserved_grams", 0)
+            assert q >= 0, f"[Seed {seed}, Step {step}] Lot {lot['lot_id']} has negative quantity: {q}"
+            assert r >= 0, f"[Seed {seed}, Step {step}] Lot {lot['lot_id']} has negative reserved: {r}"
+            assert r <= q, f"[Seed {seed}, Step {step}] Lot {lot['lot_id']} reserved ({r}g) exceeds quantity ({q}g)"
 
 
 # ==============================================================================
