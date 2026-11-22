@@ -1,23 +1,15 @@
 from __future__ import annotations
 
-import os
-import uuid
-import decimal
 from decimal import Decimal, ROUND_HALF_UP
 import pytest
-from datetime import datetime, timezone, timedelta
+from datetime import timedelta
 from fastapi.testclient import TestClient
 
 from gramsetu.core import (
     Settings,
     Environment,
-    Role,
-    DevActor,
     DEV_ACTORS,
     DEV_ACTOR_HEADER,
-    InvariantViolationError,
-    ConflictError,
-    NotFoundError,
     AuthorizationError,
     get_current_utc,
 )
@@ -33,7 +25,6 @@ from gramsetu.schemas import (
     DeliveryConfirmationRequest,
     SettlementGenerateRequest,
     SettlementDeduction,
-    PaymentCreateRequest,
     PaymentReportRequest,
     PaymentVerifyRequest,
     OfflineCommandEnvelope,
@@ -48,10 +39,8 @@ from gramsetu.services.logistics import (
 )
 from gramsetu.services.settlement import (
     generate_settlement,
-    record_payment,
     report_payment,
     verify_payment,
-    get_settlement,
 )
 from gramsetu.services.overview import (
     get_farmer_overview,
@@ -330,7 +319,7 @@ def test_f9_role_dashboards_and_tenant_isolation():
     driver = DEV_ACTORS["driver-1"]
 
     # Populate sample data for farmer-1 and fpo-alpha
-    lot = receive_inventory_lot(
+    receive_inventory_lot(
         store,
         coord,
         admin,

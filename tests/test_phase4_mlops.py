@@ -16,16 +16,12 @@ from __future__ import annotations
 
 import csv
 import json
-import os
-import shutil
-import tempfile
 from datetime import date, datetime, timedelta, timezone
-from decimal import Decimal
 from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from gramsetu.core import Settings, Environment, DevActor, Role, DEV_ACTOR_HEADER
+from gramsetu.core import Settings, Environment, DEV_ACTOR_HEADER
 from gramsetu.main import create_app
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 from gramsetu.units import (
@@ -37,32 +33,20 @@ from gramsetu.units import (
 )
 from gramsetu.pipeline import (
     FIELDS,
-    SOURCE_TIERS,
     DataGateError,
     sha256_file,
-    require_price,
     read_normalized,
-    parse_source_date,
-    convert_government_export,
     approval_check,
     compute_feature,
     train_series,
     predict_one,
     audit_v2_2_zip,
-    maepairs,
-    smape,
 )
 from gramsetu.acquisition import (
     ingest_raw_agmarknet_batch,
-    RawBatchMetadata,
     compute_bytes_sha256,
-    CANONICAL_MARKET_CROSSWALK,
-    CANONICAL_COMMODITY_CROSSWALK,
     NAMESPACE_GOVERNMENT_ORIGIN,
-    NAMESPACE_SECONDARY_REPUBLISHED,
-    NAMESPACE_SYNTHETIC_SANDBOX,
 )
-from gramsetu.services.market import get_market_price_forecast
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 BASELINE_ZIP = REPO_ROOT / "GramSetu_All_Corrected_CSV_v2_2.zip"

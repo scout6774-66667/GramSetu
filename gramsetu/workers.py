@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Dict, Any, Callable, Optional, List
+from typing import Dict, Any, Callable
 from gramsetu.core import get_current_utc
 from gramsetu.store import TransactionCoordinator
 from gramsetu.services.events import get_unprocessed_events

@@ -1,5 +1,4 @@
 import time
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app

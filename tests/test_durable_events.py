@@ -1,10 +1,8 @@
 import os
 import tempfile
-import pytest
-from datetime import datetime, timezone
 
 from gramsetu.store import InMemoryStore, TransactionCoordinator
-from gramsetu.services.events import append_event, get_unprocessed_events
+from gramsetu.services.events import append_event
 from gramsetu.workers import LocalEventDispatcher
 
 

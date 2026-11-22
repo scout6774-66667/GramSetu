@@ -10,12 +10,7 @@ import json
 import os
 import sys
 from datetime import datetime, timezone
-from typing import Dict, Any, List
-
-# Ensure repository root is on sys.path
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-if REPO_ROOT not in sys.path:
-    sys.path.insert(0, REPO_ROOT)
+from typing import Dict, Any
 
 from INGESTION_PIPELINE.loaders import (
     compute_file_sha256,
@@ -36,16 +31,19 @@ from INGESTION_PIPELINE.loaders import (
     VehicleFleetLoader,
 )
 
+# Ensure repository root is on sys.path
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+
 
 def run_ingestion() -> Dict[str, Any]:
     print("================================================================================")
     print(" GRAMSETU AI CANONICAL DATA INGESTION & QUALITY PIPELINE")
     print("================================================================================")
-    
+
     verified_dir = os.path.join(REPO_ROOT, "data", "verified")
     op_confirmed_dir = os.path.join(REPO_ROOT, "data", "operator_confirmed")
-    derived_dir = os.path.join(REPO_ROOT, "data", "derived")
-    synthetic_dir = os.path.join(REPO_ROOT, "data", "synthetic_test")
 
     manifest: Dict[str, Any] = {
         "pipeline_name": "GramSetu Canonical Ingestion Pipeline",
@@ -111,7 +109,7 @@ def run_ingestion() -> Dict[str, Any]:
     # 3. Cross-Dataset Referential Integrity Validation
     print("[3/5] Validating cross-entity referential integrity...")
     validations = {}
-    
+
     # Check commodity references
     commodity_ids = {c["commodity_id"] for c in commodities}
     grade_cmd_diff = {g["commodity_id"] for g in grades} - commodity_ids
@@ -141,7 +139,7 @@ def run_ingestion() -> Dict[str, Any]:
     validations["fpo_hierarchy_integrity"] = "PASSED"
 
     # Check administrative location references
-    location_ids = {l["location_id"] for l in locations}
+    location_ids = {loc["location_id"] for loc in locations}
     fpo_loc_diff = {f["head_office_location_id"] for f in fpos} - location_ids
     assert not fpo_loc_diff, f"Orphan location_id in FPO head offices: {fpo_loc_diff}"
     farmer_loc_diff = {fm["village_location_id"] for fm in farmers} - location_ids

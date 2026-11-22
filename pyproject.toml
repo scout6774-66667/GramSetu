@@ -12,13 +12,40 @@ dependencies = [
     "fastapi>=0.110.0",
     "uvicorn>=0.28.0",
     "pydantic>=2.6.0",
-    "python-dateutil>=2.8.2"
+    "python-dateutil>=2.8.2",
+    "scikit-learn>=1.4.0",
+    "scipy>=1.12.0",
+    "sqlalchemy>=2.0.0"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gramsetu*"]
+exclude = [
+    "frontend*",
+    "contracts*",
+    "VALIDATION_TESTS*",
+    "INGESTION_PIPELINE*",
+    "tests*",
+    "docs*",
+    "scripts*",
+    "data*"
+]
+namespaces = false
+
+[tool.setuptools.package-data]
+gramsetu = [
+    "static/**/*",
+    "static/*",
+    "database/migrations/*.sql"
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "VALIDATION_TESTS"]
 pythonpath = ["."]
-addopts = "-p no:zarr"
 filterwarnings = [
     "ignore::DeprecationWarning",
 ]

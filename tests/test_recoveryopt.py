@@ -1,5 +1,4 @@
 from datetime import datetime, timezone, timedelta
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
@@ -25,7 +24,7 @@ def setup_recovery_scenario(client):
     lot_id = res_lot.json()["lot_id"]
 
     # 2. Setup an aging risk incident for this lot
-    res_scan = client.post("/api/v1/risk/scan?fpo_id=fpo-alpha", headers={DEV_ACTOR_HEADER: "fpo-admin-alpha"})
+    client.post("/api/v1/risk/scan?fpo_id=fpo-alpha", headers={DEV_ACTOR_HEADER: "fpo-admin-alpha"})
 
     # Create dummy incident directly for test if none generated
     inc_payload = {

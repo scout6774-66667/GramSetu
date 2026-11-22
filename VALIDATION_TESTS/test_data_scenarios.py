@@ -8,13 +8,11 @@ Executes real-world domain workflows against the backend using canonical dataset
  - Scenario E: Financial settlement & statutory deduction calculation
 """
 
-import os
 from datetime import datetime, timezone, timedelta
 import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
-from gramsetu.store import InMemoryStore, TransactionCoordinator
 from gramsetu.core import DEV_ACTOR_HEADER
 
 

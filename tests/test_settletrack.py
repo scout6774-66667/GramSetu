@@ -1,5 +1,4 @@
 from datetime import datetime, timezone, timedelta
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
@@ -107,7 +106,6 @@ def test_settlement_generation_from_accepted_quantity_only():
 def test_zero_payable_immediately_settled():
     app = create_app()
     client = TestClient(app)
-    now = datetime.now(timezone.utc)
 
     # Setup zero accepted shipment directly in store
     with app.state.coordinator.transaction():
@@ -165,7 +163,6 @@ def test_partial_payment_and_overpayment_rejection():
         json={"shipment_id": ship_id, "deductions": []},
     )
     settle_id = res_gen.json()["settlement_id"]
-    net_payable = res_gen.json()["net_payable_paise"]  # 10,000,000 paise
 
     # 1. Partial payment: 4,000,000 paise
     res_pay1 = client.post(

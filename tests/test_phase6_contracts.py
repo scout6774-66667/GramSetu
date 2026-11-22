@@ -4,14 +4,12 @@ Verifies Phase 6 uncovered production blockers, repository truth reconciliation,
 unknown bridge/weight safety policies, half-up rounding, and fail-closed shadow pilot constraints.
 """
 
-import os
-import json
 import pytest
 from pathlib import Path
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
-from gramsetu.core import Settings, Environment, Role, DevActor, DEV_ACTOR_HEADER
+from gramsetu.core import Settings, Environment, DEV_ACTOR_HEADER
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 from gramsetu.release import validate_release_zip, get_system_readiness_report
 from gramsetu.units import (
@@ -25,7 +23,6 @@ from gramsetu.algorithms import (
     RoadNode,
     RoadEdge,
 )
-from gramsetu.pipeline import train_series
 
 
 def test_p6_00_repo_truth_and_archive_reconciliation():
@@ -34,7 +31,7 @@ def test_p6_00_repo_truth_and_archive_reconciliation():
     """
     zip_path = Path("GramSetu_All_Corrected_CSV_v2_2.zip")
     assert zip_path.is_file(), "v2.2 archive must be present in workspace root"
-    
+
     staged = validate_release_zip(zip_path)
     assert staged.audit["table_count"] == 44
     assert staged.audit["normalized_row_count"] == 8321
@@ -43,7 +40,6 @@ def test_p6_00_repo_truth_and_archive_reconciliation():
     gates_path = Path("PHASE5_ACCEPTANCE_GATES.csv")
     if gates_path.is_file():
         lines = [line.strip() for line in gates_path.read_text(encoding="utf-8").splitlines() if line.strip()]
-        header = lines[0].split(",")
         gate_rows = lines[1:]
         assert len(gate_rows) == 15, f"Expected exactly 15 distinct gate definitions, found {len(gate_rows)}"
 
@@ -63,7 +59,7 @@ def test_p6_01_primary_acquisition_and_coverage_gates():
     staged = validate_release_zip("GramSetu_All_Corrected_CSV_v2_2.zip")
     prices = staged.tables["market_prices"]
     arrivals = staged.tables["market_arrivals"]
-    
+
     assert len(arrivals) == 0, "Arrivals table must be header-only (0 rows) in v2.2 baseline"
     assert len(prices) == 43, "Prices table must contain exactly 43 rows in v2.2 baseline"
 

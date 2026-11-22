@@ -8,10 +8,8 @@ from __future__ import annotations
 
 import csv
 import hashlib
-import json
 import os
-from typing import Dict, Any, List, Optional
-from datetime import datetime, timezone
+from typing import Dict, Any, List
 
 
 def compute_file_sha256(filepath: str) -> str:

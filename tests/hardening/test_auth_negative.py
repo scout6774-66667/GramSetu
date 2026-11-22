@@ -6,8 +6,7 @@ import jwt
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
-from gramsetu.core import Settings, Environment, Role, DEV_ACTOR_HEADER
-from gramsetu.security.identity import JwtIdentityAdapter
+from gramsetu.core import Settings, Environment, DEV_ACTOR_HEADER
 
 
 SECRET = "test-super-secret-key-for-jwt-hardening-123456"
@@ -94,7 +93,8 @@ def test_r3_insecure_alg_none_is_strictly_rejected(prod_client):
     }
     # Create unsigned alg=none token manually
     header_b64 = "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0"  # {"alg":"none","typ":"JWT"}
-    import base64, json
+    import base64
+    import json
     payload_b64 = base64.urlsafe_b64encode(json.dumps(payload).encode()).rstrip(b"=").decode()
     none_token = f"{header_b64}.{payload_b64}."
 
@@ -165,7 +165,6 @@ def test_r3_tenant_isolation_matrix(prod_client):
     4. Driver 1 cannot update Driver 2's shipments.
     """
     token_farmer_a = make_jwt(sub="farmer-1", role="FARMER", org_id="fpo-alpha")
-    token_farmer_b = make_jwt(sub="farmer-2", role="FARMER", org_id="fpo-alpha")
     token_buyer = make_jwt(sub="buyer-1", role="BUYER", org_id="org-reliance")
     token_fpo_beta = make_jwt(sub="fpo-admin-beta", role="FPO_ADMIN", org_id="fpo-beta")
 

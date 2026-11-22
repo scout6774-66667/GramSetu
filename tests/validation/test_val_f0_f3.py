@@ -1,24 +1,17 @@
 from __future__ import annotations
 
 import os
-import copy
 import json
-import uuid
 import pytest
-from datetime import datetime, timezone, timedelta
+from datetime import timedelta
 from fastapi.testclient import TestClient
 
 from gramsetu.core import (
     Settings,
     Environment,
-    Role,
-    DevActor,
     DEV_ACTORS,
     DEV_ACTOR_HEADER,
     CorruptionError,
-    InvariantViolationError,
-    AuthorizationError,
-    ConflictError,
     get_current_utc,
 )
 from gramsetu.store import InMemoryStore, TransactionCoordinator
@@ -29,16 +22,13 @@ from gramsetu.schemas import (
     LotReceiptCreate,
     LotSplitRequest,
     LotMergeRequest,
-    GradeAdjustmentRequest,
 )
-from gramsetu.services.supply import create_harvest_forecast, list_harvest_forecasts
+from gramsetu.services.supply import create_harvest_forecast
 from gramsetu.services.procurement import create_buyer_requirement, compute_demand_gap
 from gramsetu.services.inventory import (
     receive_inventory_lot,
-    get_inventory_lot,
     split_inventory_lot,
     merge_inventory_lots,
-    list_movements,
 )
 
 
@@ -379,7 +369,7 @@ def test_f3_complete_system_mass_equation():
     admin = DEV_ACTORS["fpo-admin-alpha"]
 
     # Receive three distinct lots
-    l1 = receive_inventory_lot(
+    receive_inventory_lot(
         store,
         coord,
         admin,
@@ -393,7 +383,7 @@ def test_f3_complete_system_mass_equation():
             storage_location="Cold Storage 1",
         ),
     )
-    l2 = receive_inventory_lot(
+    receive_inventory_lot(
         store,
         coord,
         admin,

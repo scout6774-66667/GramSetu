@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import pytest
 from gramsetu.core import ProcessLockError, CorruptionError
-from gramsetu.store import InMemoryStore, TransactionCoordinator, ProcessWriterLock
+from gramsetu.store import InMemoryStore, TransactionCoordinator
 
 
 def test_process_writer_lock_prevents_dual_coordinators(tmp_path):

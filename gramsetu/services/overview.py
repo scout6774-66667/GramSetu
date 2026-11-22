@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
 from gramsetu.core import (
     DevActor,
     Role,
@@ -31,9 +30,9 @@ def get_farmer_overview(store: InMemoryStore, actor: DevActor) -> FarmerOverview
     fc_grams = sum(f.get("estimated_grams", 0) for f in forecasts)
 
     # Delivered lots
-    lots = store.list_items("lots", lambda l: l.get("farmer_id") == farmer_id)
+    lots = store.list_items("lots", lambda item: item.get("farmer_id") == farmer_id)
     lots_count = len(lots)
-    lots_grams = sum(l.get("quantity_grams", 0) for l in lots)
+    lots_grams = sum(item.get("quantity_grams", 0) for item in lots)
 
     # Settlements
     settlements = store.list_items("settlements", lambda s: s.get("farmer_id") == farmer_id)
@@ -133,9 +132,9 @@ def get_fpo_overview(store: InMemoryStore, actor: DevActor, fpo_id: str) -> FpoO
     now = get_current_utc()
 
     # Lots (physical, available, reserved)
-    lots = store.list_items("lots", lambda l: l.get("fpo_id") == fpo_id and l.get("status") == "AVAILABLE")
-    phys_stock = sum(l.get("quantity_grams", 0) for l in lots)
-    res_stock = sum(l.get("reserved_grams", 0) for l in lots)
+    lots = store.list_items("lots", lambda item: item.get("fpo_id") == fpo_id and item.get("status") == "AVAILABLE")
+    phys_stock = sum(item.get("quantity_grams", 0) for item in lots)
+    res_stock = sum(item.get("reserved_grams", 0) for item in lots)
     avail_stock = max(0, phys_stock - res_stock)
 
     # Incidents / At-risk lots

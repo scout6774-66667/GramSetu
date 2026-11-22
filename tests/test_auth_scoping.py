@@ -1,8 +1,7 @@
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
-from gramsetu.core import Role, DEV_ACTOR_HEADER
+from gramsetu.core import DEV_ACTOR_HEADER
 
 
 def test_auth_missing_or_unknown_actor():

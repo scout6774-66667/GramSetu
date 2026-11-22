@@ -46,7 +46,7 @@ def mass_to_grams(value: Union[str, int, float, Decimal], *, source_unit: str = 
     }
     if unit not in multipliers:
         raise DatasetContractError(f"Unsupported mass source unit: '{source_unit}'. Must be one of {list(multipliers.keys())}")
-    
+
     d_val = _to_decimal(value, "mass")
     canonical_grams = d_val * multipliers[unit]
     return exact_integer(canonical_grams, "mass_grams")
@@ -176,7 +176,7 @@ def parse_iso_utc(timestamp_str: str, param_name: str = "timestamp") -> datetime
 
     if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
         raise DatasetContractError(f"Ambiguous naive timestamp rejected for {param_name}: '{s}'. Explicit timezone required.")
-    
+
     return dt.astimezone(timezone.utc)
 
 

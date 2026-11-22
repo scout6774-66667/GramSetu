@@ -4,13 +4,11 @@ Verifies that the backend strictly adheres to Phase 5 operational readiness gate
 reporting truthful blocker statuses for all unverified data domains without crashing.
 """
 
-import pytest
 from fastapi.testclient import TestClient
 
 from gramsetu.main import create_app
 from gramsetu.core import Settings, Environment, DEV_ACTOR_HEADER
-from gramsetu.store import InMemoryStore
-from gramsetu.release import validate_release_zip, import_staged_release_to_store, get_system_readiness_report
+from gramsetu.release import validate_release_zip
 
 
 def test_p5_g01_release_archive_integrity():

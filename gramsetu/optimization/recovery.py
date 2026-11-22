@@ -13,7 +13,7 @@ def optimize_recovery_allocation(
 ) -> Dict[str, Any]:
     """Formal recovery optimization engine with branch-and-bound search,
     deterministic tie-breaking, and honest optimality status.
-    
+
     Objective:
         Maximize net recovery return:
         Net Return = Gross Revenue - Transport Logistics Cost

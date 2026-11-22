@@ -35,6 +35,26 @@ async def post_generate_settlement(
     return generate_settlement(store, coordinator, actor, payload)
 
 
+@router.get("/farmer/{farmer_id}", response_model=List[SettlementResponse])
+async def get_farmer_settlements(
+    farmer_id: str,
+    actor: DevActor = Depends(get_current_actor),
+    store: InMemoryStore = Depends(get_store),
+):
+    """Retrieve all settlement statements for a farmer."""
+    return list_settlements(store, actor, farmer_id=farmer_id)
+
+
+@router.get("/buyer/{buyer_id}", response_model=List[SettlementResponse])
+async def get_buyer_settlements(
+    buyer_id: str,
+    actor: DevActor = Depends(get_current_actor),
+    store: InMemoryStore = Depends(get_store),
+):
+    """Retrieve all settlement payables for a buyer."""
+    return list_settlements(store, actor, buyer_id=buyer_id)
+
+
 @router.get("/{settlement_id}", response_model=SettlementResponse)
 async def get_single_settlement(
     settlement_id: str,

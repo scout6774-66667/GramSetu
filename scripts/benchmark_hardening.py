@@ -23,7 +23,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from gramsetu.store import InMemoryStore, TransactionCoordinator
 from gramsetu.algorithms import optimize_recovery_allocation, get_default_road_network
-from gramsetu.adapters.evidence import compute_payload_digest
 
 
 def calc_percentiles(latencies_ms: List[float]) -> Dict[str, float]:
